@@ -1,0 +1,52 @@
+mutation CreateSeedData @transaction @auth(level: PUBLIC, insecureReason: "This mutation is used to seed the database with example data and is safe to expose to the public") {
+  user_insertMany(data: [
+    {
+      id: "550e8400-e29b-41d4-a716-446655440000",
+      username: "demouser1",
+      email: "demouser1@example.com",
+      createdAt: "2024-01-01T00:00:00Z",
+      displayName: "Demo User 1"
+    },
+    {
+      id: "550e8400-e29b-41d4-a716-446655440001",
+      username: "demouser2",
+      email: "demouser2@example.com",
+      createdAt: "2024-01-01T00:00:00Z",
+      displayName: "Demo User 2"
+    }
+  ])
+  video_insertMany(data: [
+    {
+      id: "650e8400-e29b-41d4-a716-446655440000",
+      creatorId: "550e8400-e29b-41d4-a716-446655440000",
+      title: "Demo Video 1",
+      description: "Example video from demouser1",
+      videoUrl: "http://example.com/video1.mp4",
+      thumbnailUrl: "http://example.com/thumbnail1.jpg",
+      createdAt: "2024-01-02T00:00:00Z"
+    },
+    {
+      id: "650e8400-e29b-41d4-a716-446655440001",
+      creatorId: "550e8400-e29b-41d4-a716-446655440001",
+      title: "Demo Video 2",
+      description: "Example video from demouser2",
+      videoUrl: "http://example.com/video2.mp4",
+      thumbnailUrl: "http://example.com/thumbnail2.jpg",
+      createdAt: "2024-01-02T00:00:00Z"
+    }
+  ])
+  comment_insertMany(data: [
+    {
+      userId: "550e8400-e29b-41d4-a716-446655440000",
+      videoId: "650e8400-e29b-41d4-a716-446655440000",
+      content: "Example comment from demouser1 on video 1",
+      createdAt: "2024-01-03T00:00:00Z"
+    },
+    {
+      userId: "550e8400-e29b-41d4-a716-446655440001",
+      videoId: "650e8400-e29b-41d4-a716-446655440001",
+      content: "Example comment from demouser2 on video 2",
+      createdAt: "2024-01-03T00:00:00Z"
+    }
+  ])
+}

@@ -1,0 +1,436 @@
+/* link-player-deployer.css */
+
+/* Reset and base styles */
+.linkPlayerDeployerOverlay * {
+    box-sizing: border-box;
+  }
+  
+  /* Modal Overlay */
+  .linkPlayerDeployerOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(4px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  }
+  
+  .linkPlayerDeployerOverlay.linkPlayerDeployerActive {
+    opacity: 1;
+    visibility: visible;
+  }
+  
+  /* Modal Container */
+  .linkPlayerDeployerContainer {
+    background: white;
+    border-radius: 16px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+    width: 90%;
+    max-width: 480px;
+    transform: scale(0.8) translateY(20px);
+    transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    overflow: hidden;
+  }
+  
+  .linkPlayerDeployerOverlay.linkPlayerDeployerActive .linkPlayerDeployerContainer {
+    transform: scale(1) translateY(0);
+  }
+  
+  /* Modal Header */
+  .linkPlayerDeployerHeader {
+    padding: 24px 24px 16px;
+    border-bottom: 1px solid #e5e7eb;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  
+  .linkPlayerDeployerTitle {
+    font-size: 20px;
+    font-weight: 600;
+    color: #1f2937;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 0;
+  }
+  
+  .linkPlayerDeployerTitle::before {
+    content: "🎬";
+    font-size: 24px;
+  }
+  
+  .linkPlayerDeployerCloseBtn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 8px;
+    border-radius: 8px;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .linkPlayerDeployerCloseBtn:hover {
+    background: #f3f4f6;
+  }
+  
+  .linkPlayerDeployerCloseIcon {
+    width: 20px;
+    height: 20px;
+    opacity: 0.6;
+  }
+  
+  /* Modal Body */
+  .linkPlayerDeployerBody {
+    padding: 24px;
+  }
+  
+  .linkPlayerDeployerInputSection {
+    margin-bottom: 24px;
+  }
+  
+  .linkPlayerDeployerInputLabel {
+    display: block;
+    font-size: 14px;
+    font-weight: 500;
+    color: #374151;
+    margin-bottom: 8px;
+  }
+  
+  .linkPlayerDeployerUrlInput {
+    width: 100%;
+    padding: 12px 16px;
+    border: 2px solid #e5e7eb;
+    border-radius: 12px;
+    font-size: 16px;
+    transition: all 0.2s ease;
+    background: #fafbfc;
+  }
+  
+  .linkPlayerDeployerUrlInput:focus {
+    outline: none;
+    border-color: #3b82f6;
+    background: white;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+  }
+  
+  .linkPlayerDeployerDivider {
+    display: flex;
+    align-items: center;
+    margin: 24px 0;
+    color: #6b7280;
+    font-size: 14px;
+    font-weight: 500;
+  }
+  
+  .linkPlayerDeployerDivider::before,
+  .linkPlayerDeployerDivider::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: #e5e7eb;
+  }
+  
+  .linkPlayerDeployerDivider span {
+    padding: 0 16px;
+  }
+  
+  /* File Upload */
+  .linkPlayerDeployerFileUploadArea {
+    border: 2px dashed #d1d5db;
+    border-radius: 12px;
+    padding: 32px 24px;
+    text-align: center;
+    transition: all 0.2s ease;
+    cursor: pointer;
+    background: #fafbfc;
+  }
+  
+  .linkPlayerDeployerFileUploadArea:hover {
+    border-color: #3b82f6;
+    background: #f8faff;
+  }
+  
+  .linkPlayerDeployerFileUploadArea.linkPlayerDeployerDragOver {
+    border-color: #3b82f6;
+    background: #eff6ff;
+  }
+  
+  .linkPlayerDeployerFileUploadIcon {
+    font-size: 32px;
+    margin-bottom: 12px;
+  }
+  
+  .linkPlayerDeployerFileUploadText {
+    color: #374151;
+    font-size: 14px;
+    font-weight: 500;
+    margin-bottom: 4px;
+  }
+  
+  .linkPlayerDeployerFileUploadHint {
+    color: #6b7280;
+    font-size: 12px;
+  }
+  
+  .linkPlayerDeployerFileInput {
+    display: none;
+  }
+  
+  .linkPlayerDeployerSelectedFile {
+    margin-top: 12px;
+    padding: 8px 12px;
+    background: #eff6ff;
+    border: 1px solid #dbeafe;
+    border-radius: 8px;
+    font-size: 14px;
+    color: #1e40af;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  
+  /* Messages */
+  .linkPlayerDeployerErrorMessage {
+    color: #ef4444;
+    font-size: 12px;
+    margin-top: 4px;
+    display: none;
+  }
+  
+  .linkPlayerDeployerSuccessMessage {
+    color: #10b981;
+    font-size: 12px;
+    margin-top: 4px;
+    display: none;
+  }
+  
+  /* Modal Footer */
+  .linkPlayerDeployerFooter {
+    padding: 20px 24px 24px;
+    display: flex;
+    gap: 12px;
+    justify-content: flex-end;
+  }
+  
+  .linkPlayerDeployerBtn {
+    padding: 12px 24px;
+    border: none;
+    border-radius: 10px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  
+  .linkPlayerDeployerBtnCancel {
+    background: #f3f4f6;
+    color: #374151;
+  }
+  
+  .linkPlayerDeployerBtnCancel:hover {
+    background: #e5e7eb;
+  }
+  
+  .linkPlayerDeployerBtnGo {
+    background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+    color: white;
+    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+  }
+  
+  .linkPlayerDeployerBtnGo:hover:not(:disabled) {
+    background: linear-gradient(135deg, #2563eb, #1e40af);
+    transform: translateY(-1px);
+    box-shadow: 0 6px 20px rgba(59, 130, 246, 0.4);
+  }
+  
+  .linkPlayerDeployerBtnGo:disabled {
+    background: #d1d5db;
+    color: #9ca3af;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 640px) {
+    .linkPlayerDeployerContainer {
+      width: 95%;
+      margin: 0 auto;
+    }
+  
+    .linkPlayerDeployerHeader {
+      padding: 20px 20px 16px;
+    }
+  
+    .linkPlayerDeployerBody {
+      padding: 20px;
+    }
+  
+    .linkPlayerDeployerFooter {
+      padding: 16px 20px 20px;
+      flex-direction: column-reverse;
+    }
+  
+    .linkPlayerDeployerBtn {
+      width: 100%;
+      justify-content: center;
+    }
+  
+    .linkPlayerDeployerFileUploadArea {
+      padding: 24px 16px;
+    }
+  }
+  
+  /* Dark mode support (optional) */
+  @media (prefers-color-scheme: dark) {
+    .linkPlayerDeployerContainer {
+      background: #1f2937;
+      color: #f9fafb;
+    }
+  
+    .linkPlayerDeployerHeader {
+      border-bottom: 1px solid #374151;
+    }
+  
+    .linkPlayerDeployerTitle {
+      color: #f9fafb;
+    }
+  
+    .linkPlayerDeployerCloseBtn:hover {
+      background: #374151;
+    }
+  
+    .linkPlayerDeployerInputLabel {
+      color: #d1d5db;
+    }
+  
+    .linkPlayerDeployerUrlInput {
+      background: #374151;
+      border-color: #4b5563;
+      color: #f9fafb;
+    }
+  
+    .linkPlayerDeployerUrlInput:focus {
+      background: #374151;
+      border-color: #3b82f6;
+    }
+  
+    .linkPlayerDeployerFileUploadArea {
+      background: #374151;
+      border-color: #4b5563;
+    }
+  
+    .linkPlayerDeployerFileUploadArea:hover {
+      background: #4b5563;
+    }
+  
+    .linkPlayerDeployerFileUploadText {
+      color: #d1d5db;
+    }
+  
+    .linkPlayerDeployerFileUploadHint {
+      color: #9ca3af;
+    }
+  
+    .linkPlayerDeployerSelectedFile {
+      background: #1e40af;
+      border-color: #3b82f6;
+      color: #dbeafe;
+    }
+  
+    .linkPlayerDeployerBtnCancel {
+      background: #374151;
+      color: #d1d5db;
+    }
+  
+    .linkPlayerDeployerBtnCancel:hover {
+      background: #4b5563;
+    }
+  }
+  
+  /* Animation keyframes */
+  @keyframes linkPlayerDeployerFadeIn {
+    from {
+      opacity: 0;
+      transform: scale(0.9) translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1) translateY(0);
+    }
+  }
+  
+  @keyframes linkPlayerDeployerFadeOut {
+    from {
+      opacity: 1;
+      transform: scale(1) translateY(0);
+    }
+    to {
+      opacity: 0;
+      transform: scale(0.9) translateY(20px);
+    }
+  }
+  
+  /* Accessibility improvements */
+  .linkPlayerDeployerOverlay:focus-within {
+    outline: none;
+  }
+  
+  .linkPlayerDeployerBtn:focus,
+  .linkPlayerDeployerUrlInput:focus,
+  .linkPlayerDeployerCloseBtn:focus {
+    outline: 2px solid #3b82f6;
+    outline-offset: 2px;
+  }
+  
+  /* High contrast mode support */
+  @media (prefers-contrast: high) {
+    .linkPlayerDeployerContainer {
+      border: 2px solid #000;
+    }
+  
+    .linkPlayerDeployerBtn {
+      border: 2px solid currentColor;
+    }
+  
+    .linkPlayerDeployerUrlInput {
+      border: 2px solid #000;
+    }
+  }
+  
+  /* Reduced motion support */
+  @media (prefers-reduced-motion: reduce) {
+    .linkPlayerDeployerOverlay,
+    .linkPlayerDeployerContainer,
+    .linkPlayerDeployerBtn,
+    .linkPlayerDeployerUrlInput,
+    .linkPlayerDeployerFileUploadArea {
+      transition: none;
+    }
+  
+    .linkPlayerDeployerContainer {
+      animation: none;
+    }
+  }
+  
+  /* Print styles */
+  @media print {
+    .linkPlayerDeployerOverlay {
+      display: none;
+    }
+  }

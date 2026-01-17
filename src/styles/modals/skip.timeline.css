@@ -1,0 +1,135 @@
+:root {
+  /* Mapping to your likely global variables */
+  --skip-bg: var(--bg-primary, #121212);
+  --skip-border: var(--border-subtle, #333);
+  --skip-accent: var(--accent-color, #0ea5e9);
+  --skip-hover: var(--bg-hover, #222);
+}
+
+.skip-popup-card {
+  position: fixed;
+  width: 220px;
+  background: var(--skip-bg);
+  border: 1px solid var(--skip-border);
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+  z-index: 9999;
+  overflow: hidden;
+  font-family: inherit;
+}
+
+.skip-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 12px;
+  background: rgba(255,255,255,0.03);
+  border-bottom: 1px solid var(--skip-border);
+}
+
+.header-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* Custom Input Merged */
+.custom-input-wrapper {
+  display: flex;
+  align-items: center;
+  background: #000;
+  border: 1px solid var(--skip-border);
+  border-radius: 8px;
+  margin: 12px;
+  padding: 2px;
+}
+
+.custom-input-wrapper input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  color: #fff;
+  text-align: center;
+  font-size: 13px;
+  width: 40px;
+  outline: none;
+}
+
+.inner-skip-btn {
+  background: transparent;
+  border: none;
+  color: var(--skip-accent);
+  padding: 6px;
+  cursor: pointer;
+  border-radius: 6px;
+  transition: 0.2s;
+}
+
+.inner-skip-btn:hover:not(:disabled) {
+  background: rgba(14, 165, 233, 0.15);
+}
+
+.inner-skip-btn:disabled {
+  opacity: 0.3;
+  cursor: default;
+}
+
+/* Preset Twin Grid */
+.skip-body { padding-bottom: 8px; }
+
+.preset-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 6px;
+  padding: 0 12px;
+}
+
+.twin-group {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1px; /* The gap shows as a thin line between buttons */
+  background: var(--skip-border); 
+  border-radius: 6px;
+  overflow: hidden;
+  border: 1px solid var(--skip-border);
+}
+
+.twin-btn {
+  background: var(--skip-bg);
+  border: none;
+  color: #ccc;
+  padding: 8px 0;
+  font-size: 12px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.twin-btn:hover {
+  background: var(--skip-hover);
+  color: #fff;
+}
+
+.twin-btn.left:active { transform: translateX(-2px); }
+.twin-btn.right:active { transform: translateX(2px); }
+
+.skip-footer {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 12px;
+  font-size: 9px;
+  color: #555;
+  border-top: 1px solid var(--skip-border);
+}
+
+.close-icon-btn {
+  background: transparent;
+  border: none;
+  color: #666;
+  cursor: pointer;
+}
+.close-icon-btn:hover { color: #fff; }

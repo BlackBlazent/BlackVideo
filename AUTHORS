@@ -1,0 +1,17 @@
+- name: Jednaz Lonestamp
+  position: Fullstack Developer
+  email: jednazlonestamp9@gmail.com
+  github: https://github.com/LoneStamp
+  social_media:
+    X: https://x.com/Jednaz9
+    instagram: https://www.instagram.com/jednazlonestamp9black/
+    facebook: https://www.facebook.com/blackrose.jednaz.09
+
+- name: team1
+  position: position1
+  email: team1@gmail.com
+  github: https://github.com/team1
+  social_media:
+    X: https://x.com/team1
+    instagram: https://www.instagram.com/team1
+    facebook: https://www.facebook.com/team1

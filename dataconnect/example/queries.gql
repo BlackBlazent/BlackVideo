@@ -1,0 +1,54 @@
+mutation CreateNewUser(
+  $username: String!
+  $email: String!
+  $displayName: String!
+) @auth(level: USER) {
+  user_insert(
+    data: {
+      username: $username
+      email: $email
+      displayName: $displayName
+      createdAt_expr: "request.time"
+      id_expr: "uuidV4()"
+    }
+  )
+}
+
+query GetVideosByUser($userId: UUID!) @auth(level: USER) {
+  videos(where: { creatorId: { eq: $userId } }) {
+    id
+    title
+    description
+    videoUrl
+    thumbnailUrl
+  }
+}
+
+mutation AddVideoToCollection(
+  $videoId: UUID!
+  $collectionId: UUID!
+  $note: String
+) @auth(level: USER) {
+  collectionVideo_insert(
+    data: {
+      videoId: $videoId
+      collectionId: $collectionId
+      addedAt_expr: "request.time"
+      note: $note
+    }
+  )
+}
+
+query ListAllPublicVideos @auth(level: PUBLIC, insecureReason: "This operation is safe to expose to the public") {
+  videos {
+    id
+    title
+    description
+    videoUrl
+    thumbnailUrl
+    creator {
+      id
+      username
+    }
+  }
+}

@@ -1,0 +1,10 @@
+{
+    "name": "computer-vision",
+    "author": "jednazLonestamp",
+    "version": "1.0.0",
+    "description": "Analyze video frames with an OSINT computer vision tools",
+    "entry": "index.ts",
+    "icon": "icon.png",
+    "style": "styles.css",
+    "updateUrl": "https://yourdomain.com/extensions/computer-vision/manifest.json"
+}

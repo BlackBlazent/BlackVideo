@@ -1,0 +1,237 @@
+/*
+
+        /* Thumbnails scroll */
+        .thumbnails-scroll {
+          display: flex;
+          align-items: center;
+          gap: 12px;
+          /*
+          background: var(--glass-bg);
+          backdrop-filter: blur(20px);
+          border: 1px solid var(--glass-border);
+          border-radius: 20px;
+          */
+          padding: 10px;
+          max-width: 100%;
+          overflow-x: auto;
+          /*
+          box-sizing: border-box;
+          box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+          */
+          margin-bottom: 16px;
+        }
+
+        .thumbnails-scroll button.scroll-btn {
+          background: var(--glass-bg);
+          backdrop-filter: blur(10px);
+          border: 1px solid var(--glass-border);
+          border-radius: 12px;
+          color: var(--text-primary);
+          font-size: 14px;
+          width: 36px;
+          height: 48px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          flex-shrink: 0;
+          transition: all 0.3s ease;
+        }
+
+        .thumbnails-scroll button.scroll-btn:hover {
+          background: linear-gradient(135deg, var(--dark-trans-bg--effect) 0%, var(--glass-bg) 100%);
+          border-color: var(--glass-border);
+          transform: translateY(-2px);
+          box-shadow: 0 8px 25px rgba(16, 17, 16, 0.4);
+        }
+
+        #playlistControlsRight {
+          display: flex;
+          align-items: center;
+          gap: 12px;
+          right: 20px;
+          position: absolute;
+        }
+        
+/*Playlist*/ | Deprecated
+        .thumbnail {
+          width: 140px;
+          background: var(--glass-bg);
+          backdrop-filter: blur(20px);
+          border: 1px solid var(--glass-border);
+          border-radius: 16px;
+          overflow: hidden;
+          flex-shrink: 0;
+          user-select: none;
+          transition: all 0.3s ease;
+          box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+          cursor: pointer;
+        }
+
+        .thumbnail:hover {
+          transform: translateY(-4px) scale(1.02);
+          box-shadow: 0 12px 32px rgba(0, 0, 0, 0.4);
+          border-color: rgba(255, 255, 255, 0.15);
+        }
+
+        .thumbnail img {
+          width: 100%;
+          height: 80px;
+          object-fit: cover;
+          display: block;
+        }
+
+        .thumbnail .caption {
+          font-family: 'SF Mono', Monaco, 'Cascadia Code', monospace;
+          font-size: 11px;
+          color: var(--text-primary);
+          border-top: 1px solid var(--glass-border);
+          padding: 8px 12px;
+          white-space: nowrap;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          background: var(--glass-bg);
+        }
+
+        .thumbnail .caption .year {
+          color: var(--text-muted);
+          flex-shrink: 0;
+          margin-left: 8px;
+          font-weight: 600;
+        }
+
+
+/* Playlist Container */
+ .thumbnails-list {
+          display: flex;
+          gap: 12px;
+          justify-content: space-between;
+          overflow-x: hidden;
+}
+
+/* Video Card Improvement */
+.thumbnail {
+  position: relative;
+  width: 200px; /* Set to your requested width */
+  background: var(--glass-bg, rgba(15, 15, 15, 0.8));
+  backdrop-filter: blur(20px);
+  border: 1px solid var(--glass-border, #333);
+  border-radius: 12px;
+  overflow: visible; /* Changed for dropdown visibility */
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.thumbnail .video-poster-overlay {
+  width: 100%;
+  height: 70px;
+  object-fit: cover;
+  border-radius: 11px 11px 0 0;
+}
+
+/* Drag Handle Styling */
+.drag-handle {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  z-index: 10;
+  color: white;
+  background: rgba(0, 0, 0, 0.5);
+  border-radius: 4px;
+  padding: 2px;
+  cursor: grab;
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+
+.thumbnail:hover .drag-handle {
+  opacity: 1;
+}
+
+/* Caption & More Button */
+.thumbnail .caption {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 12px;
+  background: rgba(0,0,0,0.2);
+}
+
+.caption-info {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.title-text {
+  font-size: 11px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: var(--text-primary, #fff);
+}
+
+.more-context {
+  position: relative;
+}
+
+.more-btn {
+  background: transparent;
+  border: none;
+  color: var(--text-muted, #888);
+  cursor: pointer;
+  padding: 4px;
+  border-radius: 50%;
+  transition: background 0.2s;
+}
+
+.more-btn:hover {
+  background: rgba(255,255,255,0.1);
+  color: #fff;
+}
+
+/* Dropdown Engine UI */
+.video-card-dropdown {
+  position: absolute;
+  bottom: 30px;
+  right: 0;
+  width: 140px;
+  background: #0f0f0f;
+  border: 1px solid #333;
+  border-radius: 8px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+  z-index: 100;
+  overflow: hidden;
+  animation: resFadeIn 0.2s ease;
+}
+
+.dropdown-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  font-size: 11px;
+  color: #eee;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.dropdown-item:hover {
+  background: rgba(255,255,255,0.05);
+  color: var(--skip-accent, #007bff);
+}
+
+/*Video Playlist Full*/
+/* Show handle only when hovering the card */
+.video-card-container:hover .drag-handle {
+    opacity: 1 !important;
+}
+
+/* Ensure the handle stays visible while being grabbed */
+.video-card-container:active .drag-handle {
+    cursor: grabbing;
+}
+
+/* Prevent text selection while dragging */
+.video-card-container[draggable="true"] {
+    user-select: none;
+}

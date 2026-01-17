@@ -1,0 +1,76 @@
+.speed-engine-popup {
+  position: fixed;
+  width: 160px;
+  background: var(--skip-bg);
+  border: 1px solid var(--skip-border);
+  border-radius: 10px;
+  box-shadow: 0 12px 40px rgba(0,0,0,0.6);
+  z-index: 10000;
+  backdrop-filter: blur(8px);
+  padding: 6px;
+}
+
+.speed-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 10px;
+  font-size: 10px;
+  font-weight: 700;
+  color: #666;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  border-bottom: 1px solid var(--skip-border);
+  margin-bottom: 4px;
+}
+
+.speed-options-list {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.speed-option-btn {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  padding: 8px 10px;
+  border: none;
+  background: transparent;
+  color: #ccc;
+  font-size: 13px;
+  cursor: pointer;
+  border-radius: 6px;
+  transition: all 0.2s ease;
+  text-align: left;
+}
+
+.speed-option-btn:hover {
+  background: var(--skip-hover);
+  color: #fff;
+}
+
+.speed-option-btn.active {
+  background: rgba(14, 165, 233, 0.1);
+  color: var(--skip-accent);
+}
+
+.speed-icon-box {
+  width: 16px;
+  display: flex;
+  justify-content: center;
+  opacity: 0.7;
+}
+
+.speed-option-btn.active .speed-icon-box {
+  opacity: 1;
+}
+
+.speed-label {
+  flex: 1;
+}
+
+.text-accent {
+  color: var(--skip-accent);
+}

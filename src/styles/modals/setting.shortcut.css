@@ -1,0 +1,100 @@
+.shortcut-modal-overlay {
+    position: fixed;
+    top: 55px; /* Aligned with top nav */
+    right: 20px;
+    z-index: 10001;
+    width: 280px;
+    animation: slideIn 0.2s ease-out;
+}
+
+@keyframes slideIn {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.shortcut-container {
+    background: var(--background-dark);
+    border: 1px solid var(--border-medium);
+    border-radius: 10px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    backdrop-filter: blur(10px);
+    overflow: hidden;
+}
+
+.shortcut-header {
+    background: rgba(255, 255, 255, 0.03);
+    padding: 10px 12px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid var(--border-subtle);
+}
+
+.header-title {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--text-muted);
+}
+
+.shortcut-item {
+    padding: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+    transition: 0.2s;
+    border-bottom: 1px solid rgba(255,255,255,0.02);
+}
+
+.shortcut-item:hover {
+    background: rgba(255,255,255,0.05);
+}
+
+.item-left {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.item-icon {
+    color: var(--primary-blue);
+    background: rgba(0, 102, 255, 0.1);
+    padding: 6px;
+    border-radius: 6px;
+}
+
+.item-text {
+    display: flex;
+    flex-direction: column;
+}
+
+.item-title {
+    font-size: 13px;
+    font-weight: 500;
+    color: #eee;
+}
+
+.item-desc {
+    font-size: 10px;
+    color: #666;
+}
+
+.arrow { color: #444; }
+
+.shortcut-footer {
+    padding: 8px;
+    background: #080808;
+    text-align: center;
+    font-size: 9px;
+    color: #444;
+}
+
+.icon-spin:hover {
+    animation: spin 2s linear infinite;
+}
+
+@keyframes spin { 100% { transform: rotate(360deg); } }

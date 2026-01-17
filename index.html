@@ -1,0 +1,190 @@
+<!doctype html>
+<!--
+/*
+ * Copyright (c) 2026 BlackVideo (Zephyra)
+ * All Rights Reserved.
+ *
+ * This source code is the confidential and proprietary property of BlackVideo.
+ * Unauthorized copying, modification, distribution, or use of this source code,
+ * in whole or in part, is strictly prohibited without prior written permission
+ * from BlackVideo.
+ */
+-->
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/assets/BlackVideo.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>BlackVideo</title>
+    <link rel="stylesheet" href="./src/styles/global.css" />
+    <link rel="stylesheet" href="./src/App.css" />
+    <link rel="stylesheet" href="./src/styles/modals/auth.css"/>
+    <link rel="stylesheet" href="./src/styles/utils/user.install.badge.css"/>
+    <!--Video Theater Stage-->
+    <link rel="stylesheet" href="./src/styles/custom.controls.css"/>
+    <link rel="stylesheet" href="./src/styles/playground.css"/>
+    <link rel="stylesheet" href="./src/styles/extensions.css"/>
+    <link rel="stylesheet" href="./src/styles/settings.css"/>
+    <!--Accessories-->
+    <link rel="stylesheet" href="./src/styles/modals/link.deployer.css"/>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+    <!--Logo-->
+    <link rel="stylesheet" href="./src/styles/modals/logo.ui.css"/>
+    <!--Menu-->
+    <link rel="stylesheet" href="./src/styles/modals/menu.ui.css"/>
+    <!--Languages-->
+    <link rel="stylesheet" href="./src/styles/modals/languages.select.css"/>
+    <!--Search-->
+    <link rel="stylesheet" href="./src/styles/modals/search.core.css"/>
+    <!--Settings-->
+    <link rel="stylesheet" href="./src/styles/modals/settings.shortcut.css"/>
+    <!--Sections-->
+    <link rel="stylesheet" href="./src/styles/about.css" />
+    <link rel="stylesheet" href="./src/styles/folder.css"/>
+    <link rel="stylesheet" href="./src/styles/library.css"/>
+    <!--Dependencies-->
+    <link href="//vjs.zencdn.net/8.23.3/video-js.min.css" rel="stylesheet">
+    <link rel="manifest" href="/manifest.json">
+    <!-- Primary Meta -->
+    <meta name="title" content="BlackVideo — Next-Gen Video Player by Jednaz Lonestamp">
+    <meta name="description" content="BlackVideo (Codename: Zephyra) is a next-gen video player developed and owned by Jednaz Lonestamp. All rights reserved.">
+    <!-- Ownership & Author -->
+    <meta name="author" content="Jednaz Lonestamp">
+    <meta name="copyright" content="© 2025 BlackBlazent | BlackVideo. All Rights Reserved.">
+    <meta name="creator" content="Jednaz Lonestamp">
+    <!-- Branding -->
+    <meta name="application-name" content="BlackVideo – Zephyra">
+    <meta name="keywords" content="BlackVideo, Zephyra, video player, Jednaz Lonestamp, CCC Network, next-gen video player, advanced playback, modular extensions">
+    <!-- Robots -->
+    <meta name="robots" content="index, follow">
+    <meta name="googlebot" content="index, follow">
+    <!-- Legal / Intellectual Property -->
+    <meta name="license" content="This software is property of Jednaz Lonestamp. Unauthorized distribution, modification, or resale is prohibited.">
+    <meta name="version" content="BlackVideo Zephyra v1.0">
+    <script src="./node_modules/videojs-sprite-thumbnails/dist/videojs-sprite-thumbnails.min.js"></script>
+    <script src="https://unpkg.com/videojs-sprite-thumbnails@2.2.3/dist/videojs-sprite-thumbnails.min.js"></script>
+    <script>
+      const player = videojs('VideoPlayer-TheaterStage');
+
+      // set up 160x90 thumbnails in single sprite.jpg, 1 per second
+      player.spriteThumbnails({
+        url: '', // URL of the video file based on the source element/tag
+        width: 160,
+        height: 90,
+        columns: 10
+      });
+    </script>
+    <script>
+      const video = document.querySelector('video');
+      const seekBar = document.getElementById('videoTimelineSeekBarProgress');
+
+      video.addEventListener('loadedmetadata', () => {
+        seekBar.max = video.duration;
+  });
+    </script>
+<script src="https://cdn.tailwindcss.com"></script>
+<!--https://app.amplitude.com/analytics/-->
+<script src="https://cdn.amplitude.com/libs/analytics-browser-2.11.1-min.js.gz"></script><script src="https://cdn.amplitude.com/libs/plugin-session-replay-browser-1.25.0-min.js.gz"></script><script>window.amplitude.add(window.sessionReplay.plugin({sampleRate: 1}));window.amplitude.init('af1428b9b0d62b734e8dc1d8dccb2dc5', {"autocapture":{"elementInteractions":true}});</script>
+  </head>
+
+  <body>
+    <div id="BlackVideo-Zephyra"></div>
+    <!--Temporary Imported-->
+    <!--Global-->
+    <script type="module" src="./AppData/forbidden/dev/global/title_bar.js"></script>
+    <script type="module" src="/src/main.tsx"></script>
+    <script type="module" src="./src/components/pageDisplayer.ts"></script>
+    <!--Logo-->
+    <script type="module" src="./AppData/forbidden/dev/global/modals/logo/logo.ui.tsx"></script>
+    <script type="module" src="./AppData/forbidden/dev/global/modals/logo/logo.script.ts"></script>
+    <!--Menu-->
+    <script type="module" src="./AppData/forbidden/dev/global/modals/menu/menu.script.ts"></script>
+    <!--Languages-->
+    <script type="module" src="./AppData/forbidden/dev/global/modals/locale/languages.tsx"></script>
+    <!--Search-->
+    <script type="module" src="./AppData/forbidden/dev/global/modals/search/search.script.ts"></script>
+    <!--Auth-->
+    <script type="module" src="./AppData/forbidden/dev/global/modals/auth/auth.portal.tsx"></script>
+    <script type="module" src="./AppData/forbidden/dev/global/modals/auth/user.create.account.ts"></script>
+    <!--Video Theater Stage-->
+    <script type="module" src="./AppData/forbidden/dev/main/playground/customs/video.controls.tsx"></script>
+    <script type="module" src="./AppData/forbidden/dev/global/tooltips.js"></script>
+    <script type="module" src="./AppData/forbidden/dev/global/image.loading.js"></script>
+    <script type="module" src="./AppData/forbidden/dev/global/loading.dev.js"></script>
+    <script type="module" src="./AppData/forbidden/dev/main/playground/playbacks/primary.video.controls.ts"></script>
+    <script type="module" src="./AppData/forbidden/dev/main/playground/playbacks/playback.timeline.control.ts"></script>
+    <script type="module" src="./AppData/forbidden/dev/main/playground/playbacks/playback.advanced.control.enhancement.volume.ts"></script>
+    <script type="module" src="./AppData/forbidden/dev/main/playground/playbacks/playback.advanced.control.enhancement.caption.ts"></script>
+    <script type="module" src="./AppData/forbidden/dev/main/playground/playbacks/playback.advanced.control.enhancement.aspect-ratio.ts"></script>
+    <script type="module" src="./AppData/forbidden/dev/main/playground/ui/aspect.ratio.ui.tsx"></script>
+    <script type="module" src="./AppData/forbidden/dev/main/playground/Video.Theater.Stage.ts"></script>
+    <script type="module" src="./AppData/forbidden/dev/main/playground/ui/caption.subtitle.ui.tsx"></script>
+    <script type="module" src="./AppData/forbidden/dev/main/playground/ui/speaker.ui.tsx"></script>
+    <script type="module" src="./AppData/forbidden/dev/main/playground/Video.Theater.Stage.ts"></script>
+    <script type="module" src="./AppData/forbidden/dev/main/playground/playbacks/aspect.ratio.events.ts"></script>
+    <script type="module" src="./AppData/forbidden/dev/main/playground/ui/playback.speed.ui.tsx"></script>
+    <script type="module" src="./AppData/forbidden/dev/main/playground/playbacks/playback.speed.ts"></script>
+    <script type="module" src="./AppData/forbidden/dev/main/playground/playbacks/picture.in.picture.ts"></script>
+    <script type="module" src="./AppData/forbidden/dev/main/playground/playbacks/resolution.ts"></script>
+    <script type="module" src="./AppData/forbidden/dev/main/playground/ui/resolution.ui.tsx"></script>
+    <script type="module" src="./AppData/forbidden/dev/main/playground/playbacks/resolution.processor.ts"></script>
+    <script type="module" src="./AppData/forbidden/dev/main/playground/ui/fullscreen.ui.tsx"></script>
+    <script type="module" src="./AppData/forbidden/dev/main/playground/playbacks/fullscreen.ts"></script>
+    <script type="module" src="./AppData/forbidden/dev/main/playground/ui/fps.ui.tsx"></script>
+    <script type="module" src="./AppData/forbidden/dev/main/playground/playbacks/fps.script.ts"></script>
+    <script type="module" src="./AppData/forbidden/dev/main/playground/ui/bitrate.ui.tsx"></script>
+    <script type="module" src="./AppData/forbidden/dev/main/playground/playbacks/bitrate.control.ts"></script>
+    <script type="module" src="./AppData/forbidden/dev/main/playground/ui/skip.controls.ui.tsx"></script>
+    <script type="module" src="./AppData/forbidden/dev/main/playground/playbacks/skips.control.ts"></script>
+    <!--Extension-->
+    <script type="module" src="./AppData/forbidden/dev/main/playground/extension/extention.blob.ts"></script>
+    <!--Accessories-->
+    <script type="module" src="./AppData/forbidden/dev/main/playground/accessories/magnifyin_glass/magnifying.glass.ts"></script>
+    <script type="module" src="./AppData/forbidden/dev/main/playground/accessories/links/link.player.deployer.ts"></script>
+    <script type="module" src="./AppData/forbidden/dev/main/playground/accessories/links/links.processors.ts"></script>
+    <script type="module" src="./AppData/forbidden/dev/main/playground/accessories/snap/snapshot.capture.frame.ts"></script>
+    <script type="module" src="./AppData/forbidden/dev/main/playground/accessories/recorder/video.recording.ts"></script>
+    <script type="module" src="./AppData/forbidden/dev/main/playground/accessories/recorder/recorder.control.ui.tsx"></script>
+    <script type="module" src="./AppData/forbidden/dev/main/playground/accessories/recorder/float.render.ui.tsx"></script>
+    <script type="module" src="./AppData/forbidden/service/zephyrahAI.ts"></script>
+    <!--Languages-->
+    <script type="module" src="./AppData/forbidden/dev/global/modals/locale/langauge.select.ts"></script>
+    <!--Footer-->
+    <script type="module" src="./AppData/forbidden/dev/footer/copyright.deployer.ts"></script>
+    <script type="module" src="./AppData/forbidden/dev/footer/days.displayer.ts"></script>
+    <script type="module" src="./AppData/forbidden/dev/footer/temperature.script.ts"></script>
+    <script type="module" src="./AppData/forbidden/dev/footer/countryDetails.ts"></script>
+    <script type="module" src="./AppData/forbidden/dev/footer/time.spent.ts"></script>
+    <script type="module" src="./AppData/forbidden/dev/footer/holyBible.ts"></script>
+    <script type="module" src="./AppData/forbidden/dev/footer/user.signature.name.ts"></script>
+    <script type="module" src="./AppData/forbidden/dev/footer/cpu.percentage.ts"></script>
+    <!--Core-->
+    <script type="module" src="./src/core/dependencies.checker.ts"></script>
+    <script type="module" src="./src/core/dependencies.ui.checker.ts"></script>
+    <script type="module" src="./src/core/dependencies-checker-loader.ts"></script>
+    <script type="module">
+  // Import the functions you need from the SDKs you need
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-app.js";
+  import { getAnalytics } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-analytics.js";
+  // TODO: Add SDKs for Firebase products that you want to use
+  // https://firebase.google.com/docs/web/setup#available-libraries
+
+  // Your web app's Firebase configuration
+  // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+  const firebaseConfig = {
+    apiKey: "AIzaSyDmTGev7woUE1kftEIePEr_wtFfr5RyI28",
+    authDomain: "blackvideo-6b1b2.firebaseapp.com",
+    projectId: "blackvideo-6b1b2",
+    storageBucket: "blackvideo-6b1b2.firebasestorage.app",
+    messagingSenderId: "818847615276",
+    appId: "1:818847615276:web:06e2295aee8b9503b50489",
+    measurementId: "G-P383ZSFR85"
+  };
+
+  // Initialize Firebase
+  const app = initializeApp(firebaseConfig);
+  const analytics = getAnalytics(app);
+</script>
+  </body>
+</html>

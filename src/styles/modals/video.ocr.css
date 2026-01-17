@@ -1,0 +1,250 @@
+/* video.ocr.css */
+.video-ocr-container {
+  position: fixed;
+  inset: 0;
+  pointer-events: none; /* Allows clicking through to video unless selecting */
+  z-index: 9998;
+}
+
+.ocr-bounding-box {
+  position: fixed;
+  border: 2px solid;
+  background: rgba(255, 255, 255, 0.05);
+  z-index: 10000;
+  pointer-events: none;
+  border-radius: 4px;
+  transition: box-shadow 0.2s ease;
+}
+
+.ocr-popup {
+  position: fixed;
+  bottom: 100px;
+  right: 30px;
+  width: 320px;
+  background: var(--background-medium);
+  border: 1px solid var(--glass-border);
+  border-radius: 12px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+  z-index: 9999;
+  overflow: hidden;
+  backdrop-filter: blur(12px);
+  pointer-events: auto; /* Ensures UI is clickable */
+  transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.ocr-popup.minimized {
+  width: 200px;
+}
+
+.ocr-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 16px;
+  background: var(--surface-color);
+  border-bottom: 1px solid var(--border-subtle);
+  cursor: default;
+}
+
+.header-left {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.header-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.header-actions button {
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  cursor: pointer;
+  padding: 4px;
+  border-radius: 4px;
+  transition: all 0.2s;
+}
+
+.header-actions button:hover {
+  background: var(--border-medium);
+  color: var(--text-primary);
+}
+
+.ocr-content {
+  padding: 16px;
+}
+
+.search-bar {
+  display: flex;
+  align-items: center;
+  background: var(--background-dark);
+  padding: 8px 12px;
+  border-radius: 8px;
+  gap: 10px;
+  margin-bottom: 12px;
+  border: 1px solid var(--border-subtle);
+}
+
+.search-bar input {
+  background: none;
+  border: none;
+  color: var(--text-primary);
+  outline: none;
+  font-size: 13px;
+  width: 100%;
+}
+
+.text-output {
+  background: var(--glass-bg);
+  border: 1px solid var(--border-subtle);
+  padding: 12px;
+  height: 120px;
+  overflow-y: auto;
+  font-size: 13px;
+  color: var(--text-secondary);
+  line-height: 1.5;
+  margin-bottom: 16px;
+  border-radius: 8px;
+}
+
+.tool-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 10px;
+  border-top: 1px solid var(--border-subtle);
+}
+
+.color-grid {
+  display: flex;
+  gap: 8px;
+}
+
+.color-dot {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  border: 2px solid transparent;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.color-dot:hover {
+  transform: scale(1.2);
+}
+
+.color-dot.active {
+  border-color: white;
+  box-shadow: 0 0 8px rgba(255, 255, 255, 0.5);
+}
+
+.cursor-btn {
+  background: var(--surface-color);
+  border: 1px solid var(--border-medium);
+  padding: 8px;
+  border-radius: 8px;
+  cursor: crosshair;
+  transition: all 0.2s;
+  pointer-events: auto;
+}
+
+.cursor-btn:hover {
+  background: var(--primary-blue);
+}
+/* Drag and Resize Controls */
+.drag-handle {
+  cursor: grab;
+  color: var(--text-muted);
+  margin-right: 4px;
+  display: flex;
+  align-items: center;
+}
+.drag-handle:active { cursor: grabbing; }
+
+.resize-handle {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 15px;
+  height: 15px;
+  cursor: nesw-resize;
+  background: linear-gradient(135deg, transparent 50%, var(--border-medium) 50%);
+}
+
+/* Control Bar (Toggle & Translate) */
+.control-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+  gap: 10px;
+}
+
+.enable-btn {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  background: var(--background-dark);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-muted);
+  padding: 6px 10px;
+  border-radius: 6px;
+  font-size: 11px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.enable-btn.on {
+  border-color: var(--accent-green);
+  color: var(--accent-green-light);
+  box-shadow: 0 0 10px rgba(108, 194, 74, 0.2);
+}
+
+.translate-dropdown {
+  position: relative;
+  background: var(--surface-color);
+  border: 1px solid var(--border-medium);
+  padding: 6px 10px;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 11px;
+  color: var(--text-secondary);
+}
+
+.translate-dropdown select {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+
+/* Disabled State Visuals */
+.system-disabled .text-output {
+  opacity: 0.5;
+  background: rgba(0,0,0,0.2);
+}
+
+.pulse {
+  animation: btnPulse 2s infinite;
+}
+
+@keyframes btnPulse {
+  0% { box-shadow: 0 0 0 0 rgba(0, 102, 255, 0.4); }
+  70% { box-shadow: 0 0 0 10px rgba(0, 102, 255, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(0, 102, 255, 0); }
+}
+
+/* Ensure the title icon uses your variable */
+.title-icon {
+  color: var(--primary-blue);
+}

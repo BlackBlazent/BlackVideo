@@ -1,0 +1,5 @@
+{
+    "extension.displayName": "My Cool Extension",
+    "extension.description": "Adds cool features to your editor",
+    "command.hello.title": "Say Hello"
+} 

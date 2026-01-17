@@ -1,0 +1,65 @@
+{
+  "name": "BlackVideo",
+  "short_name": "BlackVideo",
+  "description": "BlackVideo (Codename: Zephyra) — A next-gen video player with advanced playback tools and a modular extension system. Developed and owned by Jednaz Lonestamp.",
+  "version": "1.0.0",
+  "id": "com.blackvideo.app",
+  "author": "Jednaz Lonestamp",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#000000",
+  "theme_color": "#000000",
+  "dir": "ltr",
+  "lang": "en-US",
+  "categories": ["utilities", "video", "media", "productivity"],
+
+  "icons": [
+    {
+      "src": "/icons/icon-72x72.png",
+      "sizes": "72x72",
+      "type": "image/png"
+    },
+    {
+      "src": "/icons/icon-96x96.png",
+      "sizes": "96x96",
+      "type": "image/png"
+    },
+    {
+      "src": "/icons/icon-128x128.png",
+      "sizes": "128x128",
+      "type": "image/png"
+    },
+    {
+      "src": "/icons/icon-144x144.png",
+      "sizes": "144x144",
+      "type": "image/png"
+    },
+    {
+      "src": "/icons/icon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/icons/icon-256x256.png",
+      "sizes": "256x256",
+      "type": "image/png"
+    },
+    {
+      "src": "/icons/icon-384x384.png",
+      "sizes": "384x384",
+      "type": "image/png"
+    },
+    {
+      "src": "/icons/icon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ],
+
+  "license": "Proprietary. © 2025 Jednaz Lonestamp. All rights reserved.",
+  "homepage_url": "https://your-domain.com",
+  "related_applications": [],
+  "prefer_related_applications": false
+}

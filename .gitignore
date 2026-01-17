@@ -1,0 +1,53 @@
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+src-tauri/bin/**
+
+node_modules
+dist
+src/backup/
+documentaion
+__docs__
+Website
+Versions
+# Node modules
+functions/node_modules/
+# Tauri binaries
+src-tauri/bin/win/ffmpeg/*
+# FFmpeg binaries (Tauri)
+src-tauri/bin/win/ffmpeg/ffprobe.exe
+src-tauri/bin/win/ffmpeg/ffmpeg.exe
+src-tauri/bin/win/ffmpeg/ffplay.exe
+src-tauri/bin/win/ffmpeg/
+src-tauri/bin/windows/
+src-tauri/bin/linux/
+src-tauri/bin/macos/
+
+# Executables & shared libs
+*.exe
+*.dll
+*.so
+*.dylib
+
+
+dist-ssr
+*.local
+
+# Editor directories and files
+.vscode/*
+.VSCodeCounter*
+!.vscode/extensions.json
+.idea
+.codeviz/
+.DS_Store
+desktop.ini
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?

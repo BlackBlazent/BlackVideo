@@ -1,0 +1,243 @@
+/* FPS Engine Card - Main Container */
+.fps-engine-card {
+  position: fixed !important;
+  width: 260px;
+  background: var(--skip-bg, #111111);
+  border: 1px solid var(--skip-border, #333);
+  border-radius: 12px;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8);
+  z-index: 2147483647 !important;
+  pointer-events: all;
+  user-select: none;
+  color: white;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+
+/* Header Section */
+.fps-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 15px;
+  border-bottom: 1px solid var(--skip-border, #333);
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.header-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  font-weight: 600;
+  color: #fff;
+}
+
+.text-accent {
+  color: var(--skip-accent, #0ea5e9);
+}
+
+.close-icon-btn {
+  background: transparent;
+  border: none;
+  color: #666;
+  cursor: pointer;
+  padding: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+  transition: all 0.2s;
+}
+
+.close-icon-btn:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+}
+
+/* Stats Hero Section */
+.fps-stats-hero {
+  padding: 20px 15px;
+  background: linear-gradient(180deg, rgba(14, 165, 233, 0.05) 0%, transparent 100%);
+  text-align: center;
+  border-bottom: 1px solid var(--skip-border, #333);
+}
+
+.fps-value-main {
+  font-size: 32px;
+  font-weight: 800;
+  color: var(--skip-accent, #0ea5e9);
+  font-family: 'Monaco', 'Courier New', monospace;
+  line-height: 1;
+}
+
+.fps-value-main .unit {
+  font-size: 12px;
+  color: #555;
+  margin-left: 4px;
+  font-weight: 400;
+}
+
+.fps-sub-stats {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 8px;
+}
+
+.stat-item {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 10px;
+  color: #666;
+}
+
+.stat-item svg {
+  flex-shrink: 0;
+}
+
+/* Sync Toggle Row */
+.sync-toggle-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 15px;
+  cursor: pointer;
+  background: rgba(255, 255, 255, 0.02);
+  transition: background 0.2s;
+}
+
+.sync-toggle-row:hover {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.toggle-info {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  color: #ccc;
+}
+
+.toggle-info svg {
+  flex-shrink: 0;
+}
+
+/* Mini Switch */
+.mini-switch {
+  width: 24px;
+  height: 12px;
+  background: #333;
+  border-radius: 10px;
+  position: relative;
+  transition: background 0.3s;
+  flex-shrink: 0;
+}
+
+.mini-switch::after {
+  content: '';
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  background: #666;
+  border-radius: 50%;
+  top: 1px;
+  left: 1px;
+  transition: all 0.3s;
+}
+
+.mini-switch.on {
+  background: var(--skip-accent, #0ea5e9);
+}
+
+.mini-switch.on::after {
+  left: 13px;
+  background: #fff;
+}
+
+/* Standards Grid Section */
+.fps-grid-label {
+  padding: 10px 15px 5px;
+  font-size: 10px;
+  color: #666;
+  text-transform: uppercase;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+.fps-standards-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 6px;
+  padding: 8px 15px 15px;
+}
+
+.fps-preset-chip {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 6px 8px;
+  background: #000;
+  border: 1px solid var(--skip-border, #333);
+  border-radius: 4px;
+  font-size: 11px;
+  transition: all 0.2s;
+}
+
+.fps-preset-chip:hover {
+  border-color: var(--skip-accent, #0ea5e9);
+  background: rgba(14, 165, 233, 0.05);
+}
+
+.chip-val {
+  color: #ccc;
+  font-weight: 500;
+}
+
+.fps-preset-chip input[type="checkbox"] {
+  margin: 0;
+  transform: scale(0.8);
+  accent-color: var(--skip-accent, #0ea5e9);
+  cursor: pointer;
+}
+
+.fps-preset-chip input[type="checkbox"]:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+/* Footer Section */
+.fps-footer {
+  padding: 8px 15px;
+  font-size: 9px;
+  color: #444;
+  border-top: 1px solid var(--skip-border, #333);
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 0 0 12px 12px;
+}
+
+.fps-footer svg {
+  flex-shrink: 0;
+  color: #333;
+}
+
+/* CSS Variables Fallback */
+:root {
+  --skip-bg: #111111;
+  --skip-border: #333333;
+  --skip-accent: #0ea5e9;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .fps-engine-card {
+    width: 240px;
+  }
+  
+  .fps-value-main {
+    font-size: 28px;
+  }
+}

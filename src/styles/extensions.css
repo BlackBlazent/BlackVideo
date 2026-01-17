@@ -1,0 +1,154 @@
+  /* extension.css */
+@import './global.css';
+
+#extension-popup button:hover {
+    background-color: #e0e0e0;
+  }
+  
+  #extension-popup button:active {
+    background-color: #d0d0d0;
+  }
+
+  #ExtensionWrapper {
+  overflow: scroll;
+  height: 100%;
+  position: absolute;
+  }
+
+  /*UI*/
+
+/* Main Floating Container */
+.extensionsPlaceholderBuff {
+  position: fixed;
+  top: 100px;
+  left: 100px;
+  min-width: 320px;
+  min-height: 200px;
+  background: var(--background-dark);
+  background-image: linear-gradient(var(--glass-bg), var(--glass-bg));
+  backdrop-filter: blur(12px);
+  border: 1px solid var(--glass-border);
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  z-index: 9999;
+  overflow: hidden;
+  transition: width 0.3s, height 0.3s, border-radius 0.3s;
+}
+
+/* Minimized State */
+.extensionsPlaceholderBuff.is-minimized {
+  width: 200px !important;
+  height: 44px !important;
+  min-height: 44px !important;
+  border-radius: 22px;
+  background: var(--primary-blue);
+}
+
+.extensionsPlaceholderBuff.is-minimized .developer_extension_container,
+.extensionsPlaceholderBuff.is-minimized .extensionSpace,
+.extensionsPlaceholderBuff.is-minimized .nav-extra-controls {
+  display: none;
+}
+
+/* Navigation & Drag Handle */
+.extensionFrameTabs {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 12px;
+  background: var(--border-subtle);
+  border-bottom: 1px solid var(--border-medium);
+}
+
+.drag-handle-area {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex: 1;
+  cursor: grab;
+}
+
+.drag-handle-area:active { cursor: grabbing; }
+
+.extension-title-text {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* Controls & Buttons */
+.nav-extra-controls {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-right: 10px;
+}
+
+.text-switch {
+  background: none;
+  border: 1px solid var(--border-medium);
+  color: var(--text-muted);
+  font-size: 9px;
+  padding: 2px 6px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.text-switch.active {
+  color: var(--accent-green);
+  border-color: var(--accent-green);
+}
+
+.window-controls {
+  display: flex;
+  gap: 6px;
+}
+
+.win-btn {
+  width: 24px;
+  height: 24px;
+  display: grid;
+  place-items: center;
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.win-btn:hover {
+  background: var(--hover-bg);
+  color: var(--text-primary);
+}
+
+/* Body & Footer */
+.developer_extension_container {
+  flex: 1;
+  padding: 15px;
+  overflow-y: auto;
+  position: relative;
+}
+
+.extensionSpace {
+  padding: 8px 15px;
+  background: var(--background-medium);
+  font-size: 10px;
+  color: var(--text-muted);
+  border-top: 1px solid var(--border-subtle);
+}
+
+/* Resizer */
+.resizer-bottom-right {
+  width: 15px;
+  height: 15px;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  cursor: nwse-resize;
+  background: linear-gradient(135deg, transparent 50%, var(--border-medium) 50%);
+}

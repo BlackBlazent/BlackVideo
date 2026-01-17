@@ -1,0 +1,59 @@
+.vid-flip-video-util {
+          transition: transform 0.3s ease-in-out;
+        }
+        
+        /* Ambient Mode Core Styles */
+        .ambient-active {
+          --ambient-color: rgba(255, 255, 255, 0.1); /* Default fallback */
+        }
+
+        /* 1. PRIMARY TARGET: #videoContainer (Parent of the video) */
+        /* Note: Assuming #videoContainer is the parent of the element with videoId */
+        #videoContainer.ambient-active {
+            /* This is the main layer, use a pseudo-element for the glow/blur */
+            position: relative; /* Essential for z-index stacking */
+            overflow: visible; /* Allows the glow to extend outside bounds */
+        }
+        
+        #videoContainer.ambient-active::before {
+            content: '';
+            position: absolute;
+            /* Extend past the container edges for full theater effect */
+            inset: -80px; 
+            z-index: 0;
+            pointer-events: none;
+
+            /* YouTube-style blur and color projection */
+            filter: blur(80px) saturate(150%);
+            opacity: 0.4;
+            
+            /* Use the real-time sampled color */
+            background: radial-gradient(circle at center, var(--ambient-color) 0%, transparent 70%);
+            transition: all 0.5s ease; /* Smooth color changes */
+        }
+        
+        /* Ensure critical elements sit above the ambient layer */
+        #videoContainer.ambient-active #VideoPlayer-TheaterStage,
+        #videoContainer.ambient-active .video-submenu,
+        #videoContainer.ambient-active .video-elements {
+            /*position: relative;*/
+            z-index: 2; /* Must be higher than the ::before (z-index: 0) */
+        }
+        
+        /* 2. SECONDARY TARGETS: Subtle color tinting */
+        /* Use a low-opacity color wash based on ambient color */
+        .ambient-active .video-submenu,
+        .ambient-active .controls-bar,
+        .ambient-active .hexagon-bar,
+        .ambient-active .second-icon-bar,
+        .ambient-active .thumbnails-scroll {
+            background-color: color-mix(in srgb, var(--ambient-color) 5%, transparent); 
+            /* This uses the CSS color-mix function for subtle tinting */
+            backdrop-filter: blur(10px) brightness(80%); /* Restore a little contrast */
+        }
+
+        /* Active indicator for the button */
+        .action-hidden-util.active {
+          outline: 2px solid var(--ambient-color, white); /* Use ambient color if available */
+          box-shadow: 0 0 10px var(--ambient-color, white);
+        }

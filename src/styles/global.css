@@ -1,0 +1,114 @@
+html {
+    overflow: hidden;
+    scroll-behavior: smooth;
+}
+:root {
+  --font-primary: 'Poppins', sans-serif;
+
+  /* Color Variables */
+  --primary-blue: #0066ff;
+  --primary-blue-dark: #004dd9;
+  --accent-green: #6cc24a;
+  --accent-green-light: #8fd662;
+  --accent-orange: #ff6b35;
+  --accent-orange-light: #f7931e;
+  --background-dark: #1e1e1e;
+  --background-medium: #2a2a2a;
+  --surface-color: #3a3a3a;
+  --border-subtle: rgba(255, 255, 255, 0.05);
+  --border-medium: rgba(255, 255, 255, 0.1);
+  --text-primary: #ffffff;
+  --text-secondary: #e0e0e0;
+  --text-muted: #888888;
+  --glass-bg: rgba(255, 255, 255, 0.02);
+  --glass-border: rgba(255, 255, 255, 0.05);
+  --hover-bg: #bfbebe6c;
+  /*Fonts*/
+  /* Transparent */
+  --dark-trans-bg--effect: #26252516;
+  /* Special Hover Effect | Shine effect */
+  --background--bg: rgba(255, 255, 255, 0.08);
+  --transform--fx: translateY(-2px);
+  --the-shadow--gh: 0 8px 25px rgba(0, 0, 0, 0.3);
+  --before-background--bg: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+  --the-transition-anim: left 0.5s ease;
+}
+body {
+    font-family: var(--font-primary);
+    margin: 0;
+    /*background-color: #2a2a2a;*/
+    user-select: none;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background: linear-gradient(135deg, var(--background-dark) 0%, var(--background-medium) 100%);
+    color: var(--text-primary);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+ /* Background pattern overlay */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: 
+            radial-gradient(circle at 25% 25%, rgba(0, 102, 255, 0.1) 0%, transparent 50%),
+            radial-gradient(circle at 75% 75%, rgba(108, 194, 74, 0.05) 0%, transparent 50%);
+    pointer-events: none;
+    z-index: 0;
+        }
+img {
+    width: 100%;
+    height: 100%;
+}
+
+.action-toggle-icons {
+    display: flex;
+    align-items: center;
+}
+.icons-group-styles {
+    width: 16px;
+    height: 16px;
+    transition: all 0.2s ease-in-out;
+}
+.accessories-group-icon-styles {
+    width: 14px;
+    height: 14px;
+}
+/* scroll bars */
+
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    background-color: rgba(128, 128, 128, 0.5);
+    border-radius: 4px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background-color: rgba(128, 128, 128, 0.8);
+  }
+  
+  /* Firefox support */
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(128, 128, 128, 0.5) transparent;
+  }
+
+/* Page Display States */
+.main-pages-container > div {
+    display: none;
+}
+
+.main-pages-container > #PlaygroundArsenal {
+    display: block;
+}
+
+/* Ensure main content inside pages is always visible */
+.main-pages-container > div > main {
+    display: block;
+}

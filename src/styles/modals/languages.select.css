@@ -1,0 +1,169 @@
+.language-popup {
+  position: absolute;
+  background: linear-gradient(135deg, #1e1e1e 0%, #2a2a2a 100%);
+  border: 1px solid #3a3a3a;
+  border-radius: 16px;
+  padding: 12px 0;
+  min-width: 220px;
+  max-width: 280px;
+  box-shadow: 
+    0 20px 40px rgba(0, 0, 0, 0.4),
+    0 0 0 1px rgba(255, 255, 255, 0.05);
+  z-index: 9999;
+  backdrop-filter: blur(10px);
+  overflow: hidden;
+}
+
+.language-option {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 16px;
+  color: #e0e0e0;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-size: 14px;
+  font-weight: 500;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  position: relative;
+  overflow: hidden;
+  margin: 0 8px;
+  border-radius: 12px;
+}
+
+.language-option::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+  transition: left 0.5s ease;
+}
+
+.language-option:hover::before {
+  left: 100%;
+}
+
+.language-option:hover {
+  background: rgba(255, 255, 255, 0.08);
+  color: #ffffff;
+  transform: translateX(4px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.language-option:active {
+  transform: translateX(4px) scale(0.98);
+}
+
+.flag-icon {
+  width: 24px;
+  height: 24px;
+  object-fit: cover;
+  border-radius: 6px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+  transition: all 0.2s ease;
+  flex-shrink: 0;
+}
+
+.language-option:hover .flag-icon {
+  transform: scale(1.1);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+}
+
+/* Individual country hover effects */
+.language-option:hover:has(img[alt*="Armenia"]) {
+  background: linear-gradient(135deg, rgba(217, 0, 18, 0.1) 0%, rgba(0, 51, 160, 0.1) 100%);
+}
+
+.language-option:hover:has(img[alt*="English"]) {
+  background: linear-gradient(135deg, rgba(0, 40, 104, 0.1) 0%, rgba(178, 34, 52, 0.1) 100%);
+}
+
+.language-option:hover:has(img[alt*="India"]) {
+  background: linear-gradient(135deg, rgba(255, 153, 51, 0.1) 0%, rgba(19, 136, 8, 0.1) 100%);
+}
+
+.language-option:hover:has(img[alt*="Russia"]) {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, rgba(213, 43, 30, 0.1) 100%);
+}
+
+.language-option:hover:has(img[alt*="Sweden"]) {
+  background: linear-gradient(135deg, rgba(0, 106, 167, 0.1) 0%, rgba(254, 204, 2, 0.1) 100%);
+}
+
+/* Smooth entrance animation */
+@keyframes slideInFromTop {
+  from {
+    opacity: 0;
+    transform: translateY(-10px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.language-popup {
+  animation: slideInFromTop 0.2s ease-out;
+}
+
+/* Staggered animation for options */
+.language-option:nth-child(1) { animation-delay: 0.05s; }
+.language-option:nth-child(2) { animation-delay: 0.1s; }
+.language-option:nth-child(3) { animation-delay: 0.15s; }
+.language-option:nth-child(4) { animation-delay: 0.2s; }
+.language-option:nth-child(5) { animation-delay: 0.25s; }
+
+@keyframes fadeInSlide {
+  from {
+    opacity: 0;
+    transform: translateX(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.language-popup .language-option {
+  animation: fadeInSlide 0.3s ease-out both;
+}
+
+/* Responsive improvements */
+@media (max-width: 320px) {
+  .language-popup {
+    min-width: 200px;
+    margin: 0 8px;
+  }
+  
+  .language-option {
+    padding: 12px 14px;
+    font-size: 13px;
+  }
+  
+  .flag-icon {
+    width: 20px;
+    height: 20px;
+  }
+}
+
+/* Subtle glow effect on popup */
+.language-popup::after {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+  border-radius: 18px;
+  z-index: -1;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.language-popup:hover::after {
+  opacity: 1;
+}

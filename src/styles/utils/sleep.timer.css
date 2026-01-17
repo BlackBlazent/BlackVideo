@@ -1,0 +1,65 @@
+.sleep-timer-menu {
+          position: absolute;
+          /* Positioning properties will be set dynamically by JS */
+          width: 200px;
+          padding: 8px;
+          background: rgba(0, 0, 0, 0.7); /* Dark background */
+          backdrop-filter: blur(10px); /* Glass skin effect */
+          border: 1px solid rgba(255, 255, 255, 0.1);
+          border-radius: 12px;
+          box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+          z-index: 999; /* Must be high to appear over everything */
+          transition: transform 0.2s ease, opacity 0.2s ease;
+      }
+
+      .sleep-timer-menu-item {
+          width: 100%;
+          padding: 10px;
+          margin-bottom: 4px;
+          background: transparent;
+          border: none;
+          color: white;
+          text-align: left;
+          border-radius: 8px;
+          cursor: pointer;
+          transition: background-color 0.2s ease;
+      }
+
+      .sleep-timer-menu-item:hover {
+          background-color: rgba(255, 255, 255, 0.15);
+      }
+      
+      .sleep-timer-countdown {
+          color: #ffb700; /* Amber/Yellow for high visibility */
+          font-weight: bold;
+          font-size: 14px;
+          text-align: center;
+          padding: 8px 0;
+          margin-top: 5px;
+          border-top: 1px solid rgba(255, 255, 255, 0.1);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          gap: 5px;
+      }
+
+      .sleep-timer-countdown button {
+        background: none;
+        border: none;
+        color: white;
+        cursor: pointer;
+        font-size: 12px;
+        margin-left: 8px;
+        opacity: 0.7;
+      }
+      .sleep-timer-countdown button:hover {
+        opacity: 1;
+        text-decoration: underline;
+      }
+      .sleep-timer-menu-cancel {
+          background-color: rgba(255, 0, 0, 0.2);
+          font-weight: bold;
+      }
+      .sleep-timer-menu-cancel:hover {
+          background-color: rgba(255, 0, 0, 0.3);
+      }

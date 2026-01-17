@@ -1,0 +1,51 @@
+.volume-popup-container {
+    background: rgba(15, 15, 15, 0.95);
+    border: 1px solid #333;
+    padding: 15px;
+    border-radius: 12px;
+    width: 220px;
+    backdrop-filter: blur(10px);
+}
+
+.volume-slider-300 {
+    width: 100%;
+    cursor: pointer;
+    accent-color: #3b82f6;
+}
+
+/* Red color when boosting above 100% */
+.volume-slider-300::-webkit-slider-runnable-track {
+    background: linear-gradient(to right, #3b82f6 33%, #ef4444 33%);
+}
+
+.vol-boost-text {
+    color: #ef4444;
+    font-weight: bold;
+    text-shadow: 0 0 5px rgba(239, 68, 68, 0.5);
+}
+
+.sync-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 15px;
+    padding-top: 10px;
+    border-top: 1px solid #222;
+}
+
+.advanced-vol-settings {
+    margin-top: 10px;
+    background: #000;
+    padding: 10px;
+    border-radius: 8px;
+    font-size: 11px;
+}
+
+.ms-input {
+    width: 50px;
+    background: #222;
+    border: 1px solid #444;
+    color: white;
+    font-size: 11px;
+    padding: 2px;
+}

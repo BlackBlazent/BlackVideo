@@ -1,0 +1,29 @@
+.aspect-ratio-engine-card {
+  width: 240px;
+  background: var(--skip-bg, #0f0f0f);
+  border: 1px solid var(--skip-border, #222);
+  border-radius: 12px;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6);
+  padding: 0;
+  overflow: hidden;
+  backdrop-filter: blur(10px);
+}
+
+.res-option-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  margin: 2px 8px;
+}
+
+.res-option-row.active {
+  background: rgba(var(--skip-accent-rgb), 0.1);
+}
+
+.res-text {
+  font-size: 12px;
+  color: #eee;
+}
