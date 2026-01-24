@@ -1,15 +1,52 @@
-![Logo](https://github.com/BlackBlazent/BlackVideo/blob/blackvideo-master/.github/repo_assets/BlackVideoBanner.png?raw=true)
+![Logo](https://github.com/BlackBlazent/BlackBlazentGithubAssets/blob/main/Public/BlackVideo/assets/banner/BlackVideo.gif?raw=true)
 
-# **Appname:** *BlackVideo*  
-## **Codename:** *zephyra*  
- 
- <h5>🎯 <i>A next-gen video player with advanced playback tools and a modular extension system—enabling intelligent utilities for a fully customizable viewing experience.</i></h5>
+> # Announcement
 
- ![Status](https://img.shields.io/badge/status-in%20development-blue)
+The first official release of **BlackVideo** is scheduled for **June 12, 2026**  
+Version: **1.1.01.001.0001**
+
+If you’d like early access, you can join the [waitlist](https://blackvideo-centric-site.onrender.com/) on the BlackVideo website.
+
+On release day, you can try the product by visiting the official site: [BlackVideo](https://blackvideo-centric-site.onrender.com/)
+
+You can also download project files from this repository under the  
+[Download Section](#downloads).
+
+---
+
+<p style="font-size: 90px; font-weight: bold; color:#000101; justify-content: center; align-items: center;">Black<span style="font-size: 90px; font-weight: bold; color:#0bdc53; justify-content: center; align-items: center;">Video</span></p> 
+ <h5><i>A next-gen video player with advanced playback tools and a modular extension system—enabling intelligent utilities for a fully customizable viewing experience.</i></h5>
+
+<!--
+![Status](https://img.shields.io/badge/status-in%20development-blue)
 ![License](https://img.shields.io/badge/license-proprietary-red)
 ![Codename](https://img.shields.io/badge/codename-Zephyra-purple)
 ![Version](https://img.shields.io/badge/version-1.1.01.001.0001-informational)
 ![ID](https://img.shields.io/badge/appID-com.blackblazent.blackvideo--zephyra.app-lightgrey)
+-->
+
+<img style="height:90px;" src="https://github.com/BlackBlazent/BlackBlazentGithubAssets/blob/main/Public/BlackVideo/assets/badge/version.badge.png?raw=true"/>
+<img style="height:90px;" src="https://github.com/BlackBlazent/BlackBlazentGithubAssets/blob/main/Public/BlackVideo/assets/badge/codename.badge.png?raw=true"/>
+<img style="height:90px;" src="https://github.com/BlackBlazent/BlackBlazentGithubAssets/blob/main/Public/BlackVideo/assets/badge/ID.badge.png?raw=true"/>
+<img style="height:90px;" src="https://github.com/BlackBlazent/BlackBlazentGithubAssets/blob/main/Public/BlackVideo/assets/badge/license.badge.png?raw=true"/>
+
+---
+> Share on
+
+[![Share on X](https://img.shields.io/badge/X-Share-black?logo=x&logoColor=white)](https://example.com)
+[![Share on Telegram](https://img.shields.io/badge/Telegram-Share-26A5E4?logo=telegram&logoColor=white)](https://example.com)
+[![Share on WhatsApp](https://img.shields.io/badge/WhatsApp-Share-25D366?logo=whatsapp&logoColor=white)](https://example.com)
+[![Share on Instagram](https://img.shields.io/badge/Instagram-Share-E4405F?logo=instagram&logoColor=white)](https://example.com)
+[![Share on Facebook](https://img.shields.io/badge/Facebook-Share-1877F2?logo=facebook&logoColor=white)](https://example.com)
+[![Share on VK](https://img.shields.io/badge/VK-Share-0077FF?logo=vk&logoColor=white)](https://example.com)
+[![Share on OK](https://img.shields.io/badge/OK-Share-EE8208?logo=odnoklassniki&logoColor=white)](https://example.com)
+[![Share on LinkedIn](https://img.shields.io/badge/LinkedIn-Share-0A66C2?logo=linkedin&logoColor=white)](https://example.com)
+[![Share on Mastodon](https://img.shields.io/badge/Mastodon-Share-6364FF?logo=mastodon&logoColor=white)](https://example.com)
+[![Share on Reddit](https://img.shields.io/badge/Reddit-Share-FF4500?logo=reddit&logoColor=white)](https://example.com)
+[![Join Discord](https://img.shields.io/badge/Discord-Join-5865F2?logo=discord&logoColor=white)](https://example.com)
+
+---
+
 
 ## Date created
 12/23/2023 at 8:55 AM
@@ -17,14 +54,6 @@
 
 ## Date published
 DD/MM/YYYY
-
-<div style="position: relative; width: 100%; height: 0; padding-top: 50.0000%;
- padding-bottom: 0; box-shadow: 0 2px 8px 0 rgba(63,69,81,0.16); margin-top: 1.6em; margin-bottom: 0.9em; overflow: hidden;
- border-radius: 8px; will-change: transform;">
-  <iframe loading="lazy" style="position: absolute; width: 100%; height: 100%; top: 0; left: 0; border: none; padding: 0;margin: 0;"
-    src="https://www.canva.com/design/DAG91iOorVs/O1sty6MuocTfNvKLGMi6Xw/view?embed" allowfullscreen="allowfullscreen" allow="fullscreen">
-  </iframe>
-</div>
 
 ## Documentation
 
@@ -50,37 +79,6 @@ App Version History
 | Icon | Version | Details on the Version Features Include                                                                                                                                                             | 🔗 Direct Link for Version Access                                           |
 | ------- | ---------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------- |
 | <img style="width:40px; height:40px;" src="https://github.com/BlackBlazent/BlackVideo/blob/blackvideo-master/.github/repo_assets/BlackVideo.png" />      | v1.1.01.001.0001 | - Initial release <br>- Functional: | [v1.1.01.001.0001](https://example.com/downloads/v1.1.01.001.0001) |
-
-
-## Diagram (Current)
-
-```mermaid
-graph TD
-
-    base.cv::user["**User**<br>[External]"]
-    base.cv::firebase_functions["**Firebase Functions**<br>functions/package.json `firebase-functions`, functions/src/index.ts `setGlobalOptions`"]
-    base.cv::tauri_app["**Tauri Desktop Application**<br>src-tauri/Cargo.toml `[package]`, src-tauri/src/main.rs `tauri::Builder::default()`"]
-    base.cv::data_connect_service["**Data Connect Service**<br>dataconnect/dataconnect.yaml `specVersion: "v1"`, dataconnect/schema/schema.gql `type User @table`"]
-    base.cv::supabase["**Supabase**<br>package.json `@supabase/supabase-js`"]
-    base.cv::firebase_platform["**Firebase Platform**<br>package.json `firebase`"]
-    base.cv::genkit_framework["**Genkit Framework**<br>functions/package.json `genkit`, functions/package.json `genkit-cli`"]
-    base.cv::postgresql_db["**PostgreSQL Database**<br>dataconnect/dataconnect.yaml `postgresql`, dataconnect/dataconnect.yaml `cloudSql`"]
-    subgraph base.cv::frontend_app["**Frontend Web Application**<br>[External]"]
-        base.cv::spa["**Single Page Application**<br>src/main.tsx `ReactDOM.createRoot`, src/App.tsx `function App()`"]
-    end
-    %% Edges at this level (grouped by source)
-    base.cv::user["**User**<br>[External]"] -->|"Uses"| base.cv::spa["**Single Page Application**<br>src/main.tsx `ReactDOM.createRoot`, src/App.tsx `function App()`"]
-    base.cv::user["**User**<br>[External]"] -->|"Uses"| base.cv::tauri_app["**Tauri Desktop Application**<br>src-tauri/Cargo.toml `[package]`, src-tauri/src/main.rs `tauri::Builder::default()`"]
-    base.cv::spa["**Single Page Application**<br>src/main.tsx `ReactDOM.createRoot`, src/App.tsx `function App()`"] -->|"Invokes"| base.cv::firebase_functions["**Firebase Functions**<br>functions/package.json `firebase-functions`, functions/src/index.ts `setGlobalOptions`"]
-    base.cv::spa["**Single Page Application**<br>src/main.tsx `ReactDOM.createRoot`, src/App.tsx `function App()`"] -->|"Uses"| base.cv::supabase["**Supabase**<br>package.json `@supabase/supabase-js`"]
-    base.cv::spa["**Single Page Application**<br>src/main.tsx `ReactDOM.createRoot`, src/App.tsx `function App()`"] -->|"Accesses data via"| base.cv::data_connect_service["**Data Connect Service**<br>dataconnect/dataconnect.yaml `specVersion: "v1"`, dataconnect/schema/schema.gql `type User @table`"]
-    base.cv::tauri_app["**Tauri Desktop Application**<br>src-tauri/Cargo.toml `[package]`, src-tauri/src/main.rs `tauri::Builder::default()`"] -->|"Invokes"| base.cv::firebase_functions["**Firebase Functions**<br>functions/package.json `firebase-functions`, functions/src/index.ts `setGlobalOptions`"]
-    base.cv::tauri_app["**Tauri Desktop Application**<br>src-tauri/Cargo.toml `[package]`, src-tauri/src/main.rs `tauri::Builder::default()`"] -->|"Uses"| base.cv::supabase["**Supabase**<br>package.json `@supabase/supabase-js`"]
-    base.cv::tauri_app["**Tauri Desktop Application**<br>src-tauri/Cargo.toml `[package]`, src-tauri/src/main.rs `tauri::Builder::default()`"] -->|"Accesses data via"| base.cv::data_connect_service["**Data Connect Service**<br>dataconnect/dataconnect.yaml `specVersion: "v1"`, dataconnect/schema/schema.gql `type User @table`"]
-    base.cv::firebase_functions["**Firebase Functions**<br>functions/package.json `firebase-functions`, functions/src/index.ts `setGlobalOptions`"] -->|"Uses services of"| base.cv::firebase_platform["**Firebase Platform**<br>package.json `firebase`"]
-    base.cv::firebase_functions["**Firebase Functions**<br>functions/package.json `firebase-functions`, functions/src/index.ts `setGlobalOptions`"] -->|"Uses"| base.cv::genkit_framework["**Genkit Framework**<br>functions/package.json `genkit`, functions/package.json `genkit-cli`"]
-    base.cv::data_connect_service["**Data Connect Service**<br>dataconnect/dataconnect.yaml `specVersion: "v1"`, dataconnect/schema/schema.gql `type User @table`"] -->|"Manages and stores data in"| base.cv::postgresql_db["**PostgreSQL Database**<br>dataconnect/dataconnect.yaml `postgresql`, dataconnect/dataconnect.yaml `cloudSql`"]
-```
 
 ## License
 
