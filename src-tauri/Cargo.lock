@@ -498,9 +498,9 @@ checksum = "613afe47fcd5fac7ccf1db93babcb082c5994d996f20b8b159f2ad1658eb5724"
 
 [[package]]
 name = "chron"
-version = "0.1.5"
+version = "0.1.6"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "006418d1ecd6ac67cc5cbe3e7947f6e1ffc8cc68e1fb4ea9590b44d142e09a46"
+checksum = "902a6b86f517bf4c50564bfd1b3d035a58054c4c1fc6ffcbaa8eb016672fc0eb"
 
 [[package]]
 name = "chrono"
