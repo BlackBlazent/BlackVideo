@@ -2,20 +2,36 @@
 
 > # Announcement
 
-The first official release of **BlackVideo** is scheduled for **June 12, 2026**  
-Version: **1.1.01.001.0001**
+The first official exclusive release of **BlackVideo** is scheduled for **June 12, 2026**  
+Version: **1.1.01.001.0001** | **1.0.0**
 
-If you’d like early access, you can join the [waitlist](https://blackvideo-centric-site.onrender.com/) on the BlackVideo website.
+> Top countries were ***BlackVideo*** will be released.
+* [<img style="width: 15px; height: 15px;" src="./public/assets/locales/us.png"/>]()  **United States** [<img style="width: 9px; height: 9px;" src="./public/assets/others/fullscreen.png"/>](https://www.us.com)
+* [<img style="width: 15px; height: 15px;" src="./public/assets/locales/japan.png"/>]() **Japan** [<img style="width: 9px; height: 9px;" src="./public/assets/others/fullscreen.png"/>](https://www.us.com)
+* [<img style="width: 15px; height: 15px;" src="./public/assets/locales/germany.png"/>]() **Germany** [<img style="width: 9px; height: 9px;" src="./public/assets/others/fullscreen.png"/>](https://www.us.com)
+* [<img style="width: 15px; height: 15px;" src="./public/assets/locales/south-korea.png"/>]() **South Korea** [<img style="width: 9px; height: 9px;" src="./public/assets/others/fullscreen.png"/>](https://www.us.com)
+* [<img style="width: 15px; height: 15px;" src="./public/assets/locales/netherlands.png"/>]() **Netherlands** [<img style="width: 9px; height: 9px;" src="./public/assets/others/fullscreen.png"/>](https://www.us.com)
+* [<img style="width: 15px; height: 15px;" src="./public/assets/locales/sweden.png"/>]() **Sweden** [<img style="width: 9px; height: 9px;" src="./public/assets/others/fullscreen.png"/>](https://www.us.com)
+* [<img style="width: 15px; height: 15px;" src="./public/assets/locales/finland.png"/>]() **Finland** [<img style="width: 9px; height: 9px;" src="./public/assets/others/fullscreen.png"/>](https://www.us.com)
+* [<img style="width: 15px; height: 15px;" src="./public/assets/locales/canada.png"/>]() **Canada** [<img style="width: 9px; height: 9px;" src="./public/assets/others/fullscreen.png"/>](https://www.us.com)
+* [<img style="width: 15px; height: 15px;" src="./public/assets/locales/singapore.png"/>]() **Singapore** [<img style="width: 9px; height: 9px;" src="./public/assets/others/fullscreen.png"/>](https://www.us.com)
+* [<img style="width: 15px; height: 15px;" src="./public/assets/locales/estonia.png"/>]() **Estonia** [<img style="width: 9px; height: 9px;" src="./public/assets/others/fullscreen.png"/>](https://www.us.com)
+* [<img style="width: 15px; height: 15px;" src="./public/assets/locales/russia.png"/>]() **Russia** [<img style="width: 9px; height: 9px;" src="./public/assets/others/fullscreen.png"/>](https://www.us.com)
+* [<img style="width: 15px; height: 15px;" src="./public/assets/locales/armenia.png"/>]() **Armenia** [<img style="width: 9px; height: 9px;" src="./public/assets/others/fullscreen.png"/>](https://www.us.com)
+* [<img style="width: 15px; height: 15px;" src="./public/assets/locales/india.png"/>]() **India** [<img style="width: 9px; height: 9px;" src="./public/assets/others/fullscreen.png"/>](https://www.us.com)
+
+If you’d like to access early in the said date, you can join the [waitlist](https://blackvideo-centric-site.onrender.com/) on the BlackVideo website, and we let you know in that time.
 
 On release day, you can try the product by visiting the official site: [BlackVideo](https://blackvideo-centric-site.onrender.com/)
 
 You can also download project files from this repository under the  
-[Download Section](#downloads).
+[Download Section](#download).
 
 ---
 
-<p style="font-size: 90px; font-weight: bold; color:#000101; justify-content: center; align-items: center;">Black<span style="font-size: 90px; font-weight: bold; color:#0bdc53; justify-content: center; align-items: center;">Video</span></p> 
+<p style="font-size: 90px; font-weight: bold; color:#000101; justify-content: center; align-items: center;">Black<span style="font-size: 90px; font-weight: bold; color:#0bdc53; justify-content: center; align-items: center;">Video</span></p>
  <h5><i>A next-gen video player with advanced playback tools and a modular extension system—enabling intelligent utilities for a fully customizable viewing experience.</i></h5>
+
 
 <!--
 ![Status](https://img.shields.io/badge/status-in%20development-blue)
@@ -25,10 +41,10 @@ You can also download project files from this repository under the
 ![ID](https://img.shields.io/badge/appID-com.blackblazent.blackvideo--zephyra.app-lightgrey)
 -->
 
-<img style="height:90px;" src="https://github.com/BlackBlazent/BlackBlazentGithubAssets/blob/main/Public/BlackVideo/assets/badge/version.badge.png?raw=true"/>
-<img style="height:90px;" src="https://github.com/BlackBlazent/BlackBlazentGithubAssets/blob/main/Public/BlackVideo/assets/badge/codename.badge.png?raw=true"/>
-<img style="height:90px;" src="https://github.com/BlackBlazent/BlackBlazentGithubAssets/blob/main/Public/BlackVideo/assets/badge/ID.badge.png?raw=true"/>
-<img style="height:90px;" src="https://github.com/BlackBlazent/BlackBlazentGithubAssets/blob/main/Public/BlackVideo/assets/badge/license.badge.png?raw=true"/>
+|     |     |     |     |
+|-----|-----|-----|-----|
+|<img style="height:90px;" src="https://github.com/BlackBlazent/BlackBlazentGithubAssets/blob/main/Public/BlackVideo/assets/badge/version.badge.png?raw=true"/> | <img style="height:90px;" src="https://github.com/BlackBlazent/BlackBlazentGithubAssets/blob/main/Public/BlackVideo/assets/badge/codename.badge.png?raw=true"/> | <img style="height:90px;" src="https://github.com/BlackBlazent/BlackBlazentGithubAssets/blob/main/Public/BlackVideo/assets/badge/ID.badge.png?raw=true"/> | <img style="height:90px;" src="https://github.com/BlackBlazent/BlackBlazentGithubAssets/blob/main/Public/BlackVideo/assets/badge/license.badge.png?raw=true"/> |
+
 
 ---
 > Share on
@@ -48,18 +64,85 @@ You can also download project files from this repository under the
 ---
 
 
-## Date created
+### Date created
 12/23/2023 at 8:55 AM
 
 
-## Date published
-DD/MM/YYYY
+### Date published
+12/6/2026
+
+### Extensions
+> This is the offical BlackVideo Extensions System.
+
+
+* **NPM Registry**
+
+   [```blackvideo-extensions```]()
+* **Repository**
+
+   [blackvideo-extensions](https://github.com/BlackBlazent/blackvideo-extensions)
+
+* **Create** ***BlackVideo*** **extension**
+   
+   Using npm:
+   ```tsx
+   npm install -g blackvideo-extensions
+   ```
+   using pnpm:
+   ```tsx
+   pnpm add -g blackvideo-extensions
+   ```
+   CLI Usage:
+
+   After installation, the generator is available via:
+
+   ```bash
+   blackvideo-ext
+   ```
+
+   Available Commands:
+
+   | Command    | Description                       |
+   | ---------- | --------------------------------- |
+   | `init`     | Create a new extension project    |
+   | `validate` | Validate extension structure      |
+   | `build`    | Build extension package           |
+   | `dev`      | Run extension in development mode |
+   | `publish`  | Prepare extension for marketplace |
+   | `upgrade`  | Update template to latest version |
+   | `info`     | Show environment diagnostics      |
+
+   Creating a New Extension:
+
+   Initialize Project
+
+     ```bash
+     blackvideo-ext init
+     ```
+     
+     The CLI will prompt:
+     
+     ```
+     ✔ Extension name
+     ✔ Display name
+     ✔ Description
+     ✔ Author
+     ✔ License
+     ✔ Extension type
+     ✔ Playback integration (yes/no)
+     ✔ UI support (yes/no)
+     ✔ CLI support (yes/no)
+     ✔ Monetization model
+     ```
+     After this it will genearte the default structure of extension.
+
+   > **For more info about how to create BlackVideo extenions visit our extension [documentation]()**. Ultimately to discover more about BlackVideo usage and supported matters feel free visit our [Documentation page]()
 
 ## Documentation
 
 [Documentation](./__docs__/BlackVideo.Zephyra.Documentation.md)
 
-## 📥 Download  
+## Download  
 Download **BlackVideo** only from the source provided below. For your safety, avoid downloading from untrusted websites.
 
 Available on:  
@@ -76,7 +159,7 @@ Available on:
 
 App Version History
 
-| Icon | Version | Details on the Version Features Include                                                                                                                                                             | 🔗 Direct Link for Version Access                                           |
+| Icon | Version | Details on the Version Features Include                                                                                                                                                             | Direct Link for Version Access                                           |
 | ------- | ---------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------- |
 | <img style="width:40px; height:40px;" src="https://github.com/BlackBlazent/BlackVideo/blob/blackvideo-master/.github/repo_assets/BlackVideo.png" />      | v1.1.01.001.0001 | - Initial release <br>- Functional: | [v1.1.01.001.0001](https://example.com/downloads/v1.1.01.001.0001) |
 
