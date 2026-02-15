@@ -9,9 +9,12 @@ lerna-debug.log*
 src-tauri/bin/**
 
 node_modules
+build/launch_blackvideo_dev
 dist
+__docs__.zip
 src/backup/
 documentaion
+samples
 __docs__
 Website
 Versions
@@ -33,6 +36,7 @@ src-tauri/bin/macos/
 *.dll
 *.so
 *.dylib
+*.spec
 
 
 dist-ssr
