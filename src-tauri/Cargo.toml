@@ -23,5 +23,5 @@ tauri-plugin-opener = "2"
 serde = { version = "1", features = ["derive"] }
 serde_json = "1"
 chron = "0.1.5"
-tauri-plugin-dialog = "2.4.2"
+tauri-plugin-dialog = "2.6.0"
 
