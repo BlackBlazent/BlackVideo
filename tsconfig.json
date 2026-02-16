@@ -1,11 +1,18 @@
 {
   "compilerOptions": {
     "target": "ES2020",
+    "allowJs": true,
+    "checkJs": false,
     "useDefineForClassFields": true,
     "lib": ["ES2020", "DOM", "DOM.Iterable"],
     "module": "ESNext",
     "skipLibCheck": true,
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./src/*"]
+    },
     "types": ["@tauri-apps/api", "node"],
+    
 
     /* Bundler mode */
     "moduleResolution": "bundler",
@@ -21,6 +28,6 @@
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true
   },
-  "include": ["src", "src-tauri"],
+  "include": ["src", "src-tauri,", "utils", "AppData", "src-tauri/scripts/yt-extractor.js"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }
