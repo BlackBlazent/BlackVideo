@@ -1,0 +1,284 @@
+.ConcurrentVideoStage {
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+.SeparateVideoPlayerCOntainer {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+}
+
+.NativeBiteVideoSeparateWindow {
+    width: 100%;
+    min-height: 100%;
+    height: 100vh;
+    display: block;
+    cursor: none;
+}
+
+.SeparateVideoPlayerCOntainer:hover .NativeBiteVideoSeparateWindow {
+    cursor: default;
+}
+
+body { 
+    margin: 0; 
+    background: #000; 
+    overflow: hidden; 
+    font-family: sans-serif; 
+}
+
+/* Hide native controls */
+video::-webkit-media-controls {
+    display: none !important;
+}
+
+video::-webkit-media-controls-enclosure {
+    display: none !important;
+}
+
+video::-moz-media-controls {
+    display: none !important;
+}
+
+/* Custom Controls */
+.custom-video-controls {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.7) 70%, transparent 100%);
+    padding: 40px 20px 15px;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+    z-index: 10;
+}
+
+.custom-video-controls.visible {
+    opacity: 1;
+    pointer-events: all;
+}
+
+.controls-wrapper {
+    max-width: 100%;
+}
+
+.progress-container {
+    margin-bottom: 12px;
+}
+
+.progress-bar {
+    width: 100%;
+    height: 5px;
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 3px;
+    cursor: pointer;
+    position: relative;
+    margin-bottom: 8px;
+    transition: height 0.2s ease;
+}
+
+.progress-bar:hover {
+    height: 7px;
+}
+
+.progress-filled {
+    height: 100%;
+    background: #ff0000;
+    border-radius: 3px;
+    width: 0%;
+    transition: width 0.1s linear;
+    position: relative;
+}
+
+.progress-filled::after {
+    content: '';
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 12px;
+    height: 12px;
+    background: #ff0000;
+    border-radius: 50%;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+}
+
+.progress-bar:hover .progress-filled::after {
+    opacity: 1;
+}
+
+.time-display {
+    color: white;
+    font-size: 13px;
+    font-weight: 500;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.6);
+}
+
+.controls-buttons {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.control-btn {
+    background: none;
+    border: none;
+    color: white;
+    cursor: pointer;
+    padding: 8px;
+    border-radius: 50%;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.control-btn:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: scale(1.1);
+}
+
+.control-btn:active {
+    transform: scale(0.95);
+}
+
+.control-btn.active {
+    background: rgba(255, 0, 0, 0.5);
+}
+
+.control-btn.active:hover {
+    background: rgba(255, 0, 0, 0.7);
+}
+
+.play-pause-btn {
+    background: rgba(255, 255, 255, 0.15);
+    padding: 12px;
+    margin: 0 4px;
+}
+
+.play-pause-btn:hover {
+    background: rgba(255, 255, 255, 0.3);
+}
+
+.volume-container {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-left: auto;
+    margin-right: 8px;
+}
+
+.volume-slider {
+    width: 80px;
+    height: 4px;
+    -webkit-appearance: none;
+    appearance: none;
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 2px;
+    outline: none;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.volume-slider:hover {
+    height: 6px;
+}
+
+.volume-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 14px;
+    height: 14px;
+    background: white;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.volume-slider:hover::-webkit-slider-thumb {
+    transform: scale(1.2);
+}
+
+.volume-slider::-moz-range-thumb {
+    width: 14px;
+    height: 14px;
+    background: white;
+    border-radius: 50%;
+    cursor: pointer;
+    border: none;
+    transition: all 0.2s ease;
+}
+
+.volume-slider:hover::-moz-range-thumb {
+    transform: scale(1.2);
+}
+
+/* PiP and Fullscreen button spacing */
+.pip-btn,
+.fullscreen-btn {
+    margin-left: 4px;
+}
+
+/* Tooltip on hover */
+.control-btn::before {
+    content: attr(title);
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-8px);
+    background: rgba(0, 0, 0, 0.9);
+    color: white;
+    padding: 6px 10px;
+    border-radius: 4px;
+    font-size: 12px;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.control-btn:hover::before {
+    opacity: 1;
+    transform: translateX(-50%) translateY(-12px);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .custom-video-controls {
+        padding: 30px 15px 12px;
+    }
+    
+    .controls-buttons {
+        gap: 4px;
+    }
+    
+    .control-btn {
+        padding: 6px;
+    }
+    
+    .play-pause-btn {
+        padding: 10px;
+    }
+    
+    .volume-slider {
+        width: 60px;
+    }
+    
+    .control-btn::before {
+        display: none;
+    }
+}
+
+/* Hide cursor when controls are hidden */
+.SeparateVideoPlayerCOntainer.hide-cursor {
+    cursor: none;
+}
+
+.SeparateVideoPlayerCOntainer.hide-cursor * {
+    cursor: none !important;
+}

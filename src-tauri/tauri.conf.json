@@ -19,12 +19,31 @@
       }
     ],
     "security": {
-      "csp": null
+      "csp": null,
+      "assetProtocol": {
+        "enable": true,
+        "scope": [
+          "$HOME/**",
+          "$DESKTOP/**",
+          "$DOCUMENT/**",
+          "$DOWNLOAD/**",
+          "$VIDEO/**"
+        ]
+      }
     }
   },
   "plugins": {
     "dialog": null,
-    "fs": null,
+    "fs": {
+      "scope": [
+        "$HOME/**",
+        "$DESKTOP/**",
+        "$DOCUMENT/**",
+        "$DOWNLOAD/**",
+        "$VIDEO/**",
+        "$APPDATA/**"
+      ]
+    },
     "capabilities": {
     "default": {
       "permissions": [

@@ -1,0 +1,86 @@
+/*
+ * Copyright (c) 2026 BlackVideo (Zephyra)
+ * YouTube Drag & Drop Styles
+ */
+
+/* YouTube drag-over state */
+.is-youtube-drag-over {
+  position: relative;
+  border: 3px dashed #FF0000 !important;
+  background: rgba(255, 0, 0, 0.05);
+  transition: all 0.3s ease;
+}
+
+.is-youtube-drag-over::before {
+  content: 'Drop YouTube video here';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: rgba(255, 0, 0, 0.9);
+  color: white;
+  padding: 20px 40px;
+  border-radius: 10px;
+  font-size: 1.5em;
+  font-weight: bold;
+  z-index: 999;
+  pointer-events: none;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+  animation: pulse 1.5s ease-in-out infinite;
+}
+
+/* YouTube drag icon */
+.is-youtube-drag-over::after {
+  content: '▶';
+  position: absolute;
+  top: calc(50% - 60px);
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 3em;
+  color: white;
+  z-index: 999;
+  pointer-events: none;
+  animation: bounce 1s ease-in-out infinite;
+}
+
+/* Pulse animation for drag overlay */
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+  50% {
+    opacity: 0.8;
+    transform: translate(-50%, -50%) scale(1.05);
+  }
+}
+
+/* Bounce animation for play icon */
+@keyframes bounce {
+  0%, 100% {
+    transform: translateX(-50%) translateY(0);
+  }
+  50% {
+    transform: translateX(-50%) translateY(-10px);
+  }
+}
+
+/* Message overlay styles */
+#youtube-dropper-message {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+  text-align: center;
+  backdrop-filter: blur(10px);
+  letter-spacing: 0.5px;
+}
+
+/* Video container base styles for both droppers */
+#videoContainer {
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+/* Ensure message overlays are properly layered */
+#dropper-message-overlay,
+#youtube-dropper-message {
+  z-index: 1000;
+}

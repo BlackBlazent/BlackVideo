@@ -1,4 +1,3 @@
-// search.core.ui.tsx
 /*
  * Copyright (c) 2026 BlackVideo (Zephyra)
  * All Rights Reserved.
@@ -8,6 +7,9 @@
  * in whole or in part, is strictly prohibited without prior written permission
  * from BlackVideo.
  */
+
+// search.core.ui.tsx
+
 export default function SearchPreviewPopup() {
     return (
       <div id="search-popup-preview" className="search-popup-container" style={{ display: 'none' }}>

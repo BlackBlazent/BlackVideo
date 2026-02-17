@@ -3,13 +3,18 @@ html {
     scroll-behavior: smooth;
 }
 :root {
-  --font-primary: 'Poppins', sans-serif;
-
-  /* Color Variables */
+  /***
+  ****
+  ****Black Theme
+  ****
+  ****
+  ***/
+  
   --primary-blue: #0066ff;
   --primary-blue-dark: #004dd9;
   --accent-green: #6cc24a;
   --accent-green-light: #8fd662;
+  --accent-white-light: #ffffff;
   --accent-orange: #ff6b35;
   --accent-orange-light: #f7931e;
   --background-dark: #1e1e1e;
@@ -23,7 +28,6 @@ html {
   --glass-bg: rgba(255, 255, 255, 0.02);
   --glass-border: rgba(255, 255, 255, 0.05);
   --hover-bg: #bfbebe6c;
-  /*Fonts*/
   /* Transparent */
   --dark-trans-bg--effect: #26252516;
   /* Special Hover Effect | Shine effect */
@@ -32,7 +36,104 @@ html {
   --the-shadow--gh: 0 8px 25px rgba(0, 0, 0, 0.3);
   --before-background--bg: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
   --the-transition-anim: left 0.5s ease;
+
+  /* =================================
+   Text Properties
+   ================================= */
+
+/* -------------------------------
+   Text Size / Font Size
+   ------------------------------- */
+
+/* App Main Titles / Page Headers */
+--text-app-header: 24px;
+/* Section Titles / Panels */
+--text-app-subheader: 18px;
+/* Document / Modal Headers */
+--text-document-type-header: 20px;
+/* Document Subheaders */
+--text-document-type-subheader: 16px;
+/* General Description / Paragraph */
+--text-description: 14px;
+/* Captions / Metadata / Subtitles */
+--text-caption: 12px;
+/* Form Labels / Input Labels */
+--text-label: 13px;
+/* Buttons / Actions */
+--text-button: 14px;
+/* Small UI Text / Hints */
+--text-small: 11px;
+/* Extra Small / Legal / Debug */
+--text-xsmall: 10px;
+/* Code / Logs / Syntax */
+--text-syntax: 13px;
+
+/* -------------------------------
+   Text Colors
+   ------------------------------- */
+/* Primary Text (Main Content) */
+--text-color-primary: rgba(255, 255, 255, 0.95);
+/* Secondary Text (Descriptions) */
+--text-color-secondary: rgba(255, 255, 255, 0.75);
+/* Tertiary Text (Metadata) */
+--text-color-tertiary: rgba(255, 255, 255, 0.6);
+/* Quaternary / Disabled */
+--text-color-quaternary: rgba(255, 255, 255, 0.4);
+/* Hover / Active / Links */
+--text-color-hover: #4fd1ff;
+/* Muted / Placeholder */
+--text-color-muted: rgba(255, 255, 255, 0.5);
+
+
+  /* ===============================
+   Font Family - Typography System
+   =============================== */
+
+/* Primary UI Font (Main Interface) */
+--font-primary: 'Poppins', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+/* Secondary UI / Body Text */
+--font-secondary: 'Inter', 'Poppins', system-ui, sans-serif;
+/* Headings / Emphasis */
+--font-tertiary: 'Montserrat', 'Poppins', sans-serif;
+/* Technical / Developer / Debug */
+--font-quaternary: 'JetBrains Mono', 'Fira Code', monospace;
+/* Media Info / Metadata / Subtitles */
+--font-quinary: 'Roboto', 'Poppins', sans-serif;
+/* Navigation / Sidebar / Menu */
+--font-sextary: 'Manrope', 'Poppins', sans-serif;
+/* Compact UI / Labels / Badges */
+--font-septenary: 'DM Sans', 'Poppins', sans-serif;
+/* Marketing / Branding / Hero Text */
+--font-octonary: 'Outfit', 'Poppins', sans-serif;
+/* Reading / Articles / Docs */
+--font-nonary: 'Source Sans 3', 'Poppins', sans-serif;
+/* Experimental / Accent UI */
+--font-decenary: 'Space Grotesk', 'Poppins', sans-serif;
+
+
+  /* Font Weight */
+  --font-weight-bolder: bolder;
+  --font-weight-bold: bold;
+  --font-weight-semibold: semibold;
+  --font-weight-normal: normal;
+  --font-weight-meduim: medium;
+  --font-weight-light: light;
+  --font-weight-lighter: lighter;
+  --font-weight-thin: thin;
+
+  /* Buttons & Toggles*/
+  --button-app-primary: #000;
+  --button-app-secondary: #000;
+  --button-app-tertiary: #000;
+  --button-app-special: #000;
+  --button-app-not-active: #000;
+  --button-app-active: #000;
+  --button-app-systems: #000;
+  --button-app-business: #000;
+  /* Buttons or Toggles that is not button native but in div types.*/
+  --button-app-not-native: #000;
 }
+
 body {
     font-family: var(--font-primary);
     margin: 0;

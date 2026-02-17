@@ -1,4 +1,3 @@
-// src/core/security/eventGuard.ts
 /*
  * Copyright (c) 2026 BlackVideo (Zephyra)
  * All Rights Reserved.
@@ -9,6 +8,7 @@
  * from BlackVideo.
  */
 
+// src/core/security/eventGuard.ts
 import { SecurityError } from "./capabilityGuard";
 
 // Maps an event key (string) to the number of times it occurred in the current second.

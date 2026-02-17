@@ -12,7 +12,7 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { SnapCaptureUI } from './snapshot.capture.frame.ui';
 import { processFrameCapture, downloadImage } from './snapshot.capture.frame';
-import { notifier } from '../../../../../../../scripts/global.notifier.store';
+import { notifier } from '../../../../global/global.notifier.store';
 import { SaveCaptureFrame } from '../../../../global/modules/savedCaptureFrame';
 import '../../../../../../../src/styles/modals/snap.capture.frame.css';
 

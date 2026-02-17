@@ -172,7 +172,7 @@ const VideoPlaylistFullView: React.FC<PlaylistViewboxProps> = ({
                 onMouseEnter={() => setCanDrag(true)}
                 onMouseLeave={() => !draggedIndex && setCanDrag(false)}
                 style={{
-                  position: 'absolute', top: '8px', left: '8px', zIndex: 30,
+                  position: 'absolute', width: '20px', height: '10px', top: '8px', left: '8px', zIndex: 30,
                   backgroundColor: 'rgba(0,0,0,0.75)', borderRadius: '4px',
                   padding: '4px', color: '#fff', cursor: 'grab',
                   display: 'flex', alignItems: 'center', justifyContent: 'center',

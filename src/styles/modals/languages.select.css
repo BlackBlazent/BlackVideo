@@ -6,12 +6,14 @@
   padding: 12px 0;
   min-width: 220px;
   max-width: 280px;
+  height: 300px;
   box-shadow: 
     0 20px 40px rgba(0, 0, 0, 0.4),
     0 0 0 1px rgba(255, 255, 255, 0.05);
   z-index: 9999;
   backdrop-filter: blur(10px);
-  overflow: hidden;
+  overflow-x: hidden;
+  overflow-y: scroll;
 }
 
 .language-option {
@@ -74,19 +76,51 @@
 
 /* Individual country hover effects */
 .language-option:hover:has(img[alt*="Armenia"]) {
-  background: linear-gradient(135deg, rgba(217, 0, 18, 0.1) 0%, rgba(0, 51, 160, 0.1) 100%);
+  background: linear-gradient(135deg, rgba(217, 0, 18, 0.1) 0%, rgba(0, 51, 160, 0.1), rgba(242, 195, 9, 0.1) 100%);
+}
+
+.language-option:hover:has(img[alt*="Canada"]) {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) rgba(255, 8, 0, 0.1) 100%);
 }
 
 .language-option:hover:has(img[alt*="English"]) {
   background: linear-gradient(135deg, rgba(0, 40, 104, 0.1) 0%, rgba(178, 34, 52, 0.1) 100%);
 }
 
+.language-option:hover:has(img[alt*="Estonia"]) {
+  background: linear-gradient(135deg, rgba(0, 94, 245, 0.1) 0%rgba(0, 0, 0, 0.1), rgba(239, 239, 239, 0.1) 100%);
+}
+
+.language-option:hover:has(img[alt*="Finland"]) {
+  background: linear-gradient(135deg, rgba(16, 100, 235, 0.1) 0%rgba(253, 245, 246, 0.1) 100%);
+}
+
+.language-option:hover:has(img[alt*="Germany"]) {
+  background: linear-gradient(135deg, rgba(0, 0, 0, 0.995) 0%, rgba(246, 6, 34, 0.1), rgba(255, 183, 0, 0.1) 100%);
+}
+
 .language-option:hover:has(img[alt*="India"]) {
   background: linear-gradient(135deg, rgba(255, 153, 51, 0.1) 0%, rgba(19, 136, 8, 0.1) 100%);
 }
 
+.language-option:hover:has(img[alt*="Japan"]) {
+  background: linear-gradient(135deg, rgba(255, 0, 0, 0.1) 0%, rgba(255, 255, 255, 0.1) 100%);
+}
+
+.language-option:hover:has(img[alt*="Netherlands"]) {
+  background: linear-gradient(135deg, rgba(197, 17, 17, 0.1) 0%, rgba(255, 255, 255, 0.1), rgba(27, 8, 194, 0.1) 100%);
+}
+
 .language-option:hover:has(img[alt*="Russia"]) {
   background: linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, rgba(213, 43, 30, 0.1) 100%);
+}
+
+.language-option:hover:has(img[alt*="Singapore"]) {
+  background: linear-gradient(135deg, rgba(237, 15, 15, 0.1) 0%, rgba(255, 255, 255, 0.1) 100%);
+}
+
+.language-option:hover:has(img[alt*="South Korea"]) {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 0, 0, 0.1) 0%, rgba(65, 34, 178, 0.1) 100%);
 }
 
 .language-option:hover:has(img[alt*="Sweden"]) {

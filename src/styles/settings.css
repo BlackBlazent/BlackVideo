@@ -25,6 +25,13 @@
   overflow-y: auto;
 }
 
+/* Safe space for scrolling heights */
+  .safeSpace {
+  max-width: var(--max-width-style);
+  height: var(--the-height-style);
+  margin-bottom: var(--margin-bottom-style);
+}
+
 .settings-sidebar-header {
   margin-top: 30px;
   padding: 0 16px;
@@ -233,6 +240,11 @@
   border-bottom: 1px solid var(--border-subtle);
   gap: 24px;
 }
+.settings-row.vertical {
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 15px;
+}
 
 .settings-row:last-child {
   border-bottom: none;
@@ -266,6 +278,119 @@
   font-family: 'Courier New', monospace;
   color: var(--primary-blue) !important;
   font-weight: 500;
+}
+
+/* New Added */
+
+/* Background Management */
+.bg-management-area {
+  width: 100%;
+}
+
+.bg-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+  gap: 10px;
+}
+
+.bg-option {
+  height: 60px;
+  border-radius: 6px;
+  border: 1px solid #333;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  background-size: cover;
+  background-position: center;
+  transition: all 0.2s ease;
+  font-size: 11px;
+  color: #888;
+}
+
+.bg-option:hover {
+  border-color: #555;
+  color: #fff;
+}
+
+.bg-option.active {
+  border-color: var(--accent-color, #3b82f6);
+  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.2);
+}
+
+.bg-option.upload {
+  border: 1px dashed #444;
+}
+
+/* Typography Controls */
+.typo-controls {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.range-slider {
+  cursor: pointer;
+}
+
+/* Video Overlay Uploaders */
+.overlay-upload-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+  width: 100%;
+}
+
+.upload-box {
+  background: #111;
+  border: 1px solid #222;
+  padding: 12px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.upload-text {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.upload-text .title {
+  font-size: 12px;
+  font-weight: 600;
+  color: #eee;
+}
+
+.upload-text .sub {
+  font-size: 10px;
+  color: #666;
+}
+
+.mini-upload-btn {
+  background: #222;
+  border: none;
+  color: #ccc;
+  font-size: 10px;
+  padding: 5px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.mini-upload-btn:hover {
+  background: #333;
+  color: #fff;
+}
+
+.status-badge {
+  font-size: 10px;
+  background: #1a1a1a;
+  color: #666;
+  padding: 4px 8px;
+  border-radius: 4px;
+  border: 1px solid #333;
 }
 
 /* ========== BUTTONS ========== */
@@ -632,3 +757,555 @@
     flex-direction: column;
   }
 }
+
+/****************************************** Accounts Management ****************************************/
+
+.account-page {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+/* Profile Hero Styling */
+.profile-hero {
+  display: flex;
+  gap: 30px;
+  padding: 20px;
+  background: #0a0a0a;
+  border-radius: 12px;
+  border: 1px solid #1a1a1a;
+  margin-bottom: 20px;
+  align-items: center;
+}
+
+.avatar-wrapper {
+  position: relative;
+  width: 90px;
+  height: 90px;
+}
+
+.avatar-wrapper img {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  border: 2px solid #3b82f6;
+  background: #111;
+}
+
+.avatar-edit {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  background: #3b82f6;
+  color: white;
+  border: none;
+  font-size: 10px;
+  padding: 4px 8px;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.profile-meta {
+  flex: 1;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 15px;
+}
+
+.meta-row label {
+  display: block;
+  font-size: 11px;
+  color: #555;
+  text-transform: uppercase;
+  margin-bottom: 4px;
+}
+
+.meta-value {
+  font-size: 14px;
+  color: #eee;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.meta-value.mono {
+  font-family: 'JetBrains Mono', monospace;
+  color: #3b82f6;
+}
+
+.copy-icon {
+  cursor: pointer;
+  opacity: 0.5;
+}
+
+/* Platforms Grid */
+.platforms-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 15px;
+}
+
+.account-card {
+  display: flex;
+  align-items: center;
+  padding: 15px;
+  background: #0d0d0d;
+  border: 1px solid #222;
+  border-radius: 10px;
+  gap: 12px;
+}
+
+.account-card.connected {
+  border-color: #3b82f633;
+  background: #0d1117;
+}
+
+.auth-icon-wrapper {
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+}
+
+.youtube { background: #FF0000; }
+.twitter { background: #000000; border: 1px solid #333; }
+.facebook { background: #1877F2; }
+.tiktok { background: #EE1D52; }
+.twitch { background: #9146FF; }
+
+.account-info h4 { font-size: 13px; margin: 0; }
+.account-info p { font-size: 11px; color: #666; margin: 2px 0 0 0; }
+.connected-text { color: #10b981 !important; display: flex; align-items: center; gap: 4px; }
+
+/* Buttons */
+.btn-primary-sm, .btn-secondary-sm {
+  margin-left: auto;
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 11px;
+  cursor: pointer;
+  border: none;
+}
+
+.btn-primary-sm { background: #3b82f6; color: white; }
+.btn-secondary-sm { background: #222; color: #ccc; }
+
+/* Danger Zone */
+.danger-zone {
+  border-top: 1px solid #222;
+  padding-top: 20px;
+  margin-top: 20px;
+}
+
+.btn-danger {
+  background: rgba(255, 68, 68, 0.1);
+  color: #ff4444;
+  border: 1px solid #ff444433;
+  padding: 8px 16px;
+  border-radius: 6px;
+  font-size: 12px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.btn-danger:hover {
+  background: #ff4444;
+  color: white;
+}
+
+.text-red { color: #ff4444; }
+.border-none { border: none !important; }
+
+/****************************************** Billings & Subscriptions ****************************************/
+
+/* Billing Layout */
+.billing-page {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  padding-bottom: 50px;
+}
+
+/* Status Card */
+.status-card {
+  background: linear-gradient(135deg, #111 0%, #050505 100%);
+  border: 1px solid #222;
+  border-radius: 12px;
+  padding: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.plan-badge {
+  background: #3b82f6;
+  color: #fff;
+  font-size: 10px;
+  font-weight: bold;
+  padding: 2px 8px;
+  border-radius: 4px;
+  display: inline-block;
+  margin-bottom: 8px;
+}
+
+/* Pricing Grid */
+.pricing-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 15px;
+}
+
+.price-card {
+  background: #0a0a0a;
+  border: 1px solid #222;
+  padding: 20px;
+  border-radius: 10px;
+  text-align: center;
+  position: relative;
+}
+
+.price-card.featured {
+  border-color: #3b82f6;
+  background: #0d1117;
+  transform: scale(1.02);
+}
+
+.popular-tag {
+  position: absolute;
+  top: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #3b82f6;
+  font-size: 9px;
+  padding: 2px 10px;
+  border-radius: 10px;
+}
+
+.price {
+  font-size: 28px;
+  font-weight: bold;
+  margin: 15px 0;
+}
+
+.price span { font-size: 14px; opacity: 0.5; }
+
+.price-card ul {
+  list-style: none;
+  padding: 0;
+  margin-bottom: 20px;
+  font-size: 12px;
+  text-align: left;
+  color: #888;
+}
+/* --- 1. SUBSCRIPTION ACTIONS (Separation) --- */
+.status-actions {
+  display: flex;
+  flex-direction: column; /* Stacked for better control */
+  gap: 12px;
+  min-width: 160px;
+}
+
+/* Base button cleanup */
+.btn-secondary, .btn-danger-outline {
+  padding: 10px 16px;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border: 1px solid transparent;
+}
+
+.btn-secondary {
+  background: #222;
+  color: #fff;
+}
+
+.btn-secondary:hover {
+  background: #333;
+}
+
+/* Distinctive Danger Action */
+.btn-danger-outline {
+  background: transparent;
+  color: #ff4444;
+  border: 1px solid rgba(255, 68, 68, 0.2);
+  margin-top: 8px; /* Visual air between Pause and Cancel */
+}
+
+.btn-danger-outline:hover {
+  background: rgba(255, 68, 68, 0.1);
+  border-color: #ff4444;
+}
+
+/* --- 2. PAYMENT METHODS (Interactive Cards) --- */
+.payment-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.payment-method-item {
+  display: flex;
+  align-items: center;
+  padding: 16px;
+  background: #0d0d0d;
+  border: 1px solid #222;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+/* The "Selected/Active" State */
+.payment-method-item:hover {
+  border-color: #444;
+  background: #111;
+}
+
+.payment-method-item.active {
+  border-color: #3b82f6;
+  background: rgba(59, 130, 246, 0.05);
+  box-shadow: 0 0 15px rgba(59, 130, 246, 0.1);
+}
+
+/* Card Brand Icon Styling */
+.card-brand {
+  width: 50px;
+  height: 32px;
+  background: #1a1a1a;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  font-size: 10px;
+  letter-spacing: 1px;
+  color: #eee;
+  margin-right: 15px;
+  border: 1px solid #333;
+}
+
+.card-details {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.card-details span:first-child {
+  font-family: 'JetBrains Mono', monospace; /* Credit card numbers look better in mono */
+  font-size: 14px;
+  color: #fff;
+}
+
+.card-details span:last-child {
+  font-size: 11px;
+  color: #666;
+}
+
+/* --- 3. INTERACTIVE TOGGLE (The "Default" Switch) --- */
+.default-badge {
+  background: rgba(59, 130, 246, 0.15);
+  color: #3b82f6;
+  font-size: 10px;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: 20px;
+  margin-right: 15px;
+  text-transform: uppercase;
+  border: 1px solid rgba(59, 130, 246, 0.3);
+}
+
+/* Add Method Button - Modernized */
+.add-method-btn {
+  width: 100%;
+  padding: 14px;
+  background: transparent;
+  border: 1px dashed #333;
+  color: #888;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  cursor: pointer;
+  font-size: 13px;
+  transition: all 0.2s ease;
+}
+
+.add-method-btn:hover {
+  border-color: #3b82f6;
+  color: #3b82f6;
+  background: rgba(59, 130, 246, 0.02);
+}
+
+/* --- 4. BILLING FORM (Spacing Fix) --- */
+.billing-form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+  background: #080808;
+  padding: 20px;
+  border-radius: 12px;
+  border: 1px solid #1a1a1a;
+}
+
+.input-field input:focus, .input-field textarea:focus {
+  outline: none;
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+/* Usage Meters */
+.usage-container { display: flex; flex-direction: column; gap: 15px; }
+.usage-info { display: flex; justify-content: space-between; font-size: 12px; margin-bottom: 5px; }
+.progress-bar { height: 6px; background: #222; border-radius: 3px; overflow: hidden; }
+.progress-fill { height: 100%; background: #3b82f6; }
+
+/* Tables */
+.history-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+
+.history-table th { text-align: left; padding: 12px; border-bottom: 1px solid #222; color: #555; }
+.history-table td { padding: 12px; border-bottom: 1px solid #111; }
+
+.status-paid { color: #10b981; background: rgba(16, 185, 129, 0.1); padding: 2px 6px; border-radius: 4px; font-size: 11px; }
+
+/* Inputs */
+.billing-form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+.input-field.full { grid-column: span 2; }
+.input-field label { display: block; font-size: 11px; margin-bottom: 5px; color: #666; }
+.input-field input, .input-field textarea {
+  width: 100%;
+  background: #111;
+  border: 1px solid #333;
+  color: #fff;
+  padding: 8px;
+  border-radius: 4px;
+}
+
+
+/********************************************** API Providers ***********************************/
+
+.api-provider-page {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.api-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 16px;
+}
+
+.api-card {
+  background: #0d0d0d;
+  border: 1px solid #222;
+  border-radius: 12px;
+  padding: 16px;
+  transition: all 0.2s ease;
+}
+
+.api-card.active {
+  border-color: #3b82f666;
+  background: #0d1117;
+}
+
+.api-card-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+
+.provider-info {
+  display: flex;
+  gap: 12px;
+}
+
+.provider-icon-placeholder {
+  width: 32px;
+  height: 32px;
+  background: #1a1a1a;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #888;
+}
+
+.subtext {
+  font-size: 10px;
+  color: #666;
+  margin: 0;
+}
+
+/* Local LLM Grid */
+.local-input-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.input-group label {
+  display: block;
+  font-size: 10px;
+  color: #555;
+  margin-bottom: 4px;
+  text-transform: uppercase;
+}
+
+/* Tokens */
+.token-input-wrapper {
+  position: relative;
+  margin-bottom: 12px;
+}
+
+.token-field, .text-field {
+  width: 100%;
+  background: #050505;
+  border: 1px solid #222;
+  color: #eee;
+  padding: 8px 35px 8px 10px;
+  border-radius: 6px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+}
+
+.visibility-btn {
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  color: #444;
+  cursor: pointer;
+}
+
+/* Switch & Buttons */
+.btn-save-sm {
+  background: #3b82f6;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 4px;
+  font-size: 11px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin-left: auto;
+}
+
+.color-purple { color: #a855f7; }
+.color-green { color: #22c55e; }
+.color-gray { color: #888; }

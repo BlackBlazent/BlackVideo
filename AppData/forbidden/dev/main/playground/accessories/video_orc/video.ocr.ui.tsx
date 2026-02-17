@@ -29,13 +29,15 @@ const VideoOCRUI = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => void 
 
   if (!isOpen) return null;
 
-  // --- DRAG LOGIC ---
+  // --- FIXED DRAG LOGIC ---
   const startDrag = (e: React.MouseEvent) => {
     const startX = e.clientX;
     const startY = e.clientY;
     const startPos = { ...pos };
 
     const onMove = (moveEvent: MouseEvent) => {
+      // To move from bottom-right positioning, we add the delta to the initial position
+      // because we are tracking the distance from the edges.
       setPos({
         x: startPos.x - (moveEvent.clientX - startX),
         y: startPos.y - (moveEvent.clientY - startY),
@@ -127,13 +129,14 @@ const VideoOCRUI = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => void 
           pointerEvents: 'auto'
         }}
       >
-        <div className="ocr-header">
+        <div className="ocr-header" onMouseDown={startDrag} style={{ cursor: 'grab' }}>
           <div className="header-left">
-            <div className="drag-handle" onMouseDown={startDrag}><GripVertical size={14} /></div>
+            {/* Added GripVertical handle before the title */}
+            <GripVertical size={14} className="drag-handle-icon" style={{ opacity: 0.5, marginRight: '4px' }} />
             <Type size={16} className="title-icon" style={{ color: 'var(--primary-blue)' }} />
             <span>OCR Engine</span>
           </div>
-          <div className="header-actions">
+          <div className="header-actions" onMouseDown={(e) => e.stopPropagation()}>
             <button onClick={() => setIsMinimized(!isMinimized)}><Minus size={14} /></button>
             <button onClick={onClose}><X size={14} /></button>
           </div>

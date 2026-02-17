@@ -1,0 +1,18 @@
+{
+  "videos": {
+    "/path/to/video1.mp4": {
+      "video_path": "/path/to/video1.mp4",
+      "current_time": 120.5,
+      "duration": 600.0,
+      "last_updated": 1708099200,
+      "progress_percentage": 20.08
+    },
+    "/path/to/video2.mp4": {
+      "video_path": "/path/to/video2.mp4",
+      "current_time": 450.2,
+      "duration": 900.0,
+      "last_updated": 1708099300,
+      "progress_percentage": 50.02
+    }
+  }
+}

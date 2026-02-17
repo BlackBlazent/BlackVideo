@@ -167,8 +167,8 @@ panel.id = "zephyra-ai-panel";
 panel.setAttribute('data-visible', 'false');
 panel.innerHTML = `
     <div id="zephyra-ai-header">
+    <div id="zephyra-drag-handle"></div>
         <div id="zephyra-ai-title">Zephyra AI</div>
-        <div id="zephyra-drag-handle"></div>
         <div id="zephyra-ai-controls">
             <select id="zephyra-model-select" class="zephyra-select"></select>
             <button id="zephyra-close" style="background:none; border:none; color:#94a3b8; cursor:pointer;">✕</button>

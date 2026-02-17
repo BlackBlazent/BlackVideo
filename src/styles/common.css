@@ -1,0 +1,7 @@
+/* Styles that are same to others elements */
+
+:root {
+    --max-width-style: 1400px;
+    --the-height-style: 100px;
+    --margin-bottom-style: 80px;
+}

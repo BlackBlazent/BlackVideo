@@ -1,0 +1,417 @@
+<!--
+/*
+ * Copyright (c) 2026 BlackVideo (Zephyra)
+ * All Rights Reserved.
+ *
+ * This source code is the confidential and proprietary property of BlackVideo.
+ * Unauthorized copying, modification, distribution, or use of this source code,
+ * in whole or in part, is strictly prohibited without prior written permission
+ * from BlackVideo.
+ */
+-->
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/assets/BlackVideo.png" />
+    <link rel="stylesheet" href="../src/styles/others/separate.video.window.css">
+    <link rel="stylesheet" href="../src/styles/others/context-menu.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #000;
+            overflow: hidden;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+
+        #video-container {
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        /* Drag-over visual feedback */
+        #video-container.drag-over-active {
+            border: 3px dashed #00a8ff;
+        }
+
+
+        #native-video-player {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        #loading-indicator {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: #fff;
+            font-size: 18px;
+            text-align: center;
+        }
+
+        .spinner {
+            border: 4px solid rgba(255, 255, 255, 0.1);
+            border-top: 4px solid #fff;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 20px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        #error-message {
+            display: none;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(255, 0, 0, 0.9);
+            color: white;
+            padding: 20px 40px;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .show-error {
+            display: block ; /*!important*/
+        }
+
+        /* Drop zone hint (optional) */
+        #video-container::before {
+            content: 'Drop video file here';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: rgba(255, 255, 255, 0.3);
+            font-size: 24px;
+            font-weight: 300;
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        #video-container.drag-over-active::before {
+            opacity: 1;
+        }
+
+        /* Custom controls (optional - browser default works too) */
+        video::-webkit-media-controls-panel {
+            background-color: rgba(0, 0, 0, 0.8);
+        }
+    </style>
+</head>
+<body>
+
+    <main id="root" class="SeparateVideoPlayerCOntainer">
+    <div id="video-container" class="ConcurrentVideoStage">
+        <video id="native-video-player" class="NativeBiteVideoSeparateWindow video-js" crossorigin="anonymous" preload="auto" data-setup="{}" autoplay>
+            <source src="" type=""></source>
+            Your browser does not support the video tag.
+        </video>
+        <track kind="subtitles" label="English" srclang="en">
+        <div id="error-message">
+            <h3>⚠️ Error Loading Video</h3>
+            <p id="error-text"></p>
+        </div>
+    </div>
+
+    </main>
+
+    <script type="module" src="../src/window/separate-videoPlayer/src/custom-playback.js"></script>
+    <script type="module" src="../src/window/separate-videoPlayer/src/video_player_separate_video_dropper.js"></script>
+    <script type="module" src="../src/window/separate-videoPlayer/src/context-menu.js"></script>
+    <!-- Main video player initialization script -->
+    <script type="module">
+        'use strict';
+
+        /**
+         * Video Player Initialization
+         * Handles video loading from initial data or events
+         */
+        (async function initializeVideoPlayer() {
+            const videoElement = document.getElementById('native-video-player');
+            const loadingIndicator = document.getElementById('loading-indicator');
+            const errorMessage = document.getElementById('error-message');
+            const errorText = document.getElementById('error-text');
+
+            let videoData = null;
+
+            function showError(message) {
+                console.error('❌ Video Player Error:', message);
+                errorText.textContent = message;
+                errorMessage.classList.add('show-error');
+                loadingIndicator.style.display = 'none';
+                videoElement.style.display = 'none';
+            }
+
+            async function loadVideo(data) {
+                try {
+                    if (!data || !data.videoPath) {
+                        throw new Error('No video path provided');
+                    }
+
+                    console.log('📹 Loading video:', data.videoPath);
+                    console.log('⏱️ Starting at:', data.timestamp || 0);
+
+                    const source = videoElement.querySelector('source');
+                    source.src = data.videoPath;
+
+                    if (data.timestamp && data.timestamp > 0) {
+                        videoElement.currentTime = data.timestamp;
+                    }
+
+                    videoElement.style.display = 'block';
+                    loadingIndicator.style.display = 'none';
+
+                    // Configure audio
+                    videoElement.muted = false;
+                    videoElement.volume = 1;
+
+                    try {
+                        await videoElement.play();
+                        console.log('✓ Video playback started');
+                    } catch (playError) {
+                        console.warn('Autoplay prevented:', playError);
+                    }
+
+                } catch (error) {
+                    showError(`Failed to load video: ${error.message}`);
+                }
+            }
+
+            // Method 1: Check for injected data
+            if (window.__INITIAL_VIDEO_DATA__) {
+                console.log('✓ Found injected video data');
+                videoData = window.__INITIAL_VIDEO_DATA__;
+                await loadVideo(videoData);
+            } 
+            // Method 2: Listen for event
+            else {
+                console.log('⏳ Waiting for video-load event...');
+                
+                const { listen } = await import('https://esm.sh/@tauri-apps/api@2/event');
+                
+                const unlisten = await listen('video-load', (event) => {
+                    console.log('✓ Received video-load event:', event.payload);
+                    videoData = event.payload;
+                    loadVideo(videoData);
+                    unlisten();
+                });
+
+                setTimeout(() => {
+                    if (!videoData) {
+                        // Don't show error - user might drag-drop instead
+                        loadingIndicator.style.display = 'none';
+                        console.log('ℹ️ No initial video - ready for drag-and-drop');
+                    }
+                }, 5000);
+            }
+
+            // Error handling
+            videoElement.addEventListener('error', (e) => {
+                const error = videoElement.error;
+                let errorMsg = 'Unknown error occurred';
+                
+                if (error) {
+                    switch (error.code) {
+                        case error.MEDIA_ERR_ABORTED:
+                            errorMsg = 'Video loading aborted';
+                            break;
+                        case error.MEDIA_ERR_NETWORK:
+                            errorMsg = 'Network error while loading video';
+                            break;
+                        case error.MEDIA_ERR_DECODE:
+                            errorMsg = 'Video decoding failed';
+                            break;
+                        case error.MEDIA_ERR_SRC_NOT_SUPPORTED:
+                            errorMsg = 'Video format not supported';
+                            break;
+                    }
+                }
+                
+                showError(errorMsg);
+            });
+
+            videoElement.addEventListener('loadedmetadata', () => {
+                console.log('✓ Video metadata loaded');
+                console.log(`📐 Resolution: ${videoElement.videoWidth}x${videoElement.videoHeight}`);
+                console.log(`⏱️ Duration: ${videoElement.duration}s`);
+            });
+
+        })();
+    </script>
+    <!--Video Native Player & Separate Window-->
+    <script type="module">
+        // Security: Use strict mode
+        'use strict';
+
+        /**
+         * Video Player Initialization
+         * Handles both injected data and event-based loading
+         */
+        (async function initializeVideoPlayer() {
+            const videoElement = document.getElementById('native-video-player');
+            const loadingIndicator = document.getElementById('loading-indicator');
+            const errorMessage = document.getElementById('error-message');
+            const errorText = document.getElementById('error-text');
+
+            let videoData = null;
+
+            /**
+             * Show error message to user
+             */
+            function showError(message) {
+                console.error('❌ Video Player Error:', message);
+                errorText.textContent = message;
+                errorMessage.classList.add('show-error');
+                loadingIndicator.style.display = 'none';
+                videoElement.style.display = 'none';
+            }
+
+            /**
+             * Load and play video
+             */
+            async function loadVideo(data) {
+                try {
+                    if (!data || !data.videoPath) {
+                        throw new Error('No video path provided');
+                    }
+
+                    console.log('📹 Loading video:', data.videoPath);
+                    console.log('⏱️ Starting at:', data.timestamp || 0);
+
+                    // Set video source
+                    videoElement.src = data.videoPath;
+
+                    // Set starting position
+                    if (data.timestamp && data.timestamp > 0) {
+                        videoElement.currentTime = data.timestamp;
+                    }
+
+                    // Show video element
+                    videoElement.style.display = 'block';
+                    loadingIndicator.style.display = 'none';
+
+                    // Play video
+                    try {
+                        await videoElement.play();
+                        console.log('✓ Video playback started');
+                    } catch (playError) {
+                        console.warn('Autoplay prevented, user interaction required:', playError);
+                        // Browser may block autoplay, but video is loaded
+                    }
+
+                } catch (error) {
+                    showError(`Failed to load video: ${error.message}`);
+                }
+            }
+
+            /**
+             * Method 1: Check for injected data (primary method)
+             */
+            if (window.__INITIAL_VIDEO_DATA__) {
+                console.log('✓ Found injected video data');
+                videoData = window.__INITIAL_VIDEO_DATA__;
+                await loadVideo(videoData);
+            } 
+            /**
+             * Method 2: Listen for event (backup method)
+             */
+            else {
+                console.log('⏳ Waiting for video-load event...');
+                
+                // Import Tauri event listener
+                const { listen } = await import('https://esm.sh/@tauri-apps/api@2/event');
+                
+                const unlisten = await listen('video-load', (event) => {
+                    console.log('✓ Received video-load event:', event.payload);
+                    videoData = event.payload;
+                    loadVideo(videoData);
+                    unlisten(); // Cleanup listener
+                });
+
+                // Timeout fallback
+                setTimeout(() => {
+                    if (!videoData) {
+                        showError('Timeout: No video data received');
+                    }
+                }, 5000);
+            }
+
+            /**
+             * Error handling for video element
+             */
+            videoElement.addEventListener('error', (e) => {
+                const error = videoElement.error;
+                let errorMsg = 'Unknown error occurred';
+                
+                if (error) {
+                    switch (error.code) {
+                        case error.MEDIA_ERR_ABORTED:
+                            errorMsg = 'Video loading aborted';
+                            break;
+                        case error.MEDIA_ERR_NETWORK:
+                            errorMsg = 'Network error while loading video';
+                            break;
+                        case error.MEDIA_ERR_DECODE:
+                            errorMsg = 'Video decoding failed';
+                            break;
+                        case error.MEDIA_ERR_SRC_NOT_SUPPORTED:
+                            errorMsg = 'Video format not supported';
+                            break;
+                    }
+                }
+                
+                showError(errorMsg);
+            });
+
+            /**
+             * Success logging
+             */
+            videoElement.addEventListener('loadedmetadata', () => {
+                console.log('✓ Video metadata loaded');
+                console.log(`📐 Resolution: ${videoElement.videoWidth}x${videoElement.videoHeight}`);
+                console.log(`⏱️ Duration: ${videoElement.duration}s`);
+            });
+
+            videoElement.addEventListener('canplay', () => {
+                console.log('✓ Video can start playing');
+            });
+
+        })();
+    </script>
+    <!--Debugging-->
+    <script>
+        // Add this to video-player.html script section:
+console.log('=== Debug Info ===');
+console.log('Is Tauri?', window.__TAURI_IPC__ !== undefined);
+console.log('Video element:', document.getElementById('native-video-player'));
+console.log('Loading indicator:', document.getElementById('loading-indicator'));
+console.log('Error message:', document.getElementById('error-message'));
+
+// Test asset protocol directly:
+const testVideo = document.getElementById('native-video-player');
+testVideo.src = 'asset://localhost/C:/path/to/test/video.mp4';
+testVideo.load();
+    </script>
+</body>
+</html>

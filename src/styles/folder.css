@@ -281,9 +281,11 @@
 .context-menu-content {
   padding: 8px;
 }
-
+.context-menu-item-folder {
+width: 100%;
+}
 .context-menu-item {
-  width: 100%;
+  /*width: 100%; | Transfer to 'context-menu-item-folder' to avoid conflicts */
   padding: 12px 16px;
   text-align: left;
   font-size: 14px;

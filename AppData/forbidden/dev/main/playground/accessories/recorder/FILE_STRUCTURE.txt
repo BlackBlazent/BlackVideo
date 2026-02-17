@@ -1,0 +1,217 @@
+┌─────────────────────────────────────────────────────────────────────┐
+│         BlackVideo Recording System - File Structure                │
+└─────────────────────────────────────────────────────────────────────┘
+
+📁 YOUR PROJECT ROOT
+│
+├── 📁 AppData
+│   └── 📁 fobidden
+│       └── 📁 dev
+│           └── 📁 main
+│               └── 📁 playground
+│                   ├── 📄 Playground.tsx ← Update this file
+│                   │
+│                   └── 📁 accessories
+│                       └── 📁 recorder ← COPY MAIN FILES HERE
+│                           │
+│                           ├── 📄 float.render.ui.tsx
+│                           │   └─→ Main selection popup UI
+│                           │       ├─ Video Player option
+│                           │       ├─ Camera option (with submenu)
+│                           │       └─ Both/Dual option (with submenu)
+│                           │
+│                           ├── 📄 recorder.control.ui.tsx
+│                           │   └─→ Controller dispatcher
+│                           │       Routes to correct controller based on mode
+│                           │
+│                           ├── 📄 video.recording.ts
+│                           │   └─→ Core recording engine
+│                           │       ├─ MediaRecorder management
+│                           │       ├─ Stream capture
+│                           │       ├─ Canvas rendering
+│                           │       └─ Audio/Video sync
+│                           │
+│                           ├── 📄 saved.captured.ts
+│                           │   └─→ File saving utilities
+│                           │       ├─ Tauri file system API
+│                           │       ├─ Browser download fallback
+│                           │       └─ Filename generation
+│                           │
+│                           ├── 📄 connector.ts
+│                           │   └─→ Video Theater Stage integration
+│                           │       ├─ Stage event listeners
+│                           │       ├─ Video element access
+│                           │       └─ Container management
+│                           │
+│                           ├── 📄 index.ts
+│                           │   └─→ Entry point
+│                           │       Initializes entire recording system
+│                           │
+│                           └── 📁 ui ← COPY CONTROLLERS HERE
+│                               │
+│                               ├── 📄 video.player.recorder.controller.tsx
+│                               │   └─→ Video Player Recording Controller
+│                               │       ├─ Records video playback
+│                               │       ├─ Pause/Resume support
+│                               │       ├─ Duration follows video
+│                               │       └─ Drag/resize UI
+│                               │
+│                               ├── 📄 video.camera.recorder.controller.tsx
+│                               │   └─→ Camera Recording Controller
+│                               │       ├─ Front/Back camera
+│                               │       ├─ Camera switching
+│                               │       ├─ Duration at 100% (live)
+│                               │       └─ Drag/resize UI
+│                               │
+│                               └── 📄 video.dual.recorder.ui.controller.tsx
+│                                   └─→ Dual/PiP Recording Controller
+│                                       ├─ Camera + Display
+│                                       ├─ Picture-in-Picture
+│                                       ├─ Duration at 100% (live)
+│                                       └─ Drag/resize UI
+│
+└── 📁 src
+    └── 📁 styles
+        └── 📁 modals ← COPY CSS FILES HERE
+            │
+            ├── 📄 video.recorder.css
+            │   └─→ Main selection UI styles
+            │       ├─ Popup container
+            │       ├─ Mode options
+            │       ├─ Submenus
+            │       ├─ Drag handle
+            │       └─ Resize handle
+            │
+            └── 📄 recorder.control.css
+                └─→ Controller UI styles
+                    ├─ Panel layout
+                    ├─ Control buttons
+                    ├─ Duration seekbar
+                    ├─ Status indicators
+                    ├─ Drag handle
+                    └─ Resize handle
+
+
+┌─────────────────────────────────────────────────────────────────────┐
+│                     Component Relationships                          │
+└─────────────────────────────────────────────────────────────────────┘
+
+User clicks Record Button
+        │
+        ↓
+┌───────────────────────┐
+│  float.render.ui.tsx  │ ← Main Selection Popup
+│   (Selection Menu)    │
+└───────────────────────┘
+        │
+        ├──→ Video Player Mode
+        │         ↓
+        │   ┌──────────────────────────────────┐
+        │   │ video.player.recorder.controller │
+        │   └──────────────────────────────────┘
+        │
+        ├──→ Camera Mode (Front/Back)
+        │         ↓
+        │   ┌──────────────────────────────────┐
+        │   │ video.camera.recorder.controller │
+        │   └──────────────────────────────────┘
+        │
+        └──→ Both/Dual Mode (Front/Back + Display)
+                  ↓
+            ┌──────────────────────────────────┐
+            │ video.dual.recorder.ui.controller│
+            └──────────────────────────────────┘
+
+All controllers use:
+    ├─→ video.recording.ts (Core logic)
+    ├─→ saved.captured.ts (File saving)
+    └─→ connector.ts (Video stage access)
+
+
+┌─────────────────────────────────────────────────────────────────────┐
+│                         Data Flow                                    │
+└─────────────────────────────────────────────────────────────────────┘
+
+1. Initialization:
+   index.ts → connector.ts → Video Theater Stage
+                            → float.render.ui.tsx
+
+2. Mode Selection:
+   float.render.ui.tsx → recorder.control.ui.tsx → Specific Controller
+
+3. Recording:
+   Controller → video.recording.ts → MediaRecorder API
+                                   → Canvas API
+                                   → getUserMedia API
+
+4. Saving:
+   Controller → video.recording.ts → saved.captured.ts → File System
+                                                        → Downloads Folder
+
+
+┌─────────────────────────────────────────────────────────────────────┐
+│                    Key Dependencies                                  │
+└─────────────────────────────────────────────────────────────────────┘
+
+External:
+  ├─ lucide-react (Icons)
+  ├─ react & react-dom (UI framework)
+  └─ @tauri-apps/api (File system - optional)
+
+Internal:
+  ├─ Video.Theater.Stage.ts (Video element management)
+  └─ VideoPlayer-TheaterStage (HTML video element ID)
+
+
+┌─────────────────────────────────────────────────────────────────────┐
+│                  Implementation Checklist                            │
+└─────────────────────────────────────────────────────────────────────┘
+
+□ Copy all files to correct locations
+□ Update Playground.tsx with import
+□ Install lucide-react dependency
+□ Verify Video Theater Stage exists
+□ Check video element ID matches
+□ Test recording button exists
+□ Test each recording mode
+□ Verify file saving works
+□ Customize styles (optional)
+□ Deploy to production
+
+
+┌─────────────────────────────────────────────────────────────────────┐
+│                        File Sizes                                    │
+└─────────────────────────────────────────────────────────────────────┘
+
+Main Files:
+  float.render.ui.tsx               ~10 KB
+  recorder.control.ui.tsx            ~2 KB
+  video.recording.ts                ~18 KB (original, needs refactor)
+  saved.captured.ts                  ~5 KB
+  connector.ts                       ~4 KB
+  index.ts                           ~1 KB
+
+Controllers:
+  video.player.recorder.controller   ~9 KB
+  video.camera.recorder.controller   ~9 KB
+  video.dual.recorder.ui.controller ~10 KB
+
+Styles:
+  video.recorder.css                 ~5 KB
+  recorder.control.css               ~7 KB
+
+Total: ~80 KB (uncompressed)
+
+
+┌─────────────────────────────────────────────────────────────────────┐
+│                    Browser Compatibility                             │
+└─────────────────────────────────────────────────────────────────────┘
+
+✅ Chrome 80+         (Full support)
+✅ Edge 80+           (Full support)
+✅ Firefox 75+        (Full support)
+⚠️  Safari 14+        (Limited - may require MP4)
+❌ Internet Explorer  (Not supported)
+
+
+Need help? Check README.md for full documentation!

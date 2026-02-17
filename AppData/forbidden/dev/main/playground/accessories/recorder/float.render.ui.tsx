@@ -9,138 +9,244 @@
  */
 
 // float.render.ui.tsx - Floating popup UI for recording mode selection
-import React, { useState, useEffect } from 'react';
-import { createRoot } from 'react-dom/client';
+import React, { useState, useRef, useEffect } from 'react';
+import { createRoot, Root } from 'react-dom/client';
+import { Video, Camera, X, ChevronRight, GripVertical, Maximize2 } from 'lucide-react';
+import '../../../../../../../src/styles/modals/video.recorder.css'; 
 
 interface FloatingRecordUIProps {
   isVisible: boolean;
   onClose: () => void;
-  onModeSelect: (mode: 'video' | 'camera' | 'both') => void;
+  onModeSelect: (mode: 'video' | 'camera-front' | 'camera-back') => void;
 }
 
 const FloatingRecordUI: React.FC<FloatingRecordUIProps> = ({ isVisible, onClose, onModeSelect }) => {
-  const [selectedMode, setSelectedMode] = useState<'video' | 'camera' | 'both' | null>(null);
+  const [selectedMode, setSelectedMode] = useState<string | null>(null);
+  const [showCameraSubmenu, setShowCameraSubmenu] = useState(false);
+  const [isDragging, setIsDragging] = useState(false);
+  const [isResizing, setIsResizing] = useState(false);
+  const [position, setPosition] = useState({ x: window.innerWidth / 2 - 200, y: window.innerHeight / 2 - 200 });
+  const [size, setSize] = useState({ width: 400, height: 'auto' as number | 'auto' });
+  const [dragOffset, setDragOffset] = useState({ x: 0, y: 0 });
+  const [resizeStart, setResizeStart] = useState({ x: 0, y: 0, width: 400, height: 400 });
+  
+  const popupRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const handleMouseMove = (e: MouseEvent) => {
+      if (isDragging && popupRef.current) {
+        const newX = e.clientX - dragOffset.x;
+        const newY = e.clientY - dragOffset.y;
+        const maxX = window.innerWidth - popupRef.current.offsetWidth;
+        const maxY = window.innerHeight - popupRef.current.offsetHeight;
+        setPosition({
+          x: Math.max(0, Math.min(newX, maxX)),
+          y: Math.max(0, Math.min(newY, maxY))
+        });
+      }
+      
+      if (isResizing) {
+        const deltaX = e.clientX - resizeStart.x;
+        const deltaY = e.clientY - resizeStart.y;
+        const newWidth = Math.max(350, Math.min(550, resizeStart.width + deltaX));
+        const newHeight = Math.max(350, Math.min(600, resizeStart.height + deltaY));
+        setSize({ width: newWidth, height: newHeight });
+      }
+    };
+
+    const handleMouseUp = () => {
+      setIsDragging(false);
+      setIsResizing(false);
+    };
+
+    if (isDragging || isResizing) {
+      document.addEventListener('mousemove', handleMouseMove);
+      document.addEventListener('mouseup', handleMouseUp);
+    }
+
+    return () => {
+      document.removeEventListener('mousemove', handleMouseMove);
+      document.removeEventListener('mouseup', handleMouseUp);
+    };
+  }, [isDragging, isResizing, dragOffset, resizeStart]);
+
+  const handleDragStart = (e: React.MouseEvent) => {
+    if (popupRef.current) {
+      const rect = popupRef.current.getBoundingClientRect();
+      setDragOffset({ x: e.clientX - rect.left, y: e.clientY - rect.top });
+      setIsDragging(true);
+    }
+  };
+
+  const handleResizeStart = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    if (popupRef.current) {
+      setResizeStart({
+        x: e.clientX,
+        y: e.clientY,
+        width: popupRef.current.offsetWidth,
+        height: popupRef.current.offsetHeight
+      });
+      setIsResizing(true);
+    }
+  };
 
   if (!isVisible) return null;
 
-  const handleModeSelect = (mode: 'video' | 'camera' | 'both') => {
+  const handleModeSelect = (mode: 'video' | 'camera-front' | 'camera-back') => {
     setSelectedMode(mode);
     onModeSelect(mode);
   };
 
   return (
-    <div className="floating-record-overlay">
-      <div className="floating-record-popup">
-        <div className="popup-header">
+    <div 
+      className="floating-record-popup"
+      ref={popupRef}
+      style={{
+        position: 'fixed',
+        left: `${position.x}px`,
+        top: `${position.y}px`,
+        width: `${size.width}px`,
+        height: size.height === 'auto' ? 'auto' : `${size.height}px`,
+        cursor: isDragging ? 'grabbing' : 'default',
+        zIndex: 9999
+      }}
+    >
+      <div className="popup-header" onMouseDown={handleDragStart} style={{ cursor: 'grab' }}>
+        <div className="header-left">
+          <GripVertical style={{width: '18px', height: '18px', opacity: 'unset', position: 'relative'}} size={18} className="drag-handle" />
           <h3>Recording Mode</h3>
-          <button className="close-btn" onClick={onClose}>
-            <span>×</span>
-          </button>
         </div>
-        
-        <div className="recording-modes">
-          <div 
-            className={`mode-option ${selectedMode === 'video' ? 'selected' : ''}`}
-            onClick={() => handleModeSelect('video')}
-          >
-            <div className="mode-icon">
-              <span className="mode-emoji">🎥</span>
-            </div>
-            <div className="mode-info">
-              <h4>Record Video Player</h4>
-              <p>Capture the main video playback</p>
-            </div>
+        <button className="close-btn" onClick={onClose}>
+          <X size={20} />
+        </button>
+      </div>
+      
+      <div className="recording-modes">
+        {/* Video Player Recording */}
+        <div 
+          className={`mode-option ${selectedMode === 'video' ? 'selected' : ''}`}
+          onClick={() => handleModeSelect('video')}
+        >
+          <div className="mode-icon">
+            <Video size={24} className="mode-lucide" />
           </div>
+          <div className="mode-info">
+            <h4>Record Video Player</h4>
+            <p>Capture the main video playback</p>
+          </div>
+        </div>
 
+        {/* Camera Recording with submenu */}
+        <div className="mode-option-wrapper">
           <div 
-            className={`mode-option ${selectedMode === 'camera' ? 'selected' : ''}`}
-            onClick={() => handleModeSelect('camera')}
+            className={`mode-option ${selectedMode?.startsWith('camera') ? 'selected' : ''} ${showCameraSubmenu ? 'has-submenu-open' : ''}`}
+            onClick={() => setShowCameraSubmenu(!showCameraSubmenu)}
           >
             <div className="mode-icon">
-              <span className="mode-emoji">📱</span>
+              <Camera size={24} className="mode-lucide" />
             </div>
             <div className="mode-info">
               <h4>Record Camera</h4>
               <p>Capture front/back camera feed</p>
             </div>
+            <ChevronRight size={20} className={`submenu-indicator ${showCameraSubmenu ? 'rotated' : ''}`} />
           </div>
-
-          <div 
-            className={`mode-option ${selectedMode === 'both' ? 'selected' : ''}`}
-            onClick={() => handleModeSelect('both')}
-          >
-            <div className="mode-icon">
-              <span className="mode-emoji">📹</span>
+          
+          {showCameraSubmenu && (
+            <div className="submenu-container">
+              <div 
+                className={`submenu-option ${selectedMode === 'camera-front' ? 'selected' : ''}`}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  handleModeSelect('camera-front');
+                }}
+              >
+                <Camera size={18} />
+                <span>Record Front Camera (Selfie)</span>
+              </div>
+              <div 
+                className={`submenu-option ${selectedMode === 'camera-back' ? 'selected' : ''}`}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  handleModeSelect('camera-back');
+                }}
+              >
+                <Camera size={18} />
+                <span>Record Back Camera</span>
+              </div>
             </div>
-            <div className="mode-info">
-              <h4>Record Both</h4>
-              <p>Picture-in-picture recording</p>
-            </div>
-          </div>
+          )}
         </div>
+      </div>
 
-        <div className="popup-actions">
-          <button className="cancel-btn" onClick={onClose}>Cancel</button>
-        </div>
+      <div className="popup-actions">
+        <button className="cancel-btn" onClick={onClose}>Cancel</button>
+      </div>
+
+      {/* Resize handle */}
+      <div 
+        className="resize-handle"
+        onMouseDown={handleResizeStart}
+      >
+        <Maximize2 size={14} />
       </div>
     </div>
   );
 };
 
-// Standalone initialization function
+// Singleton pattern to prevent duplication
+let floatingUIRoot: Root | null = null;
+let floatingUIContainer: HTMLElement | null = null;
+
 export const initializeFloatingRecordUI = () => {
-  let isUIVisible = false;
-  let floatingUIRoot: any = null;
-
-  const createFloatingUIContainer = () => {
-    const container = document.createElement('div');
-    container.id = 'floating-record-ui-container';
-    document.body.appendChild(container);
-    return container;
-  };
-
   const showFloatingUI = () => {
-    if (!floatingUIRoot) {
-      const container = createFloatingUIContainer();
-      floatingUIRoot = createRoot(container);
+    // Remove existing container if present
+    if (floatingUIContainer) {
+      floatingUIContainer.remove();
+      floatingUIRoot = null;
+      floatingUIContainer = null;
     }
 
-    isUIVisible = true;
+    // Create new container
+    floatingUIContainer = document.createElement('div');
+    floatingUIContainer.id = 'floating-record-ui-container';
+    document.body.appendChild(floatingUIContainer);
+    
+    // Create root
+    floatingUIRoot = createRoot(floatingUIContainer);
     
     floatingUIRoot.render(
       <FloatingRecordUI
-        isVisible={isUIVisible}
+        isVisible={true}
         onClose={() => {
-          isUIVisible = false;
-          floatingUIRoot.render(
-            <FloatingRecordUI 
-              isVisible={false} 
-              onClose={() => {}} 
-              onModeSelect={() => {}} 
-            />
-          );
+          if (floatingUIRoot && floatingUIContainer) {
+            floatingUIRoot.unmount();
+            floatingUIContainer.remove();
+            floatingUIRoot = null;
+            floatingUIContainer = null;
+          }
         }}
         onModeSelect={(mode) => {
           console.log('Selected recording mode:', mode);
-          // Import and initialize recorder controls
-          import('./recorder.control.ui.tsx').then(({ initializeRecorderControls }) => {
+          
+          // Import and initialize the controller
+          import('./recorder.control.ui').then(({ initializeRecorderControls }) => {
             initializeRecorderControls(mode);
           });
           
-          isUIVisible = false;
-          floatingUIRoot.render(
-            <FloatingRecordUI 
-              isVisible={false} 
-              onClose={() => {}} 
-              onModeSelect={() => {}} 
-            />
-          );
+          // Close the mode selection popup
+          if (floatingUIRoot && floatingUIContainer) {
+            floatingUIRoot.unmount();
+            floatingUIContainer.remove();
+            floatingUIRoot = null;
+            floatingUIContainer = null;
+          }
         }}
       />
     );
   };
 
-  // Add event listener to the recording button
   const addRecordingButtonListener = () => {
     const recordingBtn = document.getElementById('accessories-screen-record-btn');
     if (recordingBtn) {
@@ -156,379 +262,13 @@ export const initializeFloatingRecordUI = () => {
     }
   };
 
-  // Initialize when DOM is ready
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', addRecordingButtonListener);
   } else {
     addRecordingButtonListener();
   }
-
-
-// Add CSS styles
-const addFloatingStyles = () => {
-  if (document.getElementById('floating-record-ui-styles')) return;
-
-  const style = document.createElement('style');
-  style.id = 'floating-record-ui-styles';
-  style.textContent = `.floating-record-overlay {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100vw;
-        height: 100vh;
-        background: rgba(0, 0, 0, 0.8);
-        backdrop-filter: blur(8px);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        z-index: 10000;
-        animation: fadeIn 0.3s ease-out;
-      }
-
-      .floating-record-popup {
-        background: var(--background-dark);
-        border: 1px solid var(--border-medium);
-        border-radius: 16px;
-        padding: 24px;
-        min-width: 400px;
-        max-width: 500px;
-        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
-        animation: slideUp 0.3s ease-out;
-      }
-
-      .popup-header {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        margin-bottom: 20px;
-        padding-bottom: 16px;
-        border-bottom: 1px solid var(--border-subtle);
-      }
-
-      .popup-header h3 {
-        color: var(--text-primary);
-        margin: 0;
-        font-size: 18px;
-        font-weight: 600;
-      }
-
-      .close-btn {
-        background: none;
-        border: none;
-        color: var(--text-muted);
-        font-size: 24px;
-        cursor: pointer;
-        padding: 4px;
-        border-radius: 4px;
-        transition: all 0.2s ease;
-      }
-
-      .close-btn:hover {
-        color: var(--text-primary);
-        background: var(--surface-color);
-      }
-
-      .recording-modes {
-        display: flex;
-        flex-direction: column;
-        gap: 12px;
-        margin-bottom: 24px;
-      }
-
-      .mode-option {
-        display: flex;
-        align-items: center;
-        padding: 16px;
-        background: var(--glass-bg);
-        border: 1px solid var(--glass-border);
-        border-radius: 12px;
-        cursor: pointer;
-        transition: all 0.2s ease;
-      }
-
-      .mode-option:hover {
-        background: var(--surface-color);
-        border-color: var(--border-medium);
-        transform: translateY(-1px);
-      }
-
-      .mode-option.selected {
-        background: var(--primary-blue);
-        border-color: var(--primary-blue);
-        color: white;
-      }
-
-      .mode-icon {
-        width: 48px;
-        height: 48px;
-        background: var(--background-medium);
-        border-radius: 8px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        margin-right: 16px;
-        flex-shrink: 0;
-      }
-
-      .mode-option.selected .mode-icon {
-        background: rgba(255, 255, 255, 0.2);
-      }
-
-      .mode-icon img {
-        width: 24px;
-        height: 24px;
-        opacity: 0.8;
-      }
-
-      .mode-info h4 {
-        margin: 0 0 4px 0;
-        color: var(--text-primary);
-        font-weight: 600;
-        font-size: 16px;
-      }
-
-      .mode-info p {
-        margin: 0;
-        color: var(--text-secondary);
-        font-size: 14px;
-      }
-
-      .mode-option.selected .mode-info h4,
-      .mode-option.selected .mode-info p {
-        color: white;
-      }
-
-      .popup-actions {
-        display: flex;
-        justify-content: flex-end;
-        gap: 12px;
-      }
-
-      .cancel-btn {
-        padding: 8px 16px;
-        background: var(--surface-color);
-        color: var(--text-secondary);
-        border: 1px solid var(--border-medium);
-        border-radius: 8px;
-        cursor: pointer;
-        font-size: 14px;
-        transition: all 0.2s ease;
-      }
-
-      .cancel-btn:hover {
-        background: var(--background-medium);
-        color: var(--text-primary);
-      }
-
-      @keyframes fadeIn {
-        from { opacity: 0; }
-        to { opacity: 1; }
-      }
-
-      @keyframes slideUp {
-        from { 
-          opacity: 0;
-          transform: translateY(20px) scale(0.95);
-        }
-        to { 
-          opacity: 1;
-          transform: translateY(0) scale(1);
-        }
-      }`;
-  document.head.appendChild(style);
 };
 
-addFloatingStyles();
-};
-
-// Auto-initialize when this module is imported
-if (typeof window !== 'undefined') {
-initializeFloatingRecordUI();
-}
-
-
-  {/*
-  // Add CSS styles
-  const addStyles = () => {
-    if (document.getElementById('floating-record-ui-styles')) return;
-
-    const style = document.createElement('style');
-    style.id = 'floating-record-ui-styles';
-    style.textContent = `
-      .floating-record-overlay {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100vw;
-        height: 100vh;
-        background: rgba(0, 0, 0, 0.8);
-        backdrop-filter: blur(8px);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        z-index: 10000;
-        animation: fadeIn 0.3s ease-out;
-      }
-
-      .floating-record-popup {
-        background: var(--background-dark);
-        border: 1px solid var(--border-medium);
-        border-radius: 16px;
-        padding: 24px;
-        min-width: 400px;
-        max-width: 500px;
-        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
-        animation: slideUp 0.3s ease-out;
-      }
-
-      .popup-header {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        margin-bottom: 20px;
-        padding-bottom: 16px;
-        border-bottom: 1px solid var(--border-subtle);
-      }
-
-      .popup-header h3 {
-        color: var(--text-primary);
-        margin: 0;
-        font-size: 18px;
-        font-weight: 600;
-      }
-
-      .close-btn {
-        background: none;
-        border: none;
-        color: var(--text-muted);
-        font-size: 24px;
-        cursor: pointer;
-        padding: 4px;
-        border-radius: 4px;
-        transition: all 0.2s ease;
-      }
-
-      .close-btn:hover {
-        color: var(--text-primary);
-        background: var(--surface-color);
-      }
-
-      .recording-modes {
-        display: flex;
-        flex-direction: column;
-        gap: 12px;
-        margin-bottom: 24px;
-      }
-
-      .mode-option {
-        display: flex;
-        align-items: center;
-        padding: 16px;
-        background: var(--glass-bg);
-        border: 1px solid var(--glass-border);
-        border-radius: 12px;
-        cursor: pointer;
-        transition: all 0.2s ease;
-      }
-
-      .mode-option:hover {
-        background: var(--surface-color);
-        border-color: var(--border-medium);
-        transform: translateY(-1px);
-      }
-
-      .mode-option.selected {
-        background: var(--primary-blue);
-        border-color: var(--primary-blue);
-        color: white;
-      }
-
-      .mode-icon {
-        width: 48px;
-        height: 48px;
-        background: var(--background-medium);
-        border-radius: 8px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        margin-right: 16px;
-        flex-shrink: 0;
-      }
-
-      .mode-option.selected .mode-icon {
-        background: rgba(255, 255, 255, 0.2);
-      }
-
-      .mode-icon img {
-        width: 24px;
-        height: 24px;
-        opacity: 0.8;
-      }
-
-      .mode-info h4 {
-        margin: 0 0 4px 0;
-        color: var(--text-primary);
-        font-weight: 600;
-        font-size: 16px;
-      }
-
-      .mode-info p {
-        margin: 0;
-        color: var(--text-secondary);
-        font-size: 14px;
-      }
-
-      .mode-option.selected .mode-info h4,
-      .mode-option.selected .mode-info p {
-        color: white;
-      }
-
-      .popup-actions {
-        display: flex;
-        justify-content: flex-end;
-        gap: 12px;
-      }
-
-      .cancel-btn {
-        padding: 8px 16px;
-        background: var(--surface-color);
-        color: var(--text-secondary);
-        border: 1px solid var(--border-medium);
-        border-radius: 8px;
-        cursor: pointer;
-        font-size: 14px;
-        transition: all 0.2s ease;
-      }
-
-      .cancel-btn:hover {
-        background: var(--background-medium);
-        color: var(--text-primary);
-      }
-
-      @keyframes fadeIn {
-        from { opacity: 0; }
-        to { opacity: 1; }
-      }
-
-      @keyframes slideUp {
-        from { 
-          opacity: 0;
-          transform: translateY(20px) scale(0.95);
-        }
-        to { 
-          opacity: 1;
-          transform: translateY(0) scale(1);
-        }
-      }
-    `;
-    document.head.appendChild(style);
-  };
-
-  addStyles();
-};
-
-// Auto-initialize when this module is imported
 if (typeof window !== 'undefined') {
   initializeFloatingRecordUI();
 }
-*/}

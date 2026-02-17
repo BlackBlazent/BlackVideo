@@ -1,0 +1,29 @@
+{
+  "name": "blackvideo-youtube-proxy",
+  "version": "1.0.0",
+  "description": "YouTube streaming proxy server for BlackVideo",
+  "main": "youtube-stream-server.js",
+  "scripts": {
+    "start": "node youtube-stream-server.js",
+    "dev": "nodemon youtube-stream-server.js"
+  },
+  "keywords": [
+    "youtube",
+    "streaming",
+    "proxy",
+    "ytdl"
+  ],
+  "author": "BlackVideo (Zephyra)",
+  "license": "PROPRIETARY",
+  "dependencies": {
+    "express": "^4.18.2",
+    "cors": "^2.8.5",
+    "ytdl-core": "^4.11.5"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.2"
+  },
+  "engines": {
+    "node": ">=16.0.0"
+  }
+}

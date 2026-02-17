@@ -24,8 +24,8 @@ export class VideoRecorder {
     private videoElement: HTMLVideoElement | null = null;
     private cameraCanvas: HTMLCanvasElement | null = null;
     private cameraCtx: CanvasRenderingContext2D | null = null;
-    private originalVideoSrc: string | null = null; // Store original video source
-    private cameraVideoElement: HTMLVideoElement | null = null; // For camera preview in main stage
+    private originalVideoSrc: string | null = null;
+    private cameraVideoElement: HTMLVideoElement | null = null;
 
     constructor() {
         this.initializeVideoTheaterStage();
@@ -71,14 +71,17 @@ export class VideoRecorder {
                 throw new Error('Failed to get canvas context');
             }
 
-            // Set canvas dimensions to match video - FIXED: Use proper dimensions
-            this.canvas.width = videoElement.videoWidth || videoElement.clientWidth || 1920;
-            this.canvas.height = videoElement.videoHeight || videoElement.clientHeight || 1080;
+            // Set canvas dimensions to match video
+            const width = videoElement.videoWidth || videoElement.clientWidth || 1920;
+            const height = videoElement.videoHeight || videoElement.clientHeight || 1080;
+            
+            this.canvas.width = width;
+            this.canvas.height = height;
 
-            // FIXED: Create stream with proper frame rate
+            // Create stream with 30 FPS
             this.videoStream = this.canvas.captureStream(30);
 
-            console.log('Video capture initialized successfully');
+            console.log('Video capture initialized successfully', { width, height });
         } catch (error) {
             console.error('Failed to initialize video capture:', error);
             throw error;
@@ -99,7 +102,7 @@ export class VideoRecorder {
 
             this.cameraStream = await navigator.mediaDevices.getUserMedia(constraints);
             
-            // FIXED: Show camera in main video stage instead of preview window
+            // Setup camera in main video stage
             await this.setupCameraInMainStage();
 
             console.log('Camera capture initialized successfully');
@@ -109,7 +112,7 @@ export class VideoRecorder {
         }
     }
 
-    // FIXED: Setup camera feed in main video stage
+    // Setup camera feed in main video stage
     private async setupCameraInMainStage(): Promise<void> {
         if (!this.cameraStream || !this.videoElement) return;
 
@@ -135,7 +138,7 @@ export class VideoRecorder {
         });
     }
 
-    // FIXED: Restore original video source
+    // Restore original video source
     private restoreOriginalVideoSource(): void {
         if (!this.videoElement) return;
 
@@ -154,7 +157,7 @@ export class VideoRecorder {
         }
     }
 
-    // FIXED: Switch camera between front and back
+    // Switch camera between front and back
     public async switchCamera(facing: 'user' | 'environment'): Promise<void> {
         try {
             if (this.cameraStream) {
@@ -184,7 +187,7 @@ export class VideoRecorder {
         }
     }
 
-    // FIXED: Start recording with proper video capture
+    // Start recording with proper video capture
     public async startRecording(mode: 'video' | 'camera' | 'both'): Promise<void> {
         try {
             this.recordedChunks = [];
@@ -218,7 +221,7 @@ export class VideoRecorder {
                     throw new Error('Invalid recording mode');
             }
 
-            // FIXED: Better codec selection and options
+            // Better codec selection and options
             const options: MediaRecorderOptions = {
                 mimeType: this.getBestMimeType(),
                 videoBitsPerSecond: 2500000, // 2.5 Mbps
@@ -227,7 +230,7 @@ export class VideoRecorder {
 
             this.mediaRecorder = new MediaRecorder(streamToRecord, options);
 
-            // FIXED: Better event handling
+            // Event handling
             this.mediaRecorder.ondataavailable = (event) => {
                 if (event.data && event.data.size > 0) {
                     this.recordedChunks.push(event.data);
@@ -242,7 +245,7 @@ export class VideoRecorder {
                 console.error('MediaRecorder error:', event);
             };
 
-            // FIXED: Start recording with smaller time slice for better data
+            // Start recording with smaller time slice
             this.mediaRecorder.start(100);
             this.isRecording = true;
             this.isPaused = false;
@@ -254,7 +257,7 @@ export class VideoRecorder {
         }
     }
 
-    // FIXED: Get best available MIME type
+    // Get best available MIME type
     private getBestMimeType(): string {
         const types = [
             'video/webm;codecs=vp9,opus',
@@ -305,7 +308,7 @@ export class VideoRecorder {
         }
     }
 
-    // FIXED: Stop recording with proper cleanup
+    // Stop recording with proper cleanup
     public async stopRecording(): Promise<Blob | null> {
         return new Promise((resolve) => {
             if (!this.mediaRecorder) {
@@ -314,7 +317,7 @@ export class VideoRecorder {
             }
 
             this.mediaRecorder.onstop = () => {
-                // FIXED: Create blob with proper type
+                // Create blob with proper type
                 const mimeType = this.mediaRecorder?.mimeType || 'video/webm';
                 const blob = new Blob(this.recordedChunks, { type: mimeType });
                 
@@ -341,7 +344,7 @@ export class VideoRecorder {
         });
     }
 
-    // FIXED: Create combined stream for PiP recording
+    // Create combined stream for PiP recording
     private async createCombinedStream(): Promise<MediaStream> {
         if (!this.videoStream || !this.cameraStream) {
             throw new Error('Cannot create combined stream: missing video or camera stream');
@@ -367,7 +370,7 @@ export class VideoRecorder {
         return this.combinedStream;
     }
 
-    // FIXED: Start video capture with proper frame handling
+    // Start video capture with proper frame handling
     private startVideoCapture(): void {
         if (!this.videoElement || !this.ctx || !this.canvas) return;
 
@@ -384,7 +387,7 @@ export class VideoRecorder {
             }
 
             try {
-                // FIXED: Clear canvas before drawing
+                // Clear canvas before drawing
                 this.ctx!.clearRect(0, 0, this.canvas!.width, this.canvas!.height);
                 
                 // Draw video frame
@@ -404,7 +407,7 @@ export class VideoRecorder {
         captureFrame();
     }
 
-    // FIXED: Start combined capture with proper PiP positioning
+    // Start combined capture with proper PiP positioning
     private startCombinedCapture(): void {
         if (!this.videoElement || !this.cameraStream || !this.combinedStream) return;
 
@@ -480,7 +483,7 @@ export class VideoRecorder {
         };
     }
 
-    // FIXED: Enhanced cleanup with proper resource management
+    // Enhanced cleanup with proper resource management
     public cleanup(): void {
         if (this.mediaRecorder && this.mediaRecorder.state !== 'inactive') {
             this.mediaRecorder.stop();
@@ -512,7 +515,7 @@ export class VideoRecorder {
         console.log('VideoRecorder cleanup completed');
     }
 
-    // FIXED: Download with proper filename and type
+    // Download with proper filename and type (fallback)
     public static downloadRecording(blob: Blob, filename?: string): void {
         const url = URL.createObjectURL(blob);
         const a = document.createElement('a');

@@ -18,6 +18,7 @@ samples
 __docs__
 Website
 Versions
+.env
 # Node modules
 functions/node_modules/
 # Tauri binaries
@@ -30,7 +31,6 @@ src-tauri/bin/win/ffmpeg/
 src-tauri/bin/windows/
 src-tauri/bin/linux/
 src-tauri/bin/macos/
-
 # Executables & shared libs
 *.exe
 *.dll

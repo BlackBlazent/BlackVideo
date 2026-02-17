@@ -1,4 +1,3 @@
-// src/core/security/devTripwire.ts
 /*
  * Copyright (c) 2026 BlackVideo (Zephyra)
  * All Rights Reserved.
@@ -9,6 +8,7 @@
  * from BlackVideo.
  */
 
+// src/core/security/devTripwire.ts
 /**
  * Executes a function only when the application is running in development mode.
  * Uses Vite's environment variable injection.

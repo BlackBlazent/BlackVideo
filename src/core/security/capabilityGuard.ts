@@ -1,4 +1,3 @@
-// src/core/security/capabilityGuard.ts
 /*
  * Copyright (c) 2026 BlackVideo (Zephyra)
  * All Rights Reserved.
@@ -9,6 +8,7 @@
  * from BlackVideo.
  */
 
+// src/core/security/capabilityGuard.ts
 // A snapshot of known browser/runtime capabilities
 export const Capabilities = {
   // Check for the existence of the MediaRecorder API for recording features

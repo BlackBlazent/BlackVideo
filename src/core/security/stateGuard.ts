@@ -1,4 +1,3 @@
-// src/core/security/stateGuard.ts
 /*
  * Copyright (c) 2026 BlackVideo (Zephyra)
  * All Rights Reserved.
@@ -9,6 +8,7 @@
  * from BlackVideo.
  */
 
+// src/core/security/stateGuard.ts
 import { SecurityError } from "./capabilityGuard";
 
 /**

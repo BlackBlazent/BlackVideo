@@ -1,0 +1,1 @@
+# pyinstaller --onefile --icon=blackvideo.ico launch_blackvideo.py

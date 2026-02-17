@@ -1,0 +1,94 @@
+THIRD-PARTY SOFTWARE NOTICES
+===========================
+
+This application, BlackVideo (Codename: Zephyra), includes third-party
+software components. The following notices are provided for attribution
+and licensing compliance purposes only.
+
+------------------------------------------------------------
+
+Tauri
+Copyright © 2019–present Tauri Contributors
+License: MIT
+https://github.com/tauri-apps/tauri
+
+React
+Copyright © Meta Platforms, Inc. and affiliates
+License: MIT
+https://reactjs.org
+
+TypeScript
+Copyright © Microsoft
+License: Apache-2.0
+https://www.typescriptlang.org
+
+JavaScript
+Various authors
+License: MIT / ISC (depending on package)
+https://www.javascript.com
+
+Lucide Icons
+Copyright © Lucide Contributors
+License: ISC
+https://lucide.dev
+
+FFmpeg (essential libraries)
+Copyright © The FFmpeg Developers
+License: LGPL v2.1 or GPL v2 (depending on build configuration)
+https://ffmpeg.org
+
+Icons8
+Copyright © Icons8
+License: Free / attribution required for free resources
+https://icons8.com
+
+Freepik
+Copyright © Freepik Company S.L.
+License: Free / attribution required for free resources
+https://www.freepik.com
+
+Video.js
+Copyright © Brightcove, Inc.
+License: Apache-2.0
+https://videojs.com
+
+xterm.js
+Copyright © Microsoft
+License: MIT
+https://xtermjs.org
+
+capture-video-frame
+Copyright © Various Contributors
+License: MIT
+https://www.npmjs.com/package/capture-video-frame
+
+RecordRTC
+Copyright © Muaz Khan
+License: MIT
+https://recordrtc.org
+
+Framer Motion
+Copyright © Framer Inc.
+License: MIT
+https://www.framer.com/motion/
+
+FPS Meter
+Copyright © Various Contributors
+License: MIT
+https://github.com/mrdoob/stats.js
+
+WebRTC
+Copyright © Various Contributors
+License: BSD / MIT
+https://webrtc.org
+
+C Language
+Copyright © ISO / ANSI
+License: Public Domain / Open Standard
+
+Windsurf Editor
+Copyright © [Author or Organization]
+License: [Insert License]
+https://[URL if public]
+
+------------------------------------------------------------

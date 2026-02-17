@@ -272,9 +272,9 @@ export class FullscreenManager {
       Object.assign(this.videoContainer.style, {
         position: 'fixed',
         width: '100%',
-        height: '90vh',
+        height: '90vh', // 60vh
         right: '0px',
-        maxHeight: '90vh',
+        maxHeight: '90vh', // 60 vh
         borderRadius: '0px',
         zIndex: '1000',
         top: '0px',

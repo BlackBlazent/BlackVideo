@@ -1,0 +1,128 @@
+.video-filter-popup {
+  position: fixed;
+  background: #1e1e1e;
+  border: 1px solid #333;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  z-index: 9999;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+  overflow: hidden;
+}
+
+.filter-header {
+  padding: 10px;
+  background: #252525;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: grab;
+  border-bottom: 1px solid #333;
+}
+
+.header-left { display: flex; align-items: center; gap: 8px; font-size: 13px; color: #eee; }
+
+.filter-body-content {
+  flex: 1;
+  padding: 15px;
+  overflow-y: auto;
+}
+
+.filter-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(110px, 1fr)); /* Landscape Grid */
+  gap: 12px;
+  margin-top: 15px;
+}
+
+.filter-card-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+}
+
+.filter-thumb-wrapper {
+  width: 100%;
+  aspect-ratio: 16/9; /* Force landscape aspect ratio */
+  background: #333;
+  border-radius: 4px;
+  overflow: hidden;
+  border: 2px solid transparent;
+  transition: 0.2s;
+}
+
+.filter-card-item:hover .filter-thumb-wrapper {
+  border-color: #7cfc00; /* Neon green highlight from reference */
+}
+
+.resize-handle {
+  width: 15px;
+  height: 15px;
+  cursor: nwse-resize;
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, transparent 50%, #444 50%);
+}
+
+/* Container for the tabs and the dropdown arrow */
+.filter-tabs-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  padding-bottom: 8px;
+}
+
+/* The actual list of buttons */
+.filter-tabs-container {
+  display: flex;
+  flex: 1;
+  gap: 16px; /* This creates the gap between text items */
+  overflow-x: auto;
+  scrollbar-width: none; /* Hide scrollbar for Firefox */
+}
+
+.filter-tabs-container::-webkit-scrollbar {
+  display: none; /* Hide scrollbar for Chrome/Safari */
+}
+
+/* Individual Tab Button */
+.filter-tab-btn {
+  background: transparent;
+  border: none;
+  color: #888; /* Muted color for inactive */
+  font-size: 13px;
+  padding: 4px 10px;
+  cursor: pointer;
+  white-space: nowrap;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+}
+
+.filter-tab-btn:hover {
+  color: #eee;
+}
+
+/* Active State - Matching the image's dark rounded box */
+.filter-tab-btn.active {
+  color: #fff;
+  background: #333; /* Dark gray background for active tab */
+  font-weight: 500;
+}
+
+/* The dropdown button at the end */
+.tabs-more-btn {
+  background: #333;
+  border: none;
+  color: #eee;
+  padding: 4px;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}

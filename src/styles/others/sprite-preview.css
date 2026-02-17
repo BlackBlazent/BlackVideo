@@ -1,0 +1,145 @@
+/* ========================================
+   HOVER TIME COUNTER
+   ======================================== */
+
+.hover-time-counter {
+  position: absolute;
+  display: none;
+  padding: 4px 8px;
+  background: rgba(0, 0, 0, 0.9);
+  color: #fff;
+  font-size: 12px;
+  font-family: 'Courier New', monospace;
+  border-radius: 4px;
+  pointer-events: none;
+  z-index: 999;
+  white-space: nowrap;
+  transform: translateX(-50%);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.hover-time-counter::after {
+  content: '';
+  position: absolute;
+  bottom: -6px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 0;
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
+  border-top: 6px solid rgba(0, 0, 0, 0.9);
+}
+
+/* ========================================
+   SPRITE THUMBNAIL PREVIEW
+   ======================================== */
+
+.video-thumbnail-preview {
+  position: absolute;
+  display: none;
+  pointer-events: none;
+  z-index: 1000;
+  border: 2px solid #fff;
+  border-radius: 4px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+  background: #000;
+  overflow: hidden;
+  animation: fadeIn 0.2s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(5px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.video-thumbnail-preview img {
+  display: block;
+  object-fit: none;
+  pointer-events: none;
+}
+
+/* ========================================
+   RESPONSIVE DESIGN
+   ======================================== */
+
+@media (max-width: 768px) {
+  .controls-bar {
+    gap: 10px;
+    padding: 0 10px;
+  }
+
+  .time {
+    font-size: 12px;
+    min-width: 70px;
+  }
+
+  .scrubber-bar {
+    height: 8px;
+  }
+
+  .scrubber-bar::-webkit-slider-thumb {
+    width: 20px;
+    height: 20px;
+  }
+
+  .scrubber-bar::-moz-range-thumb {
+    width: 20px;
+    height: 20px;
+  }
+
+  .hover-time-counter {
+    font-size: 11px;
+    padding: 3px 6px;
+  }
+}
+
+/* ========================================
+   ACCESSIBILITY
+   ======================================== */
+
+.scrubber-bar:focus {
+  outline: 2px solid #ff0000;
+  outline-offset: 2px;
+}
+
+.scrubber-bar:focus::-webkit-slider-thumb {
+  box-shadow: 0 0 0 4px rgba(255, 0, 0, 0.3);
+}
+
+.scrubber-bar:focus::-moz-range-thumb {
+  box-shadow: 0 0 0 4px rgba(255, 0, 0, 0.3);
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .video-thumbnail-preview {
+    border: 3px solid #fff;
+  }
+
+  .hover-time-counter {
+    border: 2px solid #fff;
+  }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  .video-thumbnail-preview {
+    animation: none;
+  }
+
+  .scrubber-bar::-webkit-slider-thumb {
+    transition: none;
+  }
+
+  .scrubber-bar::-moz-range-thumb {
+    transition: none;
+  }
+}

@@ -1,4 +1,3 @@
-// src/utils/folder.base.ts
 /*
  * Copyright (c) 2026 BlackVideo (Zephyra)
  * All Rights Reserved.
@@ -8,6 +7,9 @@
  * in whole or in part, is strictly prohibited without prior written permission
  * from BlackVideo.
  */
+
+// src/utils/folder.base.ts
+
 import { open } from "@tauri-apps/plugin-dialog";
 import { readDir } from "@tauri-apps/plugin-fs";
 // import { Subfolder, VideoFolder } from './types';

@@ -11,7 +11,7 @@
 const loadingHTML = `
   <div id="loading-container">
     <div class="loading-content">
-      <img id="loading-image" src="/assets/media/images/icons/general/common/resync/RELOAD.ico" alt="Loading"> <!-- Custom Image -->
+      <img id="loading-image" src="/assets/systems/RELOAD.png" alt="Loading"> <!-- Custom Image -->
       <!-- OR -->
       <!-- <span>🤣</span> --> <!-- Custom Emoji -->
     </div>

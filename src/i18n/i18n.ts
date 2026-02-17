@@ -1,4 +1,3 @@
-// src/i18n/i18n.ts
 /*
  * Copyright (c) 2026 BlackVideo (Zephyra)
  * All Rights Reserved.
@@ -8,6 +7,9 @@
  * in whole or in part, is strictly prohibited without prior written permission
  * from BlackVideo.
  */
+
+// src/i18n/i18n.ts
+
 import i18n from "i18next";
 import { initReactI18next } from "react-i18next";
 
@@ -27,13 +29,21 @@ if (typeof window !== 'undefined' && window.__TAURI_IPC__) {
 // Assuming your current paths are relative to where the file is eventually bundled
 import en from "../../AppData/app/locales/en.json";
 import hy from "../../AppData/app/locales/am.json";
+import ca from "../../AppData/app/locales/ca.json";
+import de from "../../AppData/app/locales/de.json";
+import ee from "../../AppData/app/locales/ee.json";
+import fi from "../../AppData/app/locales/fi.json";
+import jp from "../../AppData/app/locales/jp.json";
+import kr from "../../AppData/app/locales/kr.json";
+import nl from "../../AppData/app/locales/nl.json";
+import sg from "../../AppData/app/locales/sg.json";
 import hi from "../../AppData/app/locales/in.json";
 import ru from "../../AppData/app/locales/ru.json"; 
-import sv from "../../AppData/app/locales/sv.json";
+import se from "../../AppData/app/locales/se.json";
 
 
 // List of supported language codes to check against Tauri's detection
-const supportedLanguages = ['en', 'hy', 'hi', 'ru', 'sv'];
+const supportedLanguages = ['en', 'hy', 'hi', 'ru', 'se', 'ca', 'de', 'ee', 'fi', 'jp', 'kr', 'nl', 'sg' ];
 const DEFAULT_LANGUAGE = "en";
 const STORAGE_KEY = "blackvideo-lang";
 
@@ -82,7 +92,15 @@ async function initI18n() {
           hy: { translation: hy },
           hi: { translation: hi },
           ru: { translation: ru },
-          sv: { translation: sv }
+          se: { translation: se },
+          ca: { translation: ca },
+          de: { translation: de },
+          ee: { translation: ee },
+          fi: { translation: fi },
+          jp: { translation: jp },
+          kr: { translation: kr },
+          nl: { translation: nl },
+          sg: { translation: sg }
         },
         // Set initial language from the detection sequence
         lng: initialLang,

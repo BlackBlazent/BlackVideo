@@ -9,7 +9,7 @@
  * from BlackVideo.
  */
 import React, { useEffect, useState } from 'react';
-import { notifier, Notification } from '../../../scripts/global.notifier.store';
+import { notifier, Notification } from '../../../AppData/forbidden/dev/global/global.notifier.store';
 import { CheckCircle2, AlertCircle, Info, X, Camera } from 'lucide-react';
 import '../../styles/utils/global.notifier.css';
 

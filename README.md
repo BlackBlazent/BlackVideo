@@ -64,12 +64,11 @@ You can also download project files from this repository under the
 ---
 
 
-### Date created
-12/23/2023 at 8:55 AM
-
-
-### Date published
-12/6/2026
+| Field               | Value                    |
+|---------------------|--------------------------|
+| Date Created        | 2023-12-23T08:55:00      |
+| Initial Release     | 2026-05-11               |
+| Date Published      | 2026-12-06               |
 
 ### Extensions
 > This is the offical BlackVideo Extensions System.

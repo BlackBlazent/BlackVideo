@@ -12,7 +12,7 @@ export default {
   appName: "BlackVideo",
   codename: "Zephyra",
   description:
-    "A next-gen video player with advanced playback tools, modular extensions, and intelligent utilities for a customizable cinematic experience.",
+    "A next-gen video platform",
   version: "1.0.0",
   author: "Jednaz Lonestamp",
   website: "https://blackvideo-centric-site.onrender.com/",

@@ -8,6 +8,7 @@
  * from BlackVideo.
  */
 
+import React from 'react';
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { BrowserRouter as Router } from 'react-router-dom';
@@ -38,14 +39,20 @@ import { startTimeSpentTracker } from "../AppData/forbidden/dev/footer/time.spen
 import { updateScriptureCarousel } from "../AppData/forbidden/dev/footer/holyBible";
 import { getUserDisplayName, getUserNameClasses, User } from "../AppData/forbidden/dev/footer/user.signature.name";
 import { animateCpuUsage } from '../AppData/forbidden/dev/footer/cpu.percentage';
+import UserInstallBadge from './components/ui/footer/user.install.badge.tsx';
 import { VideoTerminal } from '../AppData/forbidden/dev/footer/components/ui/terminal.ui';
-
 import { GlobalNotifier } from './components/ui/global.notifier';
-
-import './styles/terminal.css'
-import './styles/modals/setting.shortcut.css'
+import BanCountryMessage from './components/ui/ban.country.message';
+import { fetchPublicIP } from '../utils/ip-utils';
+import { checkIsCountryBanned } from '../AppData/app/database/server/country-block';
 import { GlobalSearchResult } from './components/pages/globalSearch.Result';
 import SettingsShortcut from '../AppData/forbidden/dev/global/modals/settings/settings.shortcut.ui';
+import { GlobalNavigationContextMenu } from '../AppData/forbidden/dev/global/context-menu/components/globalNavigationContextMenu';
+import { globalNavigationContextMenuManager } from '../AppData/forbidden/dev/global/context-menu/globalNavigationContextMenu';
+import { UserFeedbackSubmission } from "./components/ui/footer/submit.feedback";
+
+// import './styles/terminal.css'
+import './styles/modals/setting.shortcut.css'
 
 function App() {
 
@@ -98,6 +105,48 @@ const { i18n } = useTranslation(); // 👈 Add useTranslation here to trigger re
   // or a wrapper component, but for simplicity, let's keep the button logic simple.
 
 
+  // Context Menu Approach
+  // State management for context menus
+  // Subscribe to context menu settings changes
+  
+  React.useEffect(() => {
+    const unsubscribe = globalNavigationContextMenuManager.subscribe((settings) => {
+      console.log('Navigation settings updated:', settings);
+      
+      // Apply visibility changes to toolbar elements
+      const toolbarElements = {
+        authorizationAccounts: document.querySelector('.authorization-section'),
+        menuBar: document.querySelector('.menu-btn'),
+        globalSearch: document.querySelector('.top-center'),
+        account: document.getElementById('userProfile-btn'),
+        notifications: document.querySelector('.notifications-btn'),
+        settings: document.querySelector('.settings-btn-wrapper'),
+      };
+
+      // Update visibility for each toolbar element
+      Object.entries(settings.toolbars).forEach(([key, visible]) => {
+        const element = toolbarElements[key as keyof typeof toolbarElements];
+        if (element) {
+          (element as HTMLElement).style.display = visible ? '' : 'none';
+        }
+      });
+
+      // Apply search bar design changes
+      const searchBar = document.querySelector('.top-center input') as HTMLInputElement;
+      if (searchBar) {
+        searchBar.className = `search-bar-${settings.searchBarDesign}`;
+      }
+
+      // Apply transparency
+      const header = document.getElementById('blackvideoTopNavigation');
+      if (header) {
+        header.style.opacity = `${settings.transparency / 100}`;
+      }
+    });
+
+    return () => unsubscribe();
+  }, []);
+
   // Settings Shortcut
   const [isSettingsOpen, setIsSettingsOpen] = useState(false);
 
@@ -116,6 +165,37 @@ window.triggerSearch = (query: string) => {
     setSearchQuery(query);
     setIsResultOpen(true);
 };
+
+  // Ban Country Service
+  const [bannedInfo, setBannedInfo] = useState<{ name: string; code: string } | null>(null);
+
+  useEffect(() => {
+    const verifyAccess = async () => {
+      // 1. Check for the "Poison Pill" (Existing local ban)
+      const savedBan = localStorage.getItem('access_denied_perm');
+      if (savedBan) {
+        setBannedInfo(JSON.parse(savedBan));
+        return;
+      }
+
+      // 2. Real-time Detection
+      const data = await fetchPublicIP();
+      
+      // Only proceed if detection was successful
+      if (data) {
+        const isBanned = checkIsCountryBanned(data.countryCode);
+        
+        if (isBanned) {
+          const banPayload = { name: data.countryName, code: data.countryCode };
+          // Poison the local storage forever
+          localStorage.setItem('access_denied_perm', JSON.stringify(banPayload));
+          setBannedInfo(banPayload);
+        }
+      }
+    };
+
+    verifyAccess();
+  }, []);
 
   // CPU Usage
   useEffect(() => {
@@ -180,7 +260,12 @@ window.triggerSearch = (query: string) => {
   return (
     <>
       <Router>
-        <header id="blackvideoTopNavigation" className="blackvideo-top-navigation">
+        <header id="blackvideoTopNavigation" className="blackvideo-top-navigation"  onContextMenu={(e) => {
+          // Prevent context menu on child elements, only on header itself
+          if (e.target === e.currentTarget) {
+            // Context menu will be handled by the component
+          }
+        }}>
           <div className="top-left">
             <img 
               className="blackvideo-logo" 
@@ -275,6 +360,10 @@ window.triggerSearch = (query: string) => {
          isVisible={isResultOpen} 
          onClose={() => setIsResultOpen(false)} 
        />
+       {/* Context-Menu*/}
+       {/* Context Menu Components */}
+      <GlobalNavigationContextMenu targetElementId="blackvideoTopNavigation" />
+      
         {/*Terminal CLI*/}
         <VideoTerminal />
         {/*Global Notifier*/}
@@ -301,14 +390,27 @@ window.triggerSearch = (query: string) => {
         </div>
             <span className="cpu-usage-percentage">60%</span>
           </div>
+          
+          {/*
           <div id="userLegacyBadge" className="zephyra-badge-installer-pill">
             <span className="badge-count">67</span>
           </div>
+          */}
+          {/* USER BADGE */}
+          <UserInstallBadge />
           <div className="active-extension-port"></div>
           <div className="leds-ports-container" aria-label="Status LEDs">
             <div id="extensions-windows-port" className="extensions-led-port"></div>
           </div>
+          <UserFeedbackSubmission />
         </footer>
+        {/* BAN OVERLAY - Placed at the bottom for strategy block */}
+      {bannedInfo && (
+        <BanCountryMessage 
+          countryName={bannedInfo.name} 
+          countryCode={bannedInfo.code} 
+        />
+      )}
       </Router>
     </>
   );

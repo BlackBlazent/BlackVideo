@@ -7,9 +7,17 @@
  * in whole or in part, is strictly prohibited without prior written permission
  * from BlackVideo.
  */
+
 import { useCallback, useEffect, useRef, useState } from 'react';
+// import { open } from '@tauri-apps/plugin-dialog';
+// import { convertFileSrc } from '@tauri-apps/api/core';
 import VideoControls from '../../../AppData/forbidden/dev/main/playground/customs/video.controls'; // Added for custom controls | Recent
-import VideoTheaterManager from '../../../AppData/forbidden/dev/main/playground/accessories/links/links.processors';
+import LinkDeployerUI from '../../../AppData/forbidden/dev/main/playground/accessories/links/link.player.deployer.ui';
+import { initializeRecorderAccessories } from '../../../AppData/forbidden/dev/main/playground/accessories/recorder';
+import { VideoFilterEffectUI } from '../../../AppData/forbidden/dev/main/playground/accessories/filters/video.filters.effect.ui';
+import { DeployerData, DeployMode } from '../../../AppData/forbidden/dev/main/playground/accessories/links/link.core.deployer.dev';
+/*import VideoTheaterManager from '../../../AppData/forbidden/dev/main/playground/accessories/links/links.processors';*/
+import { handleOpenLocalFile } from '../../../AppData/forbidden/dev/main/playground/customs/utils/settings/open.file.import';
 import SpeakerUI from '../../../AppData/forbidden/dev/main/playground/ui/speaker.ui';
 import { playbackControlEnhancement } from '../../../AppData/forbidden/dev/main/playground/playbacks/playback.advanced.control.enhancement.volume';
 import { captionControlEnhancement } from '../../../AppData/forbidden/dev/main/playground/playbacks/playback.advanced.control.enhancement.caption';
@@ -20,7 +28,9 @@ import { VideoTheaterStage } from '../../../AppData/forbidden/dev/main/playgroun
 import { PictureInPictureController } from '../../../AppData/forbidden/dev/main/playground/playbacks/picture.in.picture';
 import ResolutionUI from '../../../AppData/forbidden/dev/main/playground/ui/resolution.ui';
 import { PrimaryPlaybackController } from '../../../AppData/forbidden/dev/main/playground/playbacks/primary.video.controls';
-import { PrimaryPlaybackTimelineController } from '../../../AppData/forbidden/dev/main/playground/playbacks/playback.timeline.control';
+import { PrimaryPlaybackTimelineController, primaryPlaybackTimelineController } from '../../../AppData/forbidden/dev/main/playground/playbacks/playback.timeline.control';
+import { SpriteThumbnail } from '../../../AppData/forbidden/dev/main/playground/playbacks/sprite-preview/spriteThumbnail';
+import type { SpriteConfig } from '../../../AppData/forbidden/dev/main/playground/playbacks/sprite-preview/spriteThumbnailManager';
 import FullscreenUI from '../../../AppData/forbidden/dev/main/playground/ui/fullscreen.ui';
 import '../../../AppData/forbidden/dev/main/playground/playbacks/fullscreen';
 import { PlaybackSpeedUI } from '../../../AppData/forbidden/dev/main/playground/ui/playback.speed.ui';
@@ -32,17 +42,46 @@ import BitrateUI from '../../../AppData/forbidden/dev/main/playground/ui/bitrate
 import { setupBitratePopup } from '../../../AppData/forbidden/dev/main/playground/playbacks/bitrate.control';
 import { SnapCaptureController } from '../../../AppData/forbidden/dev/main/playground/accessories/snap/snap.capture.frame';
 import { VideoDropper } from '../../../AppData/forbidden/dev/main/playground/theater-stage/video.dropper';
+import { YouTubeDragDropHandler } from '../../../AppData/forbidden/dev/main/playground/theater-stage/dropper-modules/@youtube/dragDropYouTube.url';
 import VideoOCRUI from '../../../AppData/forbidden/dev/main/playground/accessories/video_orc/video.ocr.ui';
 import { initExtensionSystem } from '../../../AppData/forbidden/dev/main/playground/extension/extensionCardCaller';
 import ExtensionModalFrame from '../../../AppData/forbidden/dev/main/playground/extension/extension.modalFrame.ui';
 import { VideoPlaylist } from '../../../AppData/forbidden/dev/main/playground/video-playlist-card/video.playlist.components';
 import { usePlaylistViewbox } from '../../../AppData/forbidden/dev/main/playground/video-playlist-card/view.playlist.script';
 import VideoPlaylistFullView from '../../../AppData/forbidden/dev/main/playground/video-playlist-card/video.playlist.full.view';
+import { PlaygroundCommonMainPlaybackContextMenu } from '../../../AppData/forbidden/dev/global/context-menu/components/playgroundCommonMainPlaybackContextMenu';
+import { PlaygroundCustomPlaybackContextMenu } from '../../../AppData/forbidden/dev/global/context-menu/components/playgroundCustomPlaybackContextMenu';
+import { PlaygroundPlaybackAccessoriesContextMenu } from '../../../AppData/forbidden/dev/global/context-menu/components/playgroundPlaybackAccessoriesContextMenu';
+import { PlaygroundExtensionPlaybackContextMenu } from '../../../AppData/forbidden/dev/global/context-menu/components/playgroundExtensionPlaybackContextMenu';
+import { PlaygroundVideoTheaterStageContextMenu } from '../../../AppData/forbidden/dev/global/context-menu/components/playgroundVideoTheaterStageContextMenu';
+// Import managers for state management
+import { playbackControlsContextMenuManager } from '../../../AppData/forbidden/dev/global/context-menu/playgroundCommonMainPlaybackContextMenu';
+import { customPlaybackContextMenuManager } from '../../../AppData/forbidden/dev/global/context-menu/playgroundCustomPlaybackContextMenu';
+import { accessoriesContextMenuManager } from '../../../AppData/forbidden/dev/global/context-menu/playgroundPlaybackAccessoriesContextMenu';
+// import { extensionContextMenuManager } from '../../../AppData/forbidden/dev/global/context-menu/playgroundExtensionPlaybackContextMenu';
+// Resume Playback
+import { resumePlaybackIndex } from '../../../AppData/forbidden/dev/main/playground/customs/utils/settings/lib/resumePlayback/resumePlaybackIndex';
 
+// Playback Integration — individual node scripts
+// import { disableCommonPlayback, enableCommonPlayback, } from '../../../AppData/forbidden/dev/main/playground/customs/utils/settings/scripts/commonPlayback.script';
+// import { disableAccessoriesPlayback, enableAccessoriesPlayback, } from '../../../AppData/forbidden/dev/main/playground/customs/utils/settings/scripts/accessoriesPlayback.script';
+// import { disableExtensionsPlayback, enableExtensionsPlayback, } from '../../../AppData/forbidden/dev/main/playground/customs/utils/settings/scripts/extensionsPlayback.script';
+// Playback Integration — registration hub (also owns Playlist logic)
+import { applyPlaybackState, disablePlaylistPlayback, enablePlaylistPlayback, type PlaybackSettings, } from '../../../AppData/forbidden/dev/main/playground/customs/utils/settings/scripts/index.PlaybackIntegration.script';
+
+
+
+interface ThumbnailState {
+  visible: boolean;
+  currentTime: number;
+  mouseX?: number;
+  mouseY?: number;
+}
 
 const Playground = () => {
+
   // ========================================================================
-  // Open file
+  // !Blank | Old openfile
   // ========================================================================
   useEffect(() => {
     // Initialize the singleton stage when playground mounts
@@ -52,6 +91,7 @@ const Playground = () => {
       // Optional: Cleanup if necessary
     };
   }, []);
+
   // ========================================================================
   // Video Playlist Card Display
   // ========================================================================
@@ -92,7 +132,59 @@ const Playground = () => {
   }, []);
 
   const handleTimelineSeekBarProgress = useCallback((event: React.FormEvent<HTMLInputElement>) => {
+    // Added
+    const seekTime = parseFloat(event.target as unknown as HTMLInputElement["value"]);
+    if (videoRef.current) {
+      videoRef.current.currentTime = seekTime;
+    }
+
     console.log('Timeline seek bar progress:', (event.target as HTMLInputElement).value);
+  }, []);
+
+  // ========================================================================
+  // Sprite Manager
+  // ========================================================================
+
+  // Sprite thumbnail state
+  const [spriteConfig, setSpriteConfig] = useState<SpriteConfig>({
+    url: '',
+    width: 160,
+    height: 90,
+    columns: 10,
+    rows: 0,
+    interval: 1
+  });
+
+  const [thumbnailState, setThumbnailState] = useState<ThumbnailState>({
+    visible: false,
+    currentTime: 0,
+    mouseX: undefined,
+    mouseY: undefined
+  });
+
+  // Initialize sprite thumbnail manager
+  useEffect(() => {
+    // Get the sprite thumbnail manager from the timeline controller
+    const spriteMgr = primaryPlaybackTimelineController.getSpriteThumbnailManager();
+
+    // Register callback to listen for sprite state changes
+    spriteMgr.onStateChange((state, config) => {
+      setThumbnailState(state);
+      setSpriteConfig(config);
+    });
+
+    // Optional: Set custom sprite configuration if needed
+    // spriteMgr.setSpriteConfig({
+    //   width: 180,
+    //   height: 100,
+    //   columns: 8,
+    //   interval: 2
+    // });
+
+    // Cleanup on unmount
+    return () => {
+      primaryPlaybackTimelineController.destroy();
+    };
   }, []);
 
   // ========================================================================
@@ -420,14 +512,40 @@ const [isFrameRatePopupVisible, setIsFrameRatePopupVisible] = useState(false);
 
 
   // ========================================================================
-  // VideoTheaterManager Group
+  // VideoTheaterManager Group | Link Deployer
   // ========================================================================
-  useEffect(() => {
+
+  {/*useEffect(() => {
     const videoManager = new VideoTheaterManager();
     return () => {
       videoManager.destroy();
     };
-  }, []);
+  }, []);*/}
+
+  // State
+const [isDeployerOpen, setIsDeployerOpen] = useState(false);
+
+// Enhanced deploy handler
+const handleDeploy = (data: DeployerData) => {
+  console.log('Deployment Data:', data);
+  
+  if (data.mode === DeployMode.VIDEO_STAGE) {
+    console.log('Deploying to Video Stage');
+    // Video stage deployment is handled automatically by the core
+  } else if (data.mode === DeployMode.EMBED) {
+    console.log('Deploying to Embed Window');
+    // Embed deployment is handled automatically by the core
+  }
+
+  setIsDeployerOpen(false);
+};
+
+const handleCancel = () => {
+  console.log('Deployment cancelled');
+  setIsDeployerOpen(false);
+};
+
+
 
 
   // ========================================================================
@@ -491,16 +609,114 @@ const handleFullscreenPopupClose = () => {
   }
 };
 
+ // =========================================================================
+  // 1. Resume Playback
+  // =========================================================================
+  //
+  // onVideoSourceLoaded is declared first so every section below can safely
+  // reference it. Previously the user's local ordering caused TypeScript to
+  // report "used before declaration" because useCallback closures capture
+  // the binding at parse time in strict mode.
+  //
+  // Flow: loadVideoFile / drop → onVideoSourceLoaded(nativePath)
+  //   → primaryPlaybackTimelineController.setVideoSource(nativePath)
+  //     → canplay fires → initializeResumePlayback()
+  //       → reads JSON → sets currentTime → starts auto-save
+  // =========================================================================
+
+  const onVideoSourceLoaded = useCallback((nativePath: string) => {
+    primaryPlaybackTimelineController.setVideoSource(nativePath);
+    console.log('📼 Resume playback keyed to:', nativePath);
+  }, []);
+
+
+  
+  // =========================================================================
+  // 2. Open File
+  // =========================================================================
+  //
+  // Wraps handleOpenLocalFile (owned by open.file.import.ts) and passes
+  // onVideoSourceLoaded so resume is wired after the file is picked.
+  // This wrapper is what VideoSubSettings "Open Local File" row calls —
+  // onClick={() => handleOpenLocalFile()} in VideoSubSettings passes NO
+  // callback intentionally because VideoSubSettings has no access to
+  // onVideoSourceLoaded. Resume wiring from the settings row is handled
+  // by the drop/dialog paths that go through Playground.
+  // =========================================================================
+
+  const handleOpenFile = useCallback(() => {
+    handleOpenLocalFile(onVideoSourceLoaded);
+  }, [onVideoSourceLoaded]);
+
+  // =========================================================================
+  // 3. Drag-and-Drop
+  // =========================================================================
+
+  const handleDragOver = useCallback((e: React.DragEvent<HTMLDivElement>) => {
+    e.preventDefault();
+    e.stopPropagation();
+    e.dataTransfer.dropEffect = 'copy';
+  }, []);
+
+  const handleDrop = useCallback((e: React.DragEvent<HTMLDivElement>) => {
+    e.preventDefault();
+    e.stopPropagation();
+
+    const files = Array.from(e.dataTransfer.files);
+    const videoFile = files.find(f =>
+      /\.(mp4|mkv|mov|avi|webm|flv|ts|m4v|wmv|3gp)$/i.test(f.name)
+    );
+
+    if (!videoFile) {
+      console.warn('⚠️ Dropped file is not a supported video format');
+      return;
+    }
+
+    const video = videoRef.current;
+    if (!video) return;
+
+    const nativePath: string | undefined = (videoFile as any).path;
+    const blobUrl = URL.createObjectURL(videoFile);
+
+    video.src = blobUrl;
+    video.load();
+    video.play().catch(err => console.warn('⚠️ Auto-play blocked:', err));
+
+    if (nativePath) {
+      onVideoSourceLoaded(nativePath);
+      console.log('📂 Dropped file loaded:', videoFile.name);
+    } else {
+      console.warn('⚠️ No native path on dropped file — resume will not persist this session');
+    }
+  }, [onVideoSourceLoaded]);
+
+  // =========================================================================
+  // 4. Lifecycle
+  // =========================================================================
+
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+
+    const onError = (e: Event) => console.error('❌ Video element error:', e);
+    video.addEventListener('error', onError);
+
+    return () => {
+      video.removeEventListener('error', onError);
+      primaryPlaybackTimelineController.destroy();
+      resumePlaybackIndex.destroy();
+    };
+  }, []);
+
+
    // =========================Accessories Core Features======================
   // 1. Accessories Integration
   //=========================================================================
+  
   // ========================================================================
   // Video OCR
   // ========================================================================
   const [isSnapActive, setIsSnapActive] = useState(false);
-   // ========================================================================
-  // Video OCR
-  // ========================================================================
   const [isOCRVisible, setIsOCRVisible] = useState(false);
 
   // OPTIONAL: Automatically open when playground starts
@@ -509,6 +725,19 @@ const handleFullscreenPopupClose = () => {
   }, []);
 
   const toggleOCR = () => setIsOCRVisible(!isOCRVisible);
+
+  // ========================================================================
+  // 1. Recording
+  //=========================================================================
+
+  useEffect(() => {
+  initializeRecorderAccessories();
+}, []);
+
+   // ========================================================================
+  // 1. Video Filters
+  //=========================================================================
+   const [isFilterOpen, setIsFilterOpen] = useState(false);
 
   // =========================Extensions Core Features======================
   // 1. Extensions Integration
@@ -555,12 +784,164 @@ const handleFullscreenPopupClose = () => {
     }, []);
 
   // ========================================================================
+  // Playback Integration
+  // ========================================================================
+  const [playbackSettings, setPlaybackSettings] = useState<PlaybackSettings>({
+  disableCommon: false,
+  disableAccessories: false,
+  disableExtension: false,
+  disablePlaylist: false,
+});
+
+// ─── 3. Restore on Mount ──────────────────────────────────────────────────────
+//
+// If you persist settings (e.g., localStorage or a server profile),
+// rehydrate them here. applyPlaybackState() calls every enable/disable
+// function in one shot so the DOM reflects the saved state immediately.
+
+useEffect(() => {
+  applyPlaybackState(playbackSettings);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+}, []); // run once on mount
+
+  // ========================================================================
+  // Video link dragged dropper
+  // ========================================================================
+
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (containerRef.current && videoRef.current) {
+      try {
+        console.log("BlackVideo: Initializing YouTube Dropper...");
+        const handler = new YouTubeDragDropHandler(
+          containerRef.current, 
+          videoRef.current
+        );
+
+        // Cleanup on unmount
+        return () => handler.destroy();
+      } catch (err) {
+        console.error("BlackVideo: Dropper Init Failed", err);
+      }
+    }
+  }, []);
+
+  // ========================================================================
+  // Context-Menu
+  // ========================================================================
+  // Subscribe to playback controls visibility changes
+  useEffect(() => {
+    const unsubscribe = playbackControlsContextMenuManager.subscribe((visibility) => {
+      console.log('Playback controls visibility updated:', visibility);
+      
+      // Apply visibility changes to control elements
+      const controlElements = {
+        sprite: document.querySelector('.sprite-preview'),
+        heatmap: document.querySelector('.heatmap-indicator'),
+        timelineCounter: document.getElementById('videoTimelineDurationCounter'),
+        timelineDuration: document.getElementById('videoTimelineCurrentDurationTotal'),
+        previous: document.getElementById('previous-control'),
+        playPause: document.getElementById('pause-play-control'),
+        reset: document.getElementById('reload-control'),
+        loop: document.getElementById('loop-control'),
+        speaker: document.getElementById('volumeController'),
+        closedCaptions: document.getElementById('ccController'),
+        skips: document.getElementById('skipsController'),
+        playbackSpeed: document.getElementById('speedController'),
+        frameRate: document.getElementById('frameRateController'),
+        bitrate: document.getElementById('bitrateController'),
+        resolution: document.getElementById('resolution-controller'),
+        pictureInPicture: document.getElementById('pip-controller'),
+        aspectRatio: document.getElementById('aspect-ratio-controller'),
+        fullscreen: document.getElementById('fullscreen-controller'),
+      };
+
+      Object.entries(visibility).forEach(([key, visible]) => {
+        const element = controlElements[key as keyof typeof controlElements];
+        if (element) {
+          (element as HTMLElement).style.display = visible ? '' : 'none';
+        }
+      });
+    });
+
+    return () => unsubscribe();
+  }, []);
+
+  // Subscribe to custom playback visibility changes
+  useEffect(() => {
+    const unsubscribe = customPlaybackContextMenuManager.subscribe((visibility) => {
+      console.log('Custom playback visibility updated:', visibility);
+      
+      // Apply visibility changes to custom control elements
+      const customElements = {
+        skipIntroOutro: document.getElementById('skip-intro-outro'),
+        sleepTimer: document.getElementById('sleep-timer-util'),
+        ambient: document.getElementById('ambient-mode-util'),
+        flipVideo: document.getElementById('flip-video-util'),
+        save: document.getElementById('save-vid-util'),
+        screenCast: document.getElementById('screen-cast-util'),
+        share: document.getElementById('share-vid-util'),
+        reset: document.querySelector('.video-submenu .reset-btn'),
+        loop: document.querySelector('.video-submenu .loop-btn'),
+        previous: document.getElementById('video-submenu-prev'),
+        next: document.getElementById('video-submenu-next'),
+        playPause: document.querySelector('.video-submenu .playback-indicator'),
+      };
+
+      Object.entries(visibility).forEach(([key, visible]) => {
+        const element = customElements[key as keyof typeof customElements];
+        if (element) {
+          (element as HTMLElement).style.display = visible ? '' : 'none';
+        }
+      });
+    });
+
+    return () => unsubscribe();
+  }, []);
+
+  // Subscribe to accessories settings changes
+  useEffect(() => {
+    const unsubscribe = accessoriesContextMenuManager.subscribe((settings) => {
+      console.log('Accessories settings updated:', settings);
+      
+      // Apply visibility changes
+      const accessoryElements = {
+        linkDeployer: document.querySelector('.hexagon:nth-child(1)'),
+        aiChat: document.querySelector('.hexagon:nth-child(2)'),
+        filters: document.querySelector('.hexagon:nth-child(3)'),
+        magnifyingGlass: document.getElementById('magnifying-glass-placeholder'),
+        screenCapture: document.getElementById('screen-capture-placeholder'),
+        recorder: document.getElementById('recording-accessories'),
+        videoOCR: document.getElementById('video-ocr-accessories'),
+      };
+
+      Object.entries(settings.visibility).forEach(([key, visible]) => {
+        const element = accessoryElements[key as keyof typeof accessoryElements];
+        if (element) {
+          (element as HTMLElement).style.display = visible ? '' : 'none';
+        }
+      });
+
+      // Apply icon shape changes
+      const hexagonBar = document.getElementById('accessories-built-ins');
+      if (hexagonBar) {
+        hexagonBar.className = `${settings.iconShape}-bar`;
+      }
+    });
+
+    return () => unsubscribe();
+  }, []);
+
+
+  // ========================================================================
   // UI Rendering
   // ========================================================================
   return (
     <main className="Playground-Page" id="PlaygroundArsenal">
-      <div id="videoContainer" className="video-container">
-        <video id="VideoPlayer-TheaterStage" className="video-player-theater-stage video-js" poster="/media/poster.placeholder.png" aria-label="Theater Stage" data-setup='{}'>
+      <div ref={containerRef} id="videoContainer" className="video-container">
+        <video ref={videoRef} id="VideoPlayer-TheaterStage" className="video-player-theater-stage video-js" poster="/media/poster.placeholder.png" aria-label="Theater Stage" data-setup='{}'>
           <source id="VideoSource-Stream" className="video-source" src="/media/sample.mp4" type="video/mp4" />
           <track label="English" kind="subtitles" srcLang="en" src="" default />
           Your browser does not support the video tag.
@@ -569,6 +950,14 @@ const handleFullscreenPopupClose = () => {
         <div id="video-file-name" className="video-file-name tooltip"></div>
         <VideoControls videoId="VideoPlayer-TheaterStage" isVisible={false} videoDuration={0}/>
       </div>
+      {/* Sprite Thumbnail Preview Overlay */}
+        <SpriteThumbnail
+          spriteConfig={spriteConfig}
+          currentTime={thumbnailState.currentTime}
+          mouseX={thumbnailState.mouseX}
+          mouseY={thumbnailState.mouseY}
+          visible={thumbnailState.visible}
+        />
       <div id="videoElements" className="video-elements">
         <div id="videoFullPackPlaybackControls" className="controls-bar" role="group" aria-label="Video controls">
           <span id="videoTimelineDurationCounter" className="time">00:00:00</span>
@@ -654,9 +1043,9 @@ const handleFullscreenPopupClose = () => {
         </div>
         <div id="accessories-built-ins" className="hexagon-bar" aria-label="Accessories built-ins">
           {/*Accessories Built-ins*/}
-          <div className="hexagon" title="Deploy link to play">
+          <div className="hexagon" title="Deploy link to play" onClick={() => setIsDeployerOpen(true)}>
             <div id="accessories-control-btn-link-placeholder" className="hexagon-inner">
-              <i id="accessories-link-player-btn" className="accessories-link-player-btn action-toggle-icons">
+              <i id="accessories-link-player-btn" className="accessories-link-player-btn open-deployer-btn action-toggle-icons">
                 <img id="accessories-link-player-icon" className="accessories-link-player-icon accessories-group-icon-styles" src="/assets/common/link.png" alt="Deploy link to play" />
               </i>
             </div>
@@ -665,6 +1054,13 @@ const handleFullscreenPopupClose = () => {
             <div id="accessories-control-btn-ask-ai-placeholder" className="hexagon-inner">
               <i id="accessories-ask-ai-player-btn" className="accessories-ask-ai-player-btn action-toggle-icons">
                 <img id="accessories-ask-ai-player-icon" className="accessories-ask-ai-player-icon accessories-group-icon-styles" src="/assets/common/ai-ask.png" alt="Ask AI" />
+              </i>
+            </div>
+          </div>
+          <div className="hexagon" title="Video Filters" onClick={() => setIsFilterOpen(!isFilterOpen)} style={{ cursor: 'pointer' }}>
+            <div id="accessories-control-btn-video-filter-placeholder" className="hexagon-inner">
+              <i id="accessories-video-filter-player-btn" className="accessories-video-filter-player-btn open-deployer-btn action-toggle-icons">
+                <img id="accessories-video-filter-player-icon" className="accessories-video-filter-player-icon accessories-group-icon-styles" src="/assets/common/video-filters.png" alt="Video Filters" />
               </i>
             </div>
           </div>
@@ -758,6 +1154,14 @@ const handleFullscreenPopupClose = () => {
         </span>
       </div>
           </div>
+
+      {/* Context Menus */}
+      <PlaygroundCommonMainPlaybackContextMenu targetElementId="videoElements" />
+      <PlaygroundCustomPlaybackContextMenu targetElementId="video-submenu" />
+      <PlaygroundPlaybackAccessoriesContextMenu targetElementId="accessories-built-ins" />
+      <PlaygroundExtensionPlaybackContextMenu targetElementId="extension-built-ins" />
+      <PlaygroundVideoTheaterStageContextMenu targetElementId="videoContainer" />
+
         </div>
       </div>
       <SpeakerUI
@@ -810,7 +1214,21 @@ const handleFullscreenPopupClose = () => {
         isVisible={isFullscreenPopupVisible}
         onClose={handleFullscreenPopupClose}
         />
+
       {/*Accessories Popup Components*/}
+
+      {/* Render LinkDeployer UI */}
+      <LinkDeployerUI
+        isOpen={isDeployerOpen}
+        onClose={() => setIsDeployerOpen(false)}
+        config={{
+          titleText: 'Link Player Deployer',
+          urlPlaceholder: 'https://youtube.com/watch?v=... or any supported video URL',
+          fileTypes: ['.txt', '.json', '.md'],
+          onDeploy: handleDeploy,
+          onCancel: handleCancel
+        }}
+      />
 
       {/* Snapshot */}
       <SnapCaptureController 
@@ -822,6 +1240,12 @@ const handleFullscreenPopupClose = () => {
         isOpen={isOCRVisible} 
         onClose={() => setIsOCRVisible(false)} 
       />
+      {/* Video Filters */}
+      <VideoFilterEffectUI 
+        isOpen={isFilterOpen} 
+        onClose={() => setIsFilterOpen(false)} 
+      />
+
       {/* Extensions Area */}
       {/* Render all currently active popups */}
       {activeExtensions.map((ext) => (

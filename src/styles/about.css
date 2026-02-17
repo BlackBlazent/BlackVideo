@@ -1,5 +1,6 @@
 /* about.css */
 @import './global.css';
+@import './common.css';
 
 .About-Page {
   display: flex;
@@ -149,7 +150,12 @@
   overflow-y: auto;
   overflow-x: hidden;
 }
-
+/* ========== Safe space area for scroll heights ========== */
+.safeSpace {
+  max-width: var(--max-width-style);
+  height: var(--the-height-style);
+  margin-bottom: var(--margin-bottom-style);
+}
 /* ========== SECTIONS ========== */
 .about-section {
   margin-bottom: 80px;

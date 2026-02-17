@@ -1,0 +1,418 @@
+/*
+ * Copyright (c) 2026 BlackVideo (Zephyra)
+ * All Rights Reserved.
+ */
+
+.recorder-controls-overlay {
+    position: fixed;
+    z-index: 9999;
+    background: linear-gradient(135deg, rgba(18, 18, 18, 0.98), rgba(10, 10, 12, 0.98));
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 16px;
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.6), 0 0 1px rgba(255, 255, 255, 0.1);
+    overflow: hidden;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+    user-select: none;
+}
+
+.recorder-controls-panel {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+
+.controls-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 16px;
+    background: rgba(255, 255, 255, 0.03);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.controls-header h3 {
+    color: #efefef;
+    margin: 0;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+}
+
+.header-actions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.drag-handle-icon {
+    color: rgba(255, 255, 255, 0.3);
+    cursor: grab;
+}
+
+.close-btn-minimal {
+    background: none;
+    border: none;
+    color: rgba(255, 255, 255, 0.4);
+    cursor: pointer;
+    padding: 4px;
+    border-radius: 6px;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.close-btn-minimal:hover {
+    color: #f4f4f5;
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.preview-section {
+    padding: 20px 16px;
+    background: linear-gradient(to bottom, transparent, rgba(0, 0, 0, 0.2));
+}
+
+.video-status {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 12px;
+}
+
+.status-icon-wrapper {
+    width: 48px;
+    height: 48px;
+    background: rgba(59, 130, 246, 0.15);
+    border: 2px solid rgba(59, 130, 246, 0.3);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #3b82f6;
+    transition: all 0.3s ease;
+}
+
+.status-icon-wrapper:hover {
+    background: rgba(59, 130, 246, 0.2);
+    border-color: rgba(59, 130, 246, 0.4);
+    transform: scale(1.05);
+}
+
+.status-text {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.video-status p {
+    margin: 0;
+    font-size: 14px;
+    color: #e5e7eb;
+    line-height: 1.4;
+    font-weight: 500;
+}
+
+.video-status small {
+    color: #9ca3af;
+    font-size: 12px;
+}
+
+/* Dual recording indicator */
+.dual-recording-indicator {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    margin-top: 12px;
+    padding: 10px;
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.dual-source {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    color: #9ca3af;
+    font-size: 12px;
+}
+
+.dual-plus {
+    color: #3b82f6;
+    font-weight: 700;
+    font-size: 14px;
+}
+
+.recording-controls {
+    padding: 16px;
+    background: rgba(0, 0, 0, 0.2);
+}
+
+.recorder-timer-display {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 18px;
+    padding: 12px;
+    background: rgba(0, 0, 0, 0.4);
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.recorder-timer-display > div:first-child {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.recording-indicator {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: #4b5563;
+    transition: all 0.3s ease;
+}
+
+.recording-indicator.active {
+    background: #ef4444;
+    box-shadow: 0 0 12px rgba(239, 68, 68, 0.6), 0 0 24px rgba(239, 68, 68, 0.3);
+    animation: pulse 1.5s infinite;
+}
+
+.recorder-time-counter {
+    font-family: 'JetBrains Mono', 'Courier New', monospace;
+    font-size: 24px;
+    font-weight: 700;
+    color: #ffffff;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.paused-label {
+    font-size: 10px;
+    font-weight: 800;
+    color: #f59e0b;
+    border: 1px solid #f59e0b;
+    padding: 3px 8px;
+    border-radius: 4px;
+    background: rgba(245, 158, 11, 0.1);
+    letter-spacing: 0.5px;
+}
+
+/* Duration bar for camera/dual recording */
+.duration-bar-container {
+    width: 100%;
+    height: 4px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 2px;
+    overflow: hidden;
+    position: relative;
+}
+
+.duration-bar {
+    height: 100%;
+    background: linear-gradient(90deg, #3b82f6, #8b5cf6);
+    border-radius: 2px;
+    transition: width 0.3s ease;
+    box-shadow: 0 0 8px rgba(59, 130, 246, 0.4);
+}
+
+.control-buttons {
+    display: flex;
+    gap: 10px;
+    justify-content: stretch;
+}
+
+.control-buttons button {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 11px 16px;
+    border-radius: 10px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    border: none;
+    position: relative;
+    overflow: hidden;
+}
+
+.control-buttons button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), transparent);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.control-buttons button:hover::before {
+    opacity: 1;
+}
+
+.control-buttons button:active {
+    transform: scale(0.96);
+}
+
+.start-btn { 
+    background: linear-gradient(135deg, #10b981, #059669); 
+    color: white; 
+    box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+}
+
+.start-btn:hover { 
+    background: linear-gradient(135deg, #059669, #047857); 
+    box-shadow: 0 6px 16px rgba(16, 185, 129, 0.4);
+}
+
+.start-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.pause-btn { 
+    background: linear-gradient(135deg, #374151, #4b5563); 
+    color: white; 
+}
+
+.pause-btn:hover { 
+    background: linear-gradient(135deg, #4b5563, #6b7280); 
+}
+
+.stop-btn { 
+    background: linear-gradient(135deg, #ef4444, #dc2626); 
+    color: white; 
+    box-shadow: 0 4px 12px rgba(239, 68, 68, 0.3);
+}
+
+.stop-btn:hover { 
+    background: linear-gradient(135deg, #dc2626, #b91c1c); 
+    box-shadow: 0 6px 16px rgba(239, 68, 68, 0.4);
+}
+
+.switch-camera-btn {
+    background: rgba(59, 130, 246, 0.12);
+    border: 1px solid rgba(59, 130, 246, 0.3) !important;
+    color: #60a5fa;
+    min-width: auto;
+    flex: 0 0 auto;
+}
+
+.switch-camera-btn:hover {
+    background: rgba(59, 130, 246, 0.2);
+    border-color: rgba(59, 130, 246, 0.4) !important;
+}
+
+.switch-camera-btn:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+}
+
+.recording-info {
+    padding: 12px 16px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    background: rgba(0, 0, 0, 0.15);
+}
+
+.recording-info.three-cols {
+    grid-template-columns: 1fr 1fr 1fr;
+}
+
+.info-row {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+}
+
+.info-label {
+    font-size: 10px;
+    color: #9ca3af;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-weight: 600;
+}
+
+.info-value {
+    font-size: 12px;
+    color: #d1d5db;
+    font-weight: 500;
+}
+
+.error-message {
+    background: rgba(239, 68, 68, 0.15);
+    color: #fca5a5;
+    padding: 10px 12px;
+    margin: 12px 16px 0;
+    font-size: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-radius: 8px;
+    border: 1px solid rgba(239, 68, 68, 0.3);
+    animation: slideDown 0.3s ease-out;
+}
+
+.error-message button {
+    cursor: pointer;
+    transition: opacity 0.2s ease;
+}
+
+.error-message button:hover {
+    opacity: 0.7;
+}
+
+.resize-handle {
+    position: absolute;
+    bottom: 6px;
+    right: 6px;
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: nwse-resize;
+    color: rgba(255, 255, 255, 0.25);
+    transition: all 0.2s ease;
+    border-radius: 4px;
+    background: rgba(0, 0, 0, 0.2);
+}
+
+.resize-handle:hover {
+    color: rgba(255, 255, 255, 0.5);
+    background: rgba(255, 255, 255, 0.05);
+}
+
+@keyframes pulse {
+    0%, 100% { 
+        opacity: 1; 
+        transform: scale(1);
+    }
+    50% { 
+        opacity: 0.5; 
+        transform: scale(0.95);
+    }
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-8px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

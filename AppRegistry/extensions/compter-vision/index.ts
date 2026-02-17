@@ -1,4 +1,3 @@
-// Entry point | Javscript/Typescript
 /*
  * Copyright (c) 2026 BlackVideo (Zephyra)
  * All Rights Reserved.
@@ -8,3 +7,5 @@
  * in whole or in part, is strictly prohibited without prior written permission
  * from BlackVideo.
  */
+
+// Entry point | Javscript/Typescript
