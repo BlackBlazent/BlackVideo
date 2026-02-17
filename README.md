@@ -5,20 +5,133 @@
 The first official exclusive release of **BlackVideo** is scheduled for **June 12, 2026**  
 Version: **1.1.01.001.0001** | **1.0.0**
 
-> Top countries were ***BlackVideo*** will be released.
-* [<img style="width: 15px; height: 15px;" src="./public/assets/locales/us.png"/>]()  **United States** [<img style="width: 9px; height: 9px;" src="./public/assets/others/fullscreen.png"/>](https://www.us.com)
-* [<img style="width: 15px; height: 15px;" src="./public/assets/locales/japan.png"/>]() **Japan** [<img style="width: 9px; height: 9px;" src="./public/assets/others/fullscreen.png"/>](https://www.us.com)
-* [<img style="width: 15px; height: 15px;" src="./public/assets/locales/germany.png"/>]() **Germany** [<img style="width: 9px; height: 9px;" src="./public/assets/others/fullscreen.png"/>](https://www.us.com)
-* [<img style="width: 15px; height: 15px;" src="./public/assets/locales/south-korea.png"/>]() **South Korea** [<img style="width: 9px; height: 9px;" src="./public/assets/others/fullscreen.png"/>](https://www.us.com)
-* [<img style="width: 15px; height: 15px;" src="./public/assets/locales/netherlands.png"/>]() **Netherlands** [<img style="width: 9px; height: 9px;" src="./public/assets/others/fullscreen.png"/>](https://www.us.com)
-* [<img style="width: 15px; height: 15px;" src="./public/assets/locales/sweden.png"/>]() **Sweden** [<img style="width: 9px; height: 9px;" src="./public/assets/others/fullscreen.png"/>](https://www.us.com)
-* [<img style="width: 15px; height: 15px;" src="./public/assets/locales/finland.png"/>]() **Finland** [<img style="width: 9px; height: 9px;" src="./public/assets/others/fullscreen.png"/>](https://www.us.com)
-* [<img style="width: 15px; height: 15px;" src="./public/assets/locales/canada.png"/>]() **Canada** [<img style="width: 9px; height: 9px;" src="./public/assets/others/fullscreen.png"/>](https://www.us.com)
-* [<img style="width: 15px; height: 15px;" src="./public/assets/locales/singapore.png"/>]() **Singapore** [<img style="width: 9px; height: 9px;" src="./public/assets/others/fullscreen.png"/>](https://www.us.com)
-* [<img style="width: 15px; height: 15px;" src="./public/assets/locales/estonia.png"/>]() **Estonia** [<img style="width: 9px; height: 9px;" src="./public/assets/others/fullscreen.png"/>](https://www.us.com)
-* [<img style="width: 15px; height: 15px;" src="./public/assets/locales/russia.png"/>]() **Russia** [<img style="width: 9px; height: 9px;" src="./public/assets/others/fullscreen.png"/>](https://www.us.com)
-* [<img style="width: 15px; height: 15px;" src="./public/assets/locales/armenia.png"/>]() **Armenia** [<img style="width: 9px; height: 9px;" src="./public/assets/others/fullscreen.png"/>](https://www.us.com)
-* [<img style="width: 15px; height: 15px;" src="./public/assets/locales/india.png"/>]() **India** [<img style="width: 9px; height: 9px;" src="./public/assets/others/fullscreen.png"/>](https://www.us.com)
+<div align="center">
+
+<strong>Top countries where <em>BlackVideo</em> will be released.</strong>
+
+<br/><br/>
+
+<table>
+<tr>
+<td align="center">
+<img width="15" height="15" src="./public/assets/locales/us.png"/><br/>
+<strong>United States</strong><br/>
+<a href="https://www.us.com">
+<img width="9" height="9" src="./public/assets/others/fullscreen.png"/>
+</a>
+</td>
+
+<td align="center">
+<img width="15" height="15" src="./public/assets/locales/japan.png"/><br/>
+<strong>Japan</strong><br/>
+<a href="https://www.us.com">
+<img width="9" height="9" src="./public/assets/others/fullscreen.png"/>
+</a>
+</td>
+
+<td align="center">
+<img width="15" height="15" src="./public/assets/locales/germany.png"/><br/>
+<strong>Germany</strong><br/>
+<a href="https://www.us.com">
+<img width="9" height="9" src="./public/assets/others/fullscreen.png"/>
+</a>
+</td>
+
+<td align="center">
+<img width="15" height="15" src="./public/assets/locales/south-korea.png"/><br/>
+<strong>South Korea</strong><br/>
+<a href="https://www.us.com">
+<img width="9" height="9" src="./public/assets/others/fullscreen.png"/>
+</a>
+</td>
+</tr>
+
+<tr>
+<td align="center">
+<img width="15" height="15" src="./public/assets/locales/netherlands.png"/><br/>
+<strong>Netherlands</strong><br/>
+<a href="https://www.us.com">
+<img width="9" height="9" src="./public/assets/others/fullscreen.png"/>
+</a>
+</td>
+
+<td align="center">
+<img width="15" height="15" src="./public/assets/locales/sweden.png"/><br/>
+<strong>Sweden</strong><br/>
+<a href="https://www.us.com">
+<img width="9" height="9" src="./public/assets/others/fullscreen.png"/>
+</a>
+</td>
+
+<td align="center">
+<img width="15" height="15" src="./public/assets/locales/finland.png"/><br/>
+<strong>Finland</strong><br/>
+<a href="https://www.us.com">
+<img width="9" height="9" src="./public/assets/others/fullscreen.png"/>
+</a>
+</td>
+
+<td align="center">
+<img width="15" height="15" src="./public/assets/locales/canada.png"/><br/>
+<strong>Canada</strong><br/>
+<a href="https://www.us.com">
+<img width="9" height="9" src="./public/assets/others/fullscreen.png"/>
+</a>
+</td>
+</tr>
+
+<tr>
+<td align="center">
+<img width="15" height="15" src="./public/assets/locales/singapore.png"/><br/>
+<strong>Singapore</strong><br/>
+<a href="https://www.us.com">
+<img width="9" height="9" src="./public/assets/others/fullscreen.png"/>
+</a>
+</td>
+
+<td align="center">
+<img width="15" height="15" src="./public/assets/locales/estonia.png"/><br/>
+<strong>Estonia</strong><br/>
+<a href="https://www.us.com">
+<img width="9" height="9" src="./public/assets/others/fullscreen.png"/>
+</a>
+</td>
+
+<td align="center">
+<img width="15" height="15" src="./public/assets/locales/russia.png"/><br/>
+<strong>Russia</strong><br/>
+<a href="https://www.us.com">
+<img width="9" height="9" src="./public/assets/others/fullscreen.png"/>
+</a>
+</td>
+
+<td align="center">
+<img width="15" height="15" src="./public/assets/locales/armenia.png"/><br/>
+<strong>Armenia</strong><br/>
+<a href="https://www.us.com">
+<img width="9" height="9" src="./public/assets/others/fullscreen.png"/>
+</a>
+</td>
+</tr>
+
+<tr>
+<td align="center">
+<img width="15" height="15" src="./public/assets/locales/india.png"/><br/>
+<strong>India</strong><br/>
+<a href="https://www.us.com">
+<img width="9" height="9" src="./public/assets/others/fullscreen.png"/>
+</a>
+</td>
+
+<td></td>
+<td></td>
+<td></td>
+</tr>
+
+</table>
+
+</div>
+
 
 If you’d like to access early in the said date, you can join the [waitlist](https://blackvideo-centric-site.onrender.com/) on the BlackVideo website, and we let you know in that time.
 
@@ -63,12 +176,16 @@ You can also download project files from this repository under the
 
 ---
 
+<p align="center">
 
-| Field               | Value                    |
-|---------------------|--------------------------|
-| Date Created        | 2023-12-23T08:55:00      |
-| Initial Release     | 2026-05-11               |
-| Date Published      | 2026-12-06               |
+| Field           | Value               |
+|:---------------:|:-------------------:|
+| Date Created    | 2023-12-23T08:55:00 |
+| Initial Release | 2026-05-11          |
+| Date Published  | 2026-12-06          |
+
+</p>
+
 
 ### Extensions
 > This is the offical BlackVideo Extensions System.
