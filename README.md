@@ -142,8 +142,8 @@ You can also download project files from this repository under the
 
 ---
 
-<p style="font-size: 90px; font-weight: bold; color:#000101; justify-content: center; align-items: center;">Black<span style="font-size: 90px; font-weight: bold; color:#0bdc53; justify-content: center; align-items: center;">Video</span></p>
- <h5><i>A next-gen video player with advanced playback tools and a modular extension system—enabling intelligent utilities for a fully customizable viewing experience.</i></h5>
+# BlackVideo
+<h5><i>A next-gen video player with advanced playback tools and a modular extension system—enabling intelligent utilities for a fully customizable viewing experience.</i></h5>
 
 
 <!--
@@ -176,7 +176,7 @@ You can also download project files from this repository under the
 
 ---
 
-<p align="center">
+<div align="center">
 
 | Field           | Value               |
 |:---------------:|:-------------------:|
@@ -184,7 +184,7 @@ You can also download project files from this repository under the
 | Initial Release | 2026-05-11          |
 | Date Published  | 2026-12-06          |
 
-</p>
+</div>
 
 
 ### Extensions
@@ -257,6 +257,125 @@ You can also download project files from this repository under the
 ## Documentation
 
 [Documentation](./__docs__/BlackVideo.Zephyra.Documentation.md)
+
+
+## Features
+
+Here are some of the key features of **BlackVideo**.
+
+---
+
+<div id="feature-1" class="group">
+
+### AI-Assisted Playback
+
+<img src="https://github.com/BlackBlazent/BlackBlazentGithubAssets/blob/main/Public/BlackVideo/assets/banner/ai-assited.png?raw=true" />
+
+<p><i>Zephyra</i> AI Assistant enhances your video experience with intelligent playback features, smart recommendations, and personalized assistance tailored to your viewing habits.</p>
+
+</div>
+
+> !
+
+---
+
+<div id="feature-2" class="group">
+
+### Advanced Codec Support
+
+<img src="https://github.com/BlackBlazent/BlackBlazentGithubAssets/blob/main/Public/BlackVideo/assets/banner/codecs.png?raw=true" />
+
+<p>BlackVideo prioritizes widely adopted industry-standard codecs while providing extensive support for multiple modern and legacy codec formats.</p>
+
+</div>
+
+> !
+
+---
+
+<div id="feature-3" class="group">
+
+### Wide Format Compatibility
+
+<img src="https://github.com/BlackBlazent/BlackBlazentGithubAssets/blob/main/Public/BlackVideo/assets/banner/formtas.png?raw=true" />
+
+<p>Supports market-relevant and high-value formats while maintaining broad compatibility with a wide range of video file types.</p>
+
+</div>
+
+> !
+
+---
+
+<div id="feature-4" class="group">
+
+### Lightweight Player
+
+<img src="https://github.com/BlackBlazent/BlackBlazentGithubAssets/blob/main/Public/BlackVideo/assets/banner/lightweight.png?raw=true" />
+
+<p>A streamlined and efficient player designed for smooth performance, allowing you to enjoy your favorite videos without distractions or unnecessary resource usage.</p>
+
+</div>
+
+> !
+
+---
+
+<div id="feature-5" class="group">
+
+### Theater Stage
+
+<img src="https://github.com/BlackBlazent/BlackBlazentGithubAssets/blob/main/Public/BlackVideo/assets/banner/playground.png?raw=true" />
+
+<p>Experience immersive playback in Theater Stage, where you can interact with advanced playback controls and explore powerful viewing features.</p>
+
+</div>
+
+> !
+
+---
+
+<div id="feature-6" class="group">
+
+### Smart Library Management
+
+<img src="https://github.com/BlackBlazent/BlackBlazentGithubAssets/blob/main/Public/BlackVideo/assets/banner/smartlibrary.png?raw=true" />
+
+<p>An intelligent library management system that helps you organize, categorize, and manage your video collection efficiently and effectively.</p>
+
+</div>
+
+> !
+
+---
+
+<div id="feature-7" class="group">
+
+### Extension System Playback
+
+<img src="https://github.com/BlackBlazent/BlackBlazentGithubAssets/blob/main/Public/BlackVideo/assets/banner/extension-systems.png?raw=true" />
+
+<p>The BlackVideo Extension System enables enhanced playback through modular extensions, allowing users to expand functionality and customize their viewing experience.</p>
+
+</div>
+
+> !
+
+---
+
+<div id="feature-8" class="group">
+
+### Marketplace
+
+<img src="https://github.com/BlackBlazent/BlackBlazentGithubAssets/blob/main/Public/BlackVideo/assets/banner/marketplace.png?raw=true" />
+
+<p>The BlackVideo Marketplace allows users to discover, install, and manage extensions, themes, and additional features to further enhance their experience.</p>
+
+</div>
+
+> !
+
+---
 
 ## Download  
 Download **BlackVideo** only from the source provided below. For your safety, avoid downloading from untrusted websites.
