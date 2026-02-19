@@ -1,3 +1,5 @@
+[![Visitors](https://api.visitorbadge.io/api/combined?path=https%3A%2F%2Fgithub.com%2FBlackBlazent%2FBlackVideo&label=VISITORS&countColor=%2337d67a&style=plastic&labelStyle=upper)](https://visitorbadge.io/status?path=https%3A%2F%2Fgithub.com%2FBlackBlazent%2FBlackVideo)
+
 ![Logo](https://github.com/BlackBlazent/BlackBlazentGithubAssets/blob/main/Public/BlackVideo/assets/banner/BlackVideo.gif?raw=true)
 
 > # Announcement
@@ -143,6 +145,7 @@ You can also download project files from this repository under the
 ---
 
 # BlackVideo
+
 <h5><i>A next-gen video player with advanced playback tools and a modular extension system—enabling intelligent utilities for a fully customizable viewing experience.</i></h5>
 
 
