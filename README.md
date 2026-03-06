@@ -189,6 +189,10 @@ You can also download project files from this repository under the
 
 </div>
 
+> **!Important**
+
+Utilities of BlackVideo
+- [blackvideo-mini-player](https://github.com/BlackBlazent/blackvideo-mini-player.git): An optional standalone side-support CLI video player for BlackVideo. 
 
 ### Extensions
 > This is the offical BlackVideo Extensions System.
