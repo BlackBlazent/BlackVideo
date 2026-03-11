@@ -7,18 +7,20 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 src-tauri/bin/**
+.env
 
 node_modules
 build/launch_blackvideo_dev
 dist
 __docs__.zip
 src/backup/
+task/
 documentaion
+errors/
 samples
 __docs__
 Website
 Versions
-.env
 # Node modules
 functions/node_modules/
 # Tauri binaries
@@ -55,3 +57,6 @@ desktop.ini
 *.njsproj
 *.sln
 *.sw?
+
+# EV files
+.ev
