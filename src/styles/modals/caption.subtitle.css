@@ -1,0 +1,701 @@
+/*
+ * Copyright (c) 2026 BlackVideo (Zephyra)
+ * All Rights Reserved.
+ *
+ * caption.subtitle.ui.css
+ *
+ * All styles for CaptionSubtitleUI component.
+ * Prefixed "csui-" to prevent global collisions.
+ * Zero inline styles live in the TSX file — everything is here.
+ */
+
+/* ─────────────────────────────────────────────────────────────
+   Root popup container
+───────────────────────────────────────────────────────────── */
+
+.csui-popup {
+  position: fixed;
+  z-index: 9999;
+  background-color: #111214;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.7),
+    0 0 0 1px rgba(255, 255, 255, 0.04);
+  color: #e2e2e2;
+  font-family: "Segoe UI", system-ui, Arial, sans-serif;
+  font-size: 12px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  min-width: 300px;
+  min-height: 400px;
+  user-select: none;
+}
+
+/* ─────────────────────────────────────────────────────────────
+   Header / drag bar
+───────────────────────────────────────────────────────────── */
+
+.csui-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 12px 10px 10px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  cursor: grab;
+  background: #17191c;
+  border-radius: 12px 12px 0 0;
+  flex-shrink: 0;
+}
+
+.csui-header:active {
+  cursor: grabbing;
+}
+
+.csui-header-left {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.csui-grip {
+  color: rgba(255, 255, 255, 0.3);
+  flex-shrink: 0;
+}
+
+.csui-title {
+  font-size: 13px;
+  font-weight: 600;
+  color: #f0f0f0;
+  letter-spacing: 0.01em;
+}
+
+.csui-close {
+  background: none;
+  border: none;
+  color: rgba(255, 255, 255, 0.4);
+  cursor: pointer;
+  padding: 2px;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  transition: color 0.15s, background 0.15s;
+  flex-shrink: 0;
+}
+
+.csui-close:hover {
+  color: #ff5a5a;
+  background: rgba(255, 90, 90, 0.12);
+}
+
+/* ─────────────────────────────────────────────────────────────
+   Online / offline badge
+───────────────────────────────────────────────────────────── */
+
+.csui-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2px 7px;
+  border-radius: 20px;
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.csui-badge--online {
+  background: rgba(34, 197, 94, 0.15);
+  color: #22c55e;
+  border: 1px solid rgba(34, 197, 94, 0.3);
+}
+
+.csui-badge--offline {
+  background: rgba(245, 158, 11, 0.15);
+  color: #f59e0b;
+  border: 1px solid rgba(245, 158, 11, 0.3);
+}
+
+/* ─────────────────────────────────────────────────────────────
+   Progress bar
+───────────────────────────────────────────────────────────── */
+
+.csui-progress-wrap {
+  padding: 8px 12px;
+  background: #0f1012;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  flex-shrink: 0;
+  transition: all 0.2s;
+}
+
+.csui-progress-wrap--running {
+  border-bottom-color: rgba(59, 130, 246, 0.2);
+}
+
+.csui-progress-wrap--done {
+  border-bottom-color: rgba(34, 197, 94, 0.2);
+}
+
+.csui-progress-wrap--error {
+  border-bottom-color: rgba(239, 68, 68, 0.3);
+}
+
+.csui-progress-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 6px;
+}
+
+.csui-progress-stage {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.csui-progress-pct {
+  font-size: 11px;
+  font-weight: 700;
+  color: #3b82f6;
+  font-variant-numeric: tabular-nums;
+}
+
+.csui-progress-bar-track {
+  height: 4px;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.csui-progress-bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #3b82f6, #60a5fa);
+  border-radius: 2px;
+  transition: width 0.3s ease;
+}
+
+.csui-progress-bar-fill--done {
+  background: linear-gradient(90deg, #22c55e, #4ade80);
+}
+
+.csui-progress-error-msg {
+  margin: 4px 0 0;
+  font-size: 10px;
+  color: #ef4444;
+  line-height: 1.4;
+  word-break: break-word;
+}
+
+.csui-icon-error { color: #ef4444; }
+.csui-icon-done  { color: #22c55e; }
+
+/* Spinning animation */
+@keyframes csui-rotate {
+  to { transform: rotate(360deg); }
+}
+
+.csui-spin {
+  animation: csui-rotate 0.8s linear infinite;
+  display: inline-block;
+}
+
+/* ─────────────────────────────────────────────────────────────
+   Tabs
+───────────────────────────────────────────────────────────── */
+
+.csui-tabs {
+  display: flex;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  background: #15171a;
+  flex-shrink: 0;
+}
+
+.csui-tab {
+  flex: 1;
+  padding: 9px 6px;
+  background: none;
+  border: none;
+  border-bottom: 2px solid transparent;
+  color: rgba(255, 255, 255, 0.4);
+  cursor: pointer;
+  font-size: 11px;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  transition: color 0.15s, border-color 0.15s, background 0.15s;
+  margin-bottom: -1px;
+}
+
+.csui-tab:hover {
+  color: rgba(255, 255, 255, 0.75);
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.csui-tab--active {
+  color: #3b82f6;
+  border-bottom-color: #3b82f6;
+  background: rgba(59, 130, 246, 0.06);
+}
+
+/* ─────────────────────────────────────────────────────────────
+   Body / scroll area
+───────────────────────────────────────────────────────────── */
+
+.csui-body {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.12) transparent;
+}
+
+.csui-body::-webkit-scrollbar {
+  width: 4px;
+}
+
+.csui-body::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.csui-body::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.12);
+  border-radius: 2px;
+}
+
+.csui-section-wrap {
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.csui-section {
+  padding: 8px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.csui-divider {
+  height: 1px;
+  background: rgba(255, 255, 255, 0.06);
+  margin: 4px 0;
+}
+
+/* ─────────────────────────────────────────────────────────────
+   Labels
+───────────────────────────────────────────────────────────── */
+
+.csui-label {
+  font-size: 11px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.55);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.csui-label--meta {
+  color: rgba(255, 255, 255, 0.45);
+}
+
+.csui-sublabel {
+  font-size: 10px;
+  color: rgba(255, 255, 255, 0.4);
+  display: block;
+  margin-bottom: 4px;
+  font-weight: 500;
+}
+
+.csui-hint {
+  font-weight: 400;
+  font-size: 10px;
+  color: rgba(255, 255, 255, 0.3);
+  text-transform: none;
+  letter-spacing: 0;
+}
+
+/* ─────────────────────────────────────────────────────────────
+   Inputs
+───────────────────────────────────────────────────────────── */
+
+.csui-input {
+  background: #1e2124;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 6px;
+  padding: 7px 10px;
+  color: #e2e2e2;
+  font-size: 12px;
+  outline: none;
+  width: 100%;
+  box-sizing: border-box;
+  transition: border-color 0.15s;
+}
+
+.csui-input:focus {
+  border-color: rgba(59, 130, 246, 0.5);
+  background: #1a1d21;
+}
+
+.csui-select {
+  background: #1e2124;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 6px;
+  padding: 7px 10px;
+  color: #e2e2e2;
+  font-size: 12px;
+  outline: none;
+  width: 100%;
+  box-sizing: border-box;
+  cursor: pointer;
+  appearance: auto;
+  transition: border-color 0.15s;
+}
+
+.csui-select:focus {
+  border-color: rgba(59, 130, 246, 0.5);
+}
+
+.csui-range {
+  width: 100%;
+  height: 4px;
+  appearance: auto;
+  accent-color: #3b82f6;
+  cursor: pointer;
+  border-radius: 2px;
+}
+
+/* ─────────────────────────────────────────────────────────────
+   Buttons
+───────────────────────────────────────────────────────────── */
+
+.csui-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  width: 100%;
+  padding: 9px 12px;
+  border: none;
+  border-radius: 7px;
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: 600;
+  transition: background 0.15s, transform 0.1s, opacity 0.15s;
+  letter-spacing: 0.01em;
+}
+
+.csui-btn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+  transform: none !important;
+}
+
+.csui-btn:not(:disabled):active {
+  transform: scale(0.97);
+}
+
+/* Primary — blue */
+.csui-btn--primary {
+  background: #3b82f6;
+  color: #fff;
+}
+
+.csui-btn--primary:not(:disabled):hover {
+  background: #2563eb;
+}
+
+/* Secondary — outline blue */
+.csui-btn--secondary {
+  background: rgba(59, 130, 246, 0.12);
+  color: #60a5fa;
+  border: 1px solid rgba(59, 130, 246, 0.3);
+}
+
+.csui-btn--secondary:not(:disabled):hover {
+  background: rgba(59, 130, 246, 0.2);
+}
+
+/* Tertiary — subtle */
+.csui-btn--tertiary {
+  background: rgba(255, 255, 255, 0.06);
+  color: rgba(255, 255, 255, 0.75);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.csui-btn--tertiary:not(:disabled):hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+/* Upload — green */
+.csui-btn--upload {
+  background: rgba(34, 197, 94, 0.12);
+  color: #4ade80;
+  border: 1px solid rgba(34, 197, 94, 0.25);
+}
+
+.csui-btn--upload:not(:disabled):hover {
+  background: rgba(34, 197, 94, 0.2);
+}
+
+/* Button group (sizing presets, style variants) */
+.csui-btn-group {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.csui-opt-btn {
+  padding: 5px 10px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 5px;
+  color: rgba(255, 255, 255, 0.55);
+  cursor: pointer;
+  font-size: 11px;
+  transition: background 0.12s, border-color 0.12s, color 0.12s;
+}
+
+.csui-opt-btn:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.csui-opt-btn--active {
+  background: rgba(59, 130, 246, 0.18);
+  border-color: rgba(59, 130, 246, 0.5);
+  color: #60a5fa;
+}
+
+/* ─────────────────────────────────────────────────────────────
+   Active track strip
+───────────────────────────────────────────────────────────── */
+
+.csui-active-track {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(34, 197, 94, 0.08);
+  border: 1px solid rgba(34, 197, 94, 0.2);
+  border-radius: 6px;
+  padding: 6px 10px;
+  color: #4ade80;
+  font-size: 11px;
+  line-height: 1.4;
+  flex-wrap: wrap;
+}
+
+.csui-active-track span {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.csui-clear-btn {
+  background: rgba(239, 68, 68, 0.15);
+  border: 1px solid rgba(239, 68, 68, 0.3);
+  color: #f87171;
+  border-radius: 4px;
+  padding: 2px 8px;
+  font-size: 10px;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: background 0.12s;
+}
+
+.csui-clear-btn:hover {
+  background: rgba(239, 68, 68, 0.25);
+}
+
+/* ─────────────────────────────────────────────────────────────
+   Warning text
+───────────────────────────────────────────────────────────── */
+
+.csui-warn {
+  margin: 0;
+  font-size: 10px;
+  color: #f59e0b;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  line-height: 1.4;
+}
+
+/* ─────────────────────────────────────────────────────────────
+   Color swatches
+───────────────────────────────────────────────────────────── */
+
+.csui-color-row {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.csui-swatch {
+  width: 22px;
+  height: 22px;
+  border-radius: 5px;
+  cursor: pointer;
+  border: 2px solid transparent;
+  transition: border-color 0.12s, transform 0.1s;
+  flex-shrink: 0;
+}
+
+.csui-swatch:hover {
+  transform: scale(1.15);
+}
+
+.csui-swatch--sel {
+  border-color: #fff !important;
+  box-shadow: 0 0 0 1px rgba(255,255,255,0.3);
+}
+
+.csui-swatch--trans {
+  background-image:
+    linear-gradient(45deg, #666 25%, transparent 25%),
+    linear-gradient(-45deg, #666 25%, transparent 25%),
+    linear-gradient(45deg, transparent 75%, #666 75%),
+    linear-gradient(-45deg, transparent 75%, #666 75%) !important;
+  background-size: 6px 6px !important;
+  background-position: 0 0, 0 3px, 3px -3px, -3px 0 !important;
+  background-color: #333 !important;
+}
+
+.csui-color-pick {
+  width: 26px;
+  height: 22px;
+  padding: 0;
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: 5px;
+  cursor: pointer;
+  background: none;
+  overflow: hidden;
+}
+
+/* ─────────────────────────────────────────────────────────────
+   Translate row
+───────────────────────────────────────────────────────────── */
+
+.csui-row2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+
+.csui-provider-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+  color: rgba(255,255,255,0.4);
+  padding: 6px 8px;
+  background: rgba(255,255,255,0.03);
+  border-radius: 5px;
+  border: 1px solid rgba(255,255,255,0.06);
+}
+
+/* ─────────────────────────────────────────────────────────────
+   Live preview box
+───────────────────────────────────────────────────────────── */
+
+.csui-preview {
+  text-align: center;
+  padding: 12px 14px;
+  border-radius: 6px;
+  border: 1px solid rgba(255,255,255,0.08);
+  background: #000;
+  line-height: 1.5;
+  word-break: break-word;
+  min-height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-shadow: 1px 1px 3px rgba(0,0,0,0.9);
+  transition: all 0.15s;
+}
+
+/* ─────────────────────────────────────────────────────────────
+   Resize handle
+───────────────────────────────────────────────────────────── */
+
+.csui-resize {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 18px;
+  height: 18px;
+  cursor: nwse-resize;
+  background: linear-gradient(135deg, transparent 50%, rgba(255,255,255,0.15) 50%);
+  border-bottom-right-radius: 12px;
+  z-index: 10;
+  transition: background 0.12s;
+}
+
+.csui-resize:hover {
+  background: linear-gradient(135deg, transparent 50%, rgba(59,130,246,0.5) 50%);
+}
+
+/* ─────────────────────────────────────────────────────────────
+   Subtitle overlay (injected into #videoContainer by track manager)
+   These are referenced via #bv-subtitle-overlay and tracked by JS
+───────────────────────────────────────────────────────────── */
+
+#bv-subtitle-overlay {
+  position: absolute;
+  left: 0;
+  right: 0;
+  text-align: center;
+  pointer-events: none;
+  z-index: 1001;
+  padding: 4px 8%;
+  display: none;
+  text-shadow:
+    1px 1px 3px rgba(0,0,0,0.95),
+    -1px -1px 3px rgba(0,0,0,0.95),
+    1px -1px 3px rgba(0,0,0,0.95),
+    -1px 1px 3px rgba(0,0,0,0.95);
+  line-height: 1.5;
+  word-break: break-word;
+  white-space: pre-wrap;
+}
+
+/* Cue styling (native <track> in fullscreen / PiP) */
+::cue {
+  background-color: rgba(0, 0, 0, 0.82);
+  color: #ffffff;
+  font-size: 18px;
+  line-height: 1.4;
+  text-shadow:
+    1px 1px 2px rgba(0,0,0,0.9),
+    -1px -1px 2px rgba(0,0,0,0.9);
+  white-space: pre-wrap;
+  padding: 2px 8px;
+}
+
+/* ─────────────────────────────────────────────────────────────
+   Scrollbar inside popup body (WebKit)
+───────────────────────────────────────────────────────────── */
+
+.csui-body::-webkit-scrollbar {
+  width: 4px;
+}
+
+.csui-body::-webkit-scrollbar-thumb {
+  background: rgba(255,255,255,0.1);
+  border-radius: 2px;
+}
+
+.csui-body::-webkit-scrollbar-track {
+  background: transparent;
+}
