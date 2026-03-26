@@ -1,0 +1,700 @@
+/*
+ * Copyright (c) 2026 BlackVideo (Zephyra)
+ * All Rights Reserved.
+ *
+ * auto.extension.css
+ * Merged styles for: auth.portal.tsx · offlineAccountPortal.tsx · auth.confirm.selection.tsx
+ */
+
+
+/* ════════════════════════════════════════════════════════════════
+   Design Tokens  (single source of truth — do not duplicate)
+   ════════════════════════════════════════════════════════════════ */
+:root {
+  /* Accent */
+  --bv-accent:           #E8FF00;
+  --bv-accent-faint:     rgba(232, 255, 0, 0.06);
+  --bv-accent-border:    rgba(232, 255, 0, 0.15);
+  --bv-accent-muted:     rgba(232, 255, 0, 0.7);
+
+  /* Backgrounds */
+  --bv-bg-overlay:       rgba(0, 0, 0, 0);
+  --bv-bg-modal:         #0f0f0f;
+  --bv-bg-input:         #141414;
+  --bv-bg-tabs:          #151515;
+  --bv-bg-tab-active:    #1e1e1e;
+  --bv-bg-info-note:     #111;
+  --bv-bg-popup:         #111111;
+
+  /* Borders */
+  --bv-border-modal:     #1e1e1e;
+  --bv-border-input:     #222;
+  --bv-border-info-note: #1a1a1a;
+
+  /* Text */
+  --bv-text-primary:     #fff;
+  --bv-text-muted:       #888;
+  --bv-text-subtle:      #555;
+  --bv-text-dim:         #444;
+
+  /* Semantic */
+  --bv-error:            #FF4D4D;
+
+  /* Password strength */
+  --bv-strength-weak:    #FF4D4D;
+  --bv-strength-fair:    #FFA500;
+  --bv-strength-good:    #5B9EFF;
+  --bv-strength-strong:  #4DFF91;
+  --bv-strength-empty:   #2a2a2a;
+
+  /* Radii */
+  --bv-radius-modal:     18px;
+  --bv-radius-input:     10px;
+  --bv-radius-tabs:      10px;
+  --bv-radius-tab:       7px;
+  --bv-radius-badge:     8px;
+  --bv-radius-note:      8px;
+  --bv-radius-btn:       10px;
+  --bv-radius-close:     8px;
+  --bv-radius-popup:     12px;
+
+  /* Misc */
+  --bv-font:             system-ui, sans-serif;
+  --bv-shadow-modal:     0 40px 80px rgba(0, 0, 0, 0.8), 0 0 0 1px rgba(255, 255, 255, 0.04);
+  --bv-shadow-popup:     0 16px 48px rgba(0, 0, 0, 0.7);
+}
+
+
+/* ════════════════════════════════════════════════════════════════
+   Shared Animations  (declared once, used by all components)
+   ════════════════════════════════════════════════════════════════ */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+@keyframes fadeOut {
+  from { opacity: 1; }
+  to   { opacity: 0; }
+}
+@keyframes slideIn {
+  from { opacity: 0; transform: translateY(20px) scale(0.98); }
+  to   { opacity: 1; transform: translateY(0)    scale(1);    }
+}
+@keyframes slideOut {
+  from { opacity: 1; transform: translateY(0)    scale(1);    }
+  to   { opacity: 0; transform: translateY(20px) scale(0.98); }
+}
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+
+/* ════════════════════════════════════════════════════════════════
+   auth.portal.tsx — UserAccountPopup
+   ════════════════════════════════════════════════════════════════ */
+
+/* ─── Popup Container ────────────────────────────────────────── */
+.user-popup-container {
+  position: absolute;
+  z-index: 999;
+  background: var(--bv-bg-popup);
+  border: 1px solid #222;
+  border-radius: var(--bv-radius-popup);
+  padding: 16px;
+  min-width: 240px;
+  box-shadow: var(--bv-shadow-popup);
+  font-family: var(--bv-font);
+}
+
+/* ─── Auth (logged-out) state ────────────────────────────────── */
+.user-popup-auth {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.create-variants {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+/* ─── Buttons ────────────────────────────────────────────────── */
+.user-popup-btn-primary {
+  width: 100%;
+  padding: 10px 14px;
+  background: var(--bv-accent);
+  color: #0a0a0a;
+  border: none;
+  border-radius: var(--bv-radius-btn);
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  font-family: var(--bv-font);
+  transition: opacity 0.15s;
+}
+
+.user-popup-btn-primary:hover {
+  opacity: 0.88;
+}
+
+.user-popup-btn-secondary {
+  width: 100%;
+  padding: 10px 14px;
+  background: none;
+  color: var(--bv-text-muted);
+  border: 1px solid #2a2a2a;
+  border-radius: var(--bv-radius-btn);
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  font-family: var(--bv-font);
+  transition: border-color 0.15s, color 0.15s;
+}
+
+.user-popup-btn-secondary:hover {
+  border-color: #444;
+  color: var(--bv-text-primary);
+}
+
+/* ─── Divider ────────────────────────────────────────────────── */
+.user-popup-divider {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 11px;
+  color: var(--bv-text-subtle);
+  font-family: var(--bv-font);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.user-popup-divider::before,
+.user-popup-divider::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: #222;
+}
+
+/* ─── Social SSO grid ────────────────────────────────────────── */
+.user-popup-socials {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.user-popup-social {
+  flex: 1;
+  min-width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #1a1a1a;
+  border: 1px solid #2a2a2a;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s;
+  padding: 0;
+}
+
+.user-popup-social:hover {
+  background: #222;
+  border-color: #3a3a3a;
+}
+
+.user-popup-social img {
+  width: 18px;
+  height: 18px;
+  object-fit: contain;
+}
+
+/* ─── Profile (logged-in) state ──────────────────────────────── */
+.user-popup-profile {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.user-popup-name {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--bv-text-primary);
+  font-family: var(--bv-font);
+  padding-bottom: 8px;
+  border-bottom: 1px solid #1e1e1e;
+}
+
+
+/* ════════════════════════════════════════════════════════════════
+   offlineAccountPortal.tsx — OfflineAccountPortal
+   ════════════════════════════════════════════════════════════════ */
+
+/* ─── Overlay ────────────────────────────────────────────────── */
+.bv-overlay {
+  position: fixed;
+  inset: 0;
+  top: 366px;
+  height: 100%;
+  background-color: var(--bv-bg-overlay);
+  backdrop-filter: blur(10px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  padding: 16px;
+}
+
+.bv-overlay.fade-in  { animation: fadeIn  0.2s ease forwards; }
+.bv-overlay.fade-out { animation: fadeOut 0.3s ease forwards; }
+
+/* ─── Modal ──────────────────────────────────────────────────── */
+.bv-portal {
+  background-color: var(--bv-bg-modal);
+  border: 1px solid var(--bv-border-modal);
+  border-radius: var(--bv-radius-modal);
+  width: 100%;
+  max-width: 400px;
+  padding: 28px;
+  box-shadow: var(--bv-shadow-modal);
+}
+
+.bv-portal.slide-in  { animation: slideIn  0.25s cubic-bezier(0.34, 1.4, 0.64, 1) forwards; }
+.bv-portal.slide-out { animation: slideOut 0.25s ease forwards; }
+
+/* ─── Header ─────────────────────────────────────────────────── */
+.bv-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 24px;
+}
+
+.bv-logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.bv-logo__name {
+  display: block;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--bv-text-primary);
+  letter-spacing: -0.3px;
+  line-height: 1;
+  font-family: var(--bv-font);
+}
+
+.bv-logo__tag {
+  display: block;
+  font-size: 10px;
+  color: var(--bv-accent);
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  font-family: var(--bv-font);
+  margin-top: 2px;
+}
+
+.bv-close-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 6px;
+  border-radius: var(--bv-radius-close);
+  display: flex;
+}
+
+/* ─── Tabs ───────────────────────────────────────────────────── */
+.bv-tabs {
+  display: flex;
+  gap: 4px;
+  background: var(--bv-bg-tabs);
+  padding: 4px;
+  border-radius: var(--bv-radius-tabs);
+  margin-bottom: 20px;
+}
+
+.bv-tab {
+  flex: 1;
+  padding: 8px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--bv-text-subtle);
+  background: none;
+  border: none;
+  border-radius: var(--bv-radius-tab);
+  cursor: pointer;
+  transition: all 0.15s;
+  font-family: var(--bv-font);
+}
+
+.bv-tab--active {
+  background: var(--bv-bg-tab-active);
+  color: var(--bv-text-primary);
+}
+
+/* ─── Form ───────────────────────────────────────────────────── */
+.bv-form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* ─── Offline Badge ──────────────────────────────────────────── */
+.bv-offline-badge {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--bv-accent-faint);
+  border: 1px solid var(--bv-accent-border);
+  border-radius: var(--bv-radius-badge);
+  padding: 8px 10px;
+  font-size: 11px;
+  color: var(--bv-accent-muted);
+  font-family: var(--bv-font);
+  margin-bottom: 4px;
+}
+
+/* ─── Field Label ────────────────────────────────────────────── */
+.bv-field-label {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--bv-text-muted);
+  letter-spacing: 0.3px;
+  text-transform: uppercase;
+  font-family: var(--bv-font);
+  margin-bottom: -4px;
+}
+
+.bv-field-label__required {
+  color: var(--bv-accent);
+  margin-left: 2px;
+}
+
+.bv-field-label__hint {
+  color: var(--bv-text-subtle);
+  margin-left: 4px;
+  font-weight: 400;
+}
+
+/* ─── Input ──────────────────────────────────────────────────── */
+.bv-input {
+  width: 100%;
+  padding: 11px 14px;
+  background: var(--bv-bg-input);
+  border: 1px solid var(--bv-border-input);
+  border-radius: var(--bv-radius-input);
+  font-size: 14px;
+  color: var(--bv-text-primary);
+  font-family: var(--bv-font);
+  box-sizing: border-box;
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+
+.bv-input:focus {
+  outline: none;
+  border-color: var(--bv-accent);
+  box-shadow: 0 0 0 2px rgba(232, 255, 0, 0.1);
+}
+
+.bv-input--pw {
+  padding-right: 44px;
+}
+
+.bv-input--error {
+  border-color: var(--bv-error);
+}
+
+/* ─── Password Wrap ──────────────────────────────────────────── */
+.bv-pw-wrap {
+  position: relative;
+}
+
+.bv-eye-btn {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+  display: flex;
+}
+
+/* ─── Password Strength ──────────────────────────────────────── */
+.bv-pw-strength {
+  margin-bottom: 8px;
+}
+
+.bv-pw-strength__bars {
+  display: flex;
+  gap: 4px;
+  margin-bottom: 4px;
+}
+
+.bv-pw-strength__bar {
+  flex: 1;
+  height: 3px;
+  border-radius: 2px;
+  transition: background 0.3s;
+}
+
+.bv-pw-strength__label {
+  font-size: 11px;
+}
+
+/* ─── Primary Button ─────────────────────────────────────────── */
+.bv-primary-btn {
+  width: 100% !important;
+  height: 100% !important;
+  padding: 12px;
+  background: var(--bv-accent);
+  color: #0a0a0a;
+  border: none;
+  border-radius: var(--bv-radius-btn);
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  font-family: var(--bv-font);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 4px;
+  transition: opacity 0.15s;
+}
+
+.bv-primary-btn--loading {
+  opacity: 0.6;
+}
+
+/* ─── Error Message ──────────────────────────────────────────── */
+.bv-error-msg {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  color: var(--bv-error);
+  font-family: var(--bv-font);
+}
+
+/* ─── Switch Hint ────────────────────────────────────────────── */
+.bv-switch-hint {
+  text-align: center;
+  font-size: 12px;
+  color: var(--bv-text-subtle);
+  margin: 0;
+  font-family: var(--bv-font);
+}
+
+.bv-link-btn {
+  width: 100% !important;
+  height: 100% !important;
+  background: none;
+  border: none;
+  color: var(--bv-accent);
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 12px;
+  width: auto;
+  font-family: var(--bv-font);
+}
+
+/* ─── Info Note ──────────────────────────────────────────────── */
+.bv-info-note {
+  display: flex;
+  align-items: flex-start;
+  gap: 6px;
+  font-size: 11px;
+  color: var(--bv-text-dim);
+  font-family: var(--bv-font);
+  line-height: 1.5;
+  padding: 10px;
+  background: var(--bv-bg-info-note);
+  border-radius: var(--bv-radius-note);
+  border: 1px solid var(--bv-border-info-note);
+}
+
+/* ─── Spinner ────────────────────────────────────────────────── */
+.bv-spinner {
+  animation: spin 0.8s linear infinite;
+}
+
+
+/* ════════════════════════════════════════════════════════════════
+   auth.confirm.selection.tsx — AuthConfirmSelection
+   ════════════════════════════════════════════════════════════════ */
+
+/* ─── Overlay ────────────────────────────────────────────────── */
+/*
+ * FIX: .bv-overlay (z-index 9999) and .bv-confirm-overlay can both be
+ * present in the DOM simultaneously during fade transitions. When the
+ * offline portal is fading out (top: 366px, still pointer-event active)
+ * it intercepts clicks on the confirm modal. Raising confirm to 10000
+ * guarantees it always sits on top regardless of transition state.
+ */
+.bv-confirm-overlay {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0);
+  backdrop-filter: blur(8px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10000;
+  padding: 16px;
+}
+
+.bv-confirm-overlay.fade-in  { animation: fadeIn  0.2s ease forwards; }
+.bv-confirm-overlay.fade-out { animation: fadeOut 0.3s ease forwards; }
+
+/* ─── Modal ──────────────────────────────────────────────────── */
+.bv-confirm-modal {
+  background-color: #111111;
+  border: 1px solid #222;
+  border-radius: 16px;
+  width: 100%;
+  max-width: 420px;
+  padding: 28px;
+  box-shadow: 0 40px 80px rgba(0, 0, 0, 0.7);
+}
+
+.bv-confirm-modal.slide-in  { animation: slideIn  0.25s cubic-bezier(0.34, 1.4, 0.64, 1) forwards; }
+.bv-confirm-modal.slide-out { animation: slideOut 0.25s ease forwards; }
+
+/* ─── Header ─────────────────────────────────────────────────── */
+.bv-confirm-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 24px;
+}
+
+.bv-confirm-logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.bv-confirm-logo__text {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--bv-text-primary);
+  letter-spacing: -0.3px;
+  font-family: var(--bv-font);
+}
+
+.bv-confirm-close-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 6px;
+}
+
+/* ─── Title Block ────────────────────────────────────────────── */
+.bv-confirm-title-block {
+  margin-bottom: 20px;
+}
+
+.bv-confirm-title {
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--bv-text-primary);
+  margin: 0 0 6px;
+  font-family: var(--bv-font);
+  letter-spacing: -0.5px;
+}
+
+.bv-confirm-subtitle {
+  font-size: 13px;
+  color: #666;
+  margin: 0;
+  font-family: var(--bv-font);
+}
+
+/* ─── Cards ──────────────────────────────────────────────────── */
+.bv-confirm-cards {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.bv-confirm-card {
+  width: 100% !important;
+  height: 100% !important;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 26px;
+  background: #141414;
+  border: 1px solid #222;
+  border-radius: 12px;
+  cursor: pointer;
+  text-align: left;
+  transition: background 0.15s, border-color 0.15s, transform 0.15s;
+}
+
+.bv-confirm-card:hover {
+  background: #1a1a1a;
+  border-color: #333;
+  transform: translateY(-1px);
+}
+
+.bv-confirm-card:active {
+  transform: translateY(0);
+}
+
+.bv-confirm-card__icon {
+  flex-shrink: 0;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #1a1a1a;
+  border-radius: 10px;
+}
+
+.bv-confirm-card__content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.bv-confirm-card__title {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--bv-text-primary);
+  font-family: var(--bv-font);
+}
+
+.bv-confirm-card__desc {
+  font-size: 12px;
+  color: #666;
+  font-family: var(--bv-font);
+  line-height: 1.4;
+}
+
+.bv-confirm-card__arrow {
+  flex-shrink: 0;
+}
+
+/* ─── Footer ─────────────────────────────────────────────────── */
+.bv-confirm-footer {
+  font-size: 11px;
+  color: var(--bv-text-dim);
+  text-align: center;
+  margin: 0;
+  font-family: var(--bv-font);
+}
