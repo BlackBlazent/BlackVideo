@@ -1,4 +1,4 @@
-[![Visitors](https://api.visitorbadge.io/api/combined?path=https%3A%2F%2Fgithub.com%2FBlackBlazent%2FBlackVideo&label=VISITORS&countColor=%2337d67a&style=plastic&labelStyle=upper)](https://visitorbadge.io/status?path=https%3A%2F%2Fgithub.com%2FBlackBlazent%2FBlackVideo)
+[![Visitors](https://api.visitorbadge.io/api/visitors?path=https%3A%2F%2Fgithub.com%2FBlackBlazent%2FBlackVideo&label=BV-VISITORS&labelColor=%23000000&countColor=%2337d67a)](https://visitorbadge.io/status?path=https%3A%2F%2Fgithub.com%2FBlackBlazent%2FBlackVideo)
 
 ![Logo](https://github.com/BlackBlazent/BlackBlazentGithubAssets/blob/main/Public/BlackVideo/assets/banner/BlackVideo.gif?raw=true)
 
@@ -18,7 +18,7 @@ Version: **1.1.01.001.0001** | **1.0.0**
 <td align="center">
 <img width="15" height="15" src="./public/assets/locales/us.png"/><br/>
 <strong>United States</strong><br/>
-<a href="https://www.us.com">
+<a href="https://www.tiktok.com/@jednaz9lonestamp/photo/7604109843623972117?is_from_webapp=1&sender_device=pc&web_id=7621722136935679509">
 <img width="9" height="9" src="./public/assets/others/fullscreen.png"/>
 </a>
 </td>
@@ -26,7 +26,7 @@ Version: **1.1.01.001.0001** | **1.0.0**
 <td align="center">
 <img width="15" height="15" src="./public/assets/locales/japan.png"/><br/>
 <strong>Japan</strong><br/>
-<a href="https://www.us.com">
+<a href="https://www.tiktok.com/@jednaz9lonestamp/photo/7604385344280186132?is_from_webapp=1&sender_device=pc&web_id=7621722136935679509">
 <img width="9" height="9" src="./public/assets/others/fullscreen.png"/>
 </a>
 </td>
@@ -34,7 +34,7 @@ Version: **1.1.01.001.0001** | **1.0.0**
 <td align="center">
 <img width="15" height="15" src="./public/assets/locales/germany.png"/><br/>
 <strong>Germany</strong><br/>
-<a href="https://www.us.com">
+<a href="https://www.tiktok.com/@jednaz9lonestamp/photo/7604798519995600148?is_from_webapp=1&sender_device=pc&web_id=7621722136935679509">
 <img width="9" height="9" src="./public/assets/others/fullscreen.png"/>
 </a>
 </td>
@@ -42,7 +42,7 @@ Version: **1.1.01.001.0001** | **1.0.0**
 <td align="center">
 <img width="15" height="15" src="./public/assets/locales/south-korea.png"/><br/>
 <strong>South Korea</strong><br/>
-<a href="https://www.us.com">
+<a href="https://www.tiktok.com/@jednaz9lonestamp/photo/7605239284282543380?is_from_webapp=1&sender_device=pc&web_id=7621722136935679509">
 <img width="9" height="9" src="./public/assets/others/fullscreen.png"/>
 </a>
 </td>
@@ -52,7 +52,7 @@ Version: **1.1.01.001.0001** | **1.0.0**
 <td align="center">
 <img width="15" height="15" src="./public/assets/locales/netherlands.png"/><br/>
 <strong>Netherlands</strong><br/>
-<a href="https://www.us.com">
+<a href="https://www.tiktok.com/@jednaz9lonestamp/photo/7605579869652618516?is_from_webapp=1&sender_device=pc&web_id=7621722136935679509">
 <img width="9" height="9" src="./public/assets/others/fullscreen.png"/>
 </a>
 </td>
@@ -60,7 +60,7 @@ Version: **1.1.01.001.0001** | **1.0.0**
 <td align="center">
 <img width="15" height="15" src="./public/assets/locales/sweden.png"/><br/>
 <strong>Sweden</strong><br/>
-<a href="https://www.us.com">
+<a href="https://www.tiktok.com/@jednaz9lonestamp/photo/7606288424630324500?is_from_webapp=1&sender_device=pc&web_id=7621722136935679509">
 <img width="9" height="9" src="./public/assets/others/fullscreen.png"/>
 </a>
 </td>
@@ -68,7 +68,7 @@ Version: **1.1.01.001.0001** | **1.0.0**
 <td align="center">
 <img width="15" height="15" src="./public/assets/locales/finland.png"/><br/>
 <strong>Finland</strong><br/>
-<a href="https://www.us.com">
+<a href="https://www.tiktok.com/@jednaz9lonestamp/photo/7605909424045051156?is_from_webapp=1&sender_device=pc&web_id=7621722136935679509">
 <img width="9" height="9" src="./public/assets/others/fullscreen.png"/>
 </a>
 </td>
@@ -76,7 +76,7 @@ Version: **1.1.01.001.0001** | **1.0.0**
 <td align="center">
 <img width="15" height="15" src="./public/assets/locales/canada.png"/><br/>
 <strong>Canada</strong><br/>
-<a href="https://www.us.com">
+<a href="https://www.tiktok.com/@jednaz9lonestamp/photo/7606529014714371348?is_from_webapp=1&sender_device=pc&web_id=7621722136935679509">
 <img width="9" height="9" src="./public/assets/others/fullscreen.png"/>
 </a>
 </td>
@@ -86,7 +86,7 @@ Version: **1.1.01.001.0001** | **1.0.0**
 <td align="center">
 <img width="15" height="15" src="./public/assets/locales/singapore.png"/><br/>
 <strong>Singapore</strong><br/>
-<a href="https://www.us.com">
+<a href="https://www.tiktok.com/@jednaz9lonestamp/photo/7606899770606570773?is_from_webapp=1&sender_device=pc&web_id=7621722136935679509">
 <img width="9" height="9" src="./public/assets/others/fullscreen.png"/>
 </a>
 </td>
@@ -102,7 +102,7 @@ Version: **1.1.01.001.0001** | **1.0.0**
 <td align="center">
 <img width="15" height="15" src="./public/assets/locales/russia.png"/><br/>
 <strong>Russia</strong><br/>
-<a href="https://www.us.com">
+<a href="https://www.tiktok.com/@jednaz9lonestamp/photo/7607772969703722261?is_from_webapp=1&sender_device=pc&web_id=7621722136935679509">
 <img width="9" height="9" src="./public/assets/others/fullscreen.png"/>
 </a>
 </td>
@@ -110,7 +110,7 @@ Version: **1.1.01.001.0001** | **1.0.0**
 <td align="center">
 <img width="15" height="15" src="./public/assets/locales/armenia.png"/><br/>
 <strong>Armenia</strong><br/>
-<a href="https://www.us.com">
+<a href="https://www.tiktok.com/@jednaz9lonestamp/photo/7608140285003992340?is_from_webapp=1&sender_device=pc&web_id=7621722136935679509">
 <img width="9" height="9" src="./public/assets/others/fullscreen.png"/>
 </a>
 </td>
@@ -120,7 +120,7 @@ Version: **1.1.01.001.0001** | **1.0.0**
 <td align="center">
 <img width="15" height="15" src="./public/assets/locales/india.png"/><br/>
 <strong>India</strong><br/>
-<a href="https://www.us.com">
+<a href="https://www.tiktok.com/@jednaz9lonestamp/photo/7607401310287039765?is_from_webapp=1&sender_device=pc&web_id=7621722136935679509">
 <img width="9" height="9" src="./public/assets/others/fullscreen.png"/>
 </a>
 </td>
